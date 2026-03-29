@@ -1,0 +1,388 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Portfolio</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=space-grotesk:400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-inner">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 64 64" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="wdLogoGrad" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#1fd997"/>
+                            <stop offset="100%" stop-color="#57c9ff"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M32 6 10 14v17c0 13 9.2 24.9 22 28 12.8-3.1 22-15 22-28V14L32 6Z" fill="url(#wdLogoGrad)"/>
+                    <path d="M20 24h5l3 12 3.2-9.1h3.6L38 36l3-12h5l-5.6 19h-4.6l-2.8-7.6-2.8 7.6h-4.6L20 24Z" fill="#091413"/>
+                </svg>
+                <span class="brand-name"><span class="brand-win">WIN</span><span class="brand-dev">DEV</span></span>
+            </div>
+            <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="#hero">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">Web &amp; Mobile Developer Portfolio</span>
+                    <h1>Hi, I'm Sherwin C. Espa&ntilde;o. I build clean and modern web and mobile experiences.</h1>
+                    <p class="lead">I design and develop user-focused websites and applications that are fast, responsive, and easy to maintain. Explore my projects and skills below.</p>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="#projects">View Projects</a>
+                        <a class="btn btn-secondary" href="#contact">Contact Me</a>
+                    </div>
+                </div>
+                <aside class="hero-card profile-wrap">
+                    <img class="profile-photo" src="images/profile.jpg" alt="Profile photo">
+                    <p class="hero-role">Web Developer | Frontend &amp; Backend | Mobile Developer</p>
+                </aside>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container about-layout">
+                <div class="about-photo-wrap">
+                    <div class="about-photo-frame">
+                        <img class="about-photo" src="images/profile1.png" alt="About profile photo">
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h2>About <span>Me</span></h2>
+                    <p class="about-intro">I'm <strong>Sherwin C. Espa&ntilde;o</strong>, a web and mobile developer focused on building clean, practical, and user-friendly digital experiences.</p>
+                    <div class="about-growth">
+                        <p><strong>Currently learning:</strong> Advanced Flutter, Laravel, React, and learning API integration.</p>
+                        <p><strong>Open to:</strong> Web or mobile developer internships, junior developer roles, and learning collaboration with experts.</p>
+                    </div>
+
+                    <ul class="about-list">
+                        <li><strong>Birthday:</strong> May 18, 2004</li>
+                        <li><strong>Phone:</strong> 09635067030</li>
+                        <li><strong>City:</strong> Davao City</li>
+                        <li><strong>Age:</strong> 21</li>
+                        <li><strong>Course:</strong> Bachelor of Science in Information Technology</li>
+                        <li><strong>Email:</strong> espanosherwin10@gmail.com</li>
+                    </ul>
+
+                    <h3 class="about-subtitle">Hobbies &amp; Interests</h3>
+                    <div class="interest-grid">
+                        <div class="interest-item"><span class="interest-icon" aria-hidden="true">&#9835;</span>Music</div>
+                        <div class="interest-item"><span class="interest-icon" aria-hidden="true">&lt;/&gt;</span>Coding</div>
+                        <div class="interest-item"><span class="interest-icon" aria-hidden="true">&#128218;</span>Reading Manga</div>
+                        <div class="interest-item"><span class="interest-icon" aria-hidden="true">&#127936;</span>Sports</div>
+                        <div class="interest-item"><span class="interest-icon" aria-hidden="true">&#127918;</span>Mobile Gaming</div>
+                        <div class="interest-item"><span class="interest-icon" aria-hidden="true">&#128247;</span>Photography</div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <div class="section-head section-head-split">
+                    <h2>Projects</h2>
+                    <button class="cert-btn" id="openCertModal" type="button">Certificates</button>
+                </div>
+                <div class="projects-carousel" id="projectsCarousel">
+                    <button class="carousel-btn prev" type="button" aria-label="Previous project">&#10094;</button>
+                    <div class="carousel-stage">
+                        <article class="carousel-slide card">
+                            <img class="project-image" src="images/bookfi.png" alt="BookFi project screenshot">
+                            <h3>BookFi</h3>
+                            <p>A book finder platform that helps users quickly search titles, view availability, and access curated recommendations.</p>
+                            <div class="pill-row">
+                                <span class="pill"><i class="tech-icon devicon-java-plain colored" aria-hidden="true"></i>Java</span>
+                                <span class="pill"><i class="tech-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span>
+                            </div>
+                        </article>
+                        <article class="carousel-slide card">
+                            <img class="project-image" src="images/bookms.png" alt="BookMS project screenshot">
+                            <h3>Book Management System</h3>
+                            <p>A book management system for organizing catalog records, borrowing workflows, and inventory updates efficiently.</p>
+                            <div class="pill-row">
+                                <span class="pill"><i class="tech-icon devicon-laravel-original colored" aria-hidden="true"></i>Laravel</span>
+                                <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
+                                <span class="pill"><i class="tech-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span>
+                            </div>
+                        </article>
+                        <article class="carousel-slide card">
+                            <img class="project-image" src="images/erms.png" alt="ERMS project screenshot">
+                            <h3>Employee Record Management System</h3>
+                            <p>An event records management system built to centralize event data, attendee tracking, and report generation.</p>
+                            <div class="pill-row">
+                                <span class="pill"><i class="tech-icon devicon-php-plain colored" aria-hidden="true"></i>PHP</span>
+                                <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
+                                <span class="pill"><i class="tech-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span>
+                            </div>
+                        </article>
+                        <article class="carousel-slide card">
+                            <img class="project-image" src="images/fms.png" alt="FMS project screenshot">
+                            <h3>FireGuard</h3>
+                            <p>A safety monitoring system that detects smoke, fire, carbon monoxide, and gas, sends alerts and notifications, and records true active alerts for real-time response tracking.</p>
+                            <div class="pill-row">
+                                <span class="pill"><i class="tech-icon devicon-react-original colored" aria-hidden="true"></i>React</span>
+                                <span class="pill"><i class="tech-icon devicon-vitejs-plain colored" aria-hidden="true"></i>Vite</span>
+                                <span class="pill"><i class="tech-icon devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span>
+                            </div>
+                        </article>
+                        <article class="carousel-slide card">
+                            <img class="project-image" src="images/ims.png" alt="IMS project screenshot">
+                            <h3>Inventory Management System</h3>
+                            <p>An inventory management system for tracking stock levels, movement logs, and low-item alerts in real time.</p>
+                            <div class="pill-row">
+                                <span class="pill"><i class="tech-icon devicon-php-plain colored" aria-hidden="true"></i>PHP</span>
+                                <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
+                                <span class="pill"><i class="tech-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span>
+                            </div>
+                        </article>
+                        <article class="carousel-slide card">
+                            <img class="project-image" src="images/savour.png" alt="SavourRamen website screenshot">
+                            <h3>SavourRamen Website</h3>
+                            <p>A modern restaurant website showcasing ramen menu highlights, brand story, and a smooth ordering-focused user experience.</p>
+                            <div class="pill-row">
+                                <span class="pill"><i class="tech-icon devicon-html5-plain colored" aria-hidden="true"></i>HTML</span>
+                                <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
+                                <span class="pill"><i class="tech-icon devicon-javascript-plain colored" aria-hidden="true"></i>JavaScript</span>
+                            </div>
+                        </article>
+                        <article class="carousel-slide card">
+                            <img class="project-image" src="images/mobileapp.png" alt="Portfolio Project mobile app screenshot">
+                            <h3>Portfolio Project</h3>
+                            <p>A mobile app that consists of my initial portfolio contents, built and run using Flutter and Firebase.</p>
+                            <div class="pill-row">
+                                <span class="pill"><i class="tech-icon devicon-flutter-plain colored" aria-hidden="true"></i>Flutter</span>
+                                <span class="pill"><i class="tech-icon devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span>
+                            </div>
+                        </article>
+                    </div>
+                    <button class="carousel-btn next" type="button" aria-label="Next project">&#10095;</button>
+                    <div class="carousel-dots" aria-label="Project pagination">
+                        <button type="button" class="dot" aria-label="Go to project 1"></button>
+                        <button type="button" class="dot" aria-label="Go to project 2"></button>
+                        <button type="button" class="dot" aria-label="Go to project 3"></button>
+                        <button type="button" class="dot" aria-label="Go to project 4"></button>
+                        <button type="button" class="dot" aria-label="Go to project 5"></button>
+                        <button type="button" class="dot" aria-label="Go to project 6"></button>
+                        <button type="button" class="dot" aria-label="Go to project 7"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cert-modal" id="certModal" aria-hidden="true">
+            <div class="cert-backdrop" data-close-cert></div>
+            <div class="cert-panel" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+                <div class="cert-panel-head">
+                    <h3 id="certModalTitle">Certificates</h3>
+                    <button class="cert-close" id="closeCertModal" type="button" aria-label="Close certificates">&times;</button>
+                </div>
+                <div class="cert-grid">
+                    <article class="cert-card">
+                        <img src="images/cert/asd1.png" alt="ASD 1 certificate">
+                        <h4>Advanced Seminar Day 1 Certificate</h4>
+                        <p>Participation and achievement certificate for Advanced Seminar learning and practical competency training.</p>
+                    </article>
+                    <article class="cert-card">
+                        <img src="images/cert/asd2.png" alt="ASD 2 certificate">
+                        <h4>Advanced Seminar Day 2 Certificate</h4>
+                        <p>Advanced Seminar certificate focused on applying learned concepts through project-based activities.</p>
+                    </article>
+                    <article class="cert-card">
+                        <img src="images/cert/cse.png" alt="CSE certificate">
+                        <h4>CyberSecurity Essentials Certificate</h4>
+                        <p>Certification validating technical knowledge and practical understanding in CyberSecurity Essentials-related training.</p>
+                    </article>
+                    <article class="cert-card">
+                        <img src="images/cert/cseh.png" alt="CSEH certificate">
+                        <h4>CyberSecurity Ethical Hacking Certificate</h4>
+                        <p>Recognition of completion for CyberSecurity Ethical Hacking coursework covering security-focused digital competencies.</p>
+                    </article>
+                    <article class="cert-card">
+                        <img src="images/cert/dict.png" alt="DICT certificate">
+                        <h4>DICT Level 1 Certificate</h4>
+                        <p>Certificate from DICT training sessions focused on digital literacy and ICT skill development.</p>
+                    </article>
+                    <article class="cert-card">
+                        <img src="images/cert/itpt.png" alt="ITPT certificate">
+                        <h4>Introduction To Packet Tracer Certificate</h4>
+                        <p>Introduction To Packet Tracer certificate demonstrating applied technical proficiency and consistent task completion.</p>
+                    </article>
+                    <article class="cert-card">
+                        <img src="images/cert/jcsp.png" alt="JCSP certificate">
+                        <h4>Junior CyberSecurity Career Path Certificate</h4>
+                        <p>Certification for Junior CyberSecurity Career Path participation emphasizing collaborative project experience and discipline.</p>
+                    </article>
+                    <article class="cert-card">
+                        <img src="images/cert/techno.png" alt="Techno certificate">
+                        <h4>Technopreneurship Certificate</h4>
+                        <p>Technopreneurship certificate awarded for demonstrated engagement in innovation and technical skills.</p>
+                    </article>
+                    <article class="cert-card">
+                        <img src="images/cert/tnc2.png" alt="TNC 2 certificate">
+                        <h4>TESDA NCII Certificate</h4>
+                        <p>TESDA NCII completion certificate highlighting progress in ICT competencies and practical execution.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <div class="cert-image-modal" id="certImageModal" aria-hidden="true">
+            <div class="cert-image-backdrop" data-close-cert-image></div>
+            <div class="cert-image-panel" role="dialog" aria-modal="true" aria-labelledby="certImageTitle">
+                <div class="cert-image-head">
+                    <h4 id="certImageTitle"></h4>
+                    <button class="cert-image-close" id="closeCertImageModal" type="button" aria-label="Close certificate preview">&times;</button>
+                </div>
+                <img id="certImagePreview" src="" alt="Certificate preview">
+            </div>
+        </div>
+
+        <section id="skills">
+            <div class="container">
+                <div class="section-head">
+                    <h2>SKILLS</h2>
+                </div>
+                <div class="skill-bars">
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-javascript-plain colored" aria-hidden="true"></i>JavaScript</span><span>50%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="50"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: SavourRamen Website</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-php-plain colored" aria-hidden="true"></i>PHP</span><span>95%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="95"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: ERMS, IMS</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-java-plain colored" aria-hidden="true"></i>Java</span><span>70%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="70"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: BookFi</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span><span>90%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="90"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: SavourRamen Website, BookMS</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-html5-plain colored" aria-hidden="true"></i>HTML</span><span>95%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="95"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: SavourRamen Website</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span><span>95%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="95"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: BookMS, ERMS, IMS</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-laravel-original colored" aria-hidden="true"></i>Laravel</span><span>88%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="88"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: BookMS Portfolio Build</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-react-original colored" aria-hidden="true"></i>React</span><span>84%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="84"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: FireGuard</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-vitejs-plain colored" aria-hidden="true"></i>Vite</span><span>50%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="50"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: FireGuard</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span><span>80%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="80"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: FireGuard, Portfolio Project</span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-flutter-plain colored" aria-hidden="true"></i>Flutter</span><span>85%</span></div>
+                        <div class="skill-track"><div class="skill-fill" data-level="85"></div></div>
+                        <div class="skill-proof"><span class="proof-badge">Used in: Portfolio Project (Mobile App)</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Contact</h2>
+                </div>
+
+                <p class="form-alert" id="formAlert" hidden aria-live="polite"></p>
+
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="contact-left">
+                        <input type="text" id="full_name" name="full_name" placeholder="Full Name" required>
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                        <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+
+                    <div class="contact-right">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                        <button class="contact-submit" id="contactSubmit" type="submit">Send Message</button>
+                    </div>
+                </form>
+                <div class="contact-trust">
+                    <h3>Connect with me</h3>
+                    <div class="trust-links">
+                        <a href="https://github.com/Sherwin1018/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <i class="bi bi-github" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/sherwin-espa%C3%B1o-b2313634a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.facebook.com/yo.choyeii" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.instagram.com/espanosherwin18/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="files/Sherwin-Espano-CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download CV PDF">
+                            <i class="bi bi-file-earmark-person-fill" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <strong>WINDEV</strong>
+                <p>Building clean web and mobile experiences.</p>
+            </div>
+            <div class="footer-copy">
+                &copy; <span id="year"></span> WINDEV. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/portfolio.js"></script>
+</body>
+</html>
+
