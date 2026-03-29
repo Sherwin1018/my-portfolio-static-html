@@ -2,6 +2,7 @@
     const EMAILJS_PUBLIC_KEY = "0SNcJ4xyZlmGEwTct";
     const EMAILJS_SERVICE_ID = "service_ybrpukc";
     const EMAILJS_TEMPLATE_ID = "template_0fhi9em";
+    const body = document.body;
 
     if (window.emailjs && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
         window.emailjs.init({
@@ -9,8 +10,13 @@
         });
     }
 
+    const scrollProgress = document.createElement("div");
+    scrollProgress.className = "scroll-progress";
+    body.appendChild(scrollProgress);
+
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
+    const navbar = document.querySelector(".navbar");
 
     function closeMobileMenu() {
         if (!menuBtn || !navLinks) {
@@ -49,6 +55,18 @@
         });
     }
 
+    function updateScrollState() {
+        const scrollTop = window.scrollY || window.pageYOffset;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollHeight > 0 ? Math.min(scrollTop / scrollHeight, 1) : 0;
+
+        document.documentElement.style.setProperty("--scroll-progress", String(progress));
+
+        if (navbar) {
+            navbar.classList.toggle("is-scrolled", scrollTop > 18);
+        }
+    }
+
     if ("IntersectionObserver" in window && observedSections.length) {
         const sectionObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
@@ -74,6 +92,57 @@
         observedSections.forEach(function (section) {
             sectionVisibility.set(section.id, 0);
             sectionObserver.observe(section);
+        });
+    }
+
+    function enableMagneticButtons() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+
+        document.querySelectorAll(".btn, .cert-btn, .contact-submit").forEach(function (button) {
+            button.addEventListener("mousemove", function (event) {
+                const rect = button.getBoundingClientRect();
+                const offsetX = event.clientX - rect.left - rect.width / 2;
+                const offsetY = event.clientY - rect.top - rect.height / 2;
+                const moveX = Math.max(Math.min(offsetX / 9, 9), -9);
+                const moveY = Math.max(Math.min(offsetY / 9, 7), -7);
+                button.style.transform = "translate(" + moveX + "px, " + moveY + "px)";
+            });
+
+            button.addEventListener("mouseleave", function () {
+                button.style.transform = "";
+            });
+        });
+    }
+
+    function enableTiltEffects() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+
+        document.querySelectorAll(".project-image, .profile-photo, .about-photo-frame").forEach(function (element) {
+            element.classList.add("interactive-tilt");
+
+            element.addEventListener("mousemove", function (event) {
+                const rect = element.getBoundingClientRect();
+                const x = (event.clientX - rect.left) / rect.width;
+                const y = (event.clientY - rect.top) / rect.height;
+                const rotateY = (x - 0.5) * 10;
+                const rotateX = (0.5 - y) * 10;
+
+                element.classList.add("is-tilting");
+                element.style.setProperty("--tilt-x", rotateX.toFixed(2) + "deg");
+                element.style.setProperty("--tilt-y", rotateY.toFixed(2) + "deg");
+                element.style.setProperty("--img-scale", "1.02");
+            });
+
+            element.addEventListener("mouseleave", function () {
+                element.classList.remove("is-tilting");
+                element.style.removeProperty("--tilt-x");
+                element.style.removeProperty("--tilt-y");
+                element.style.removeProperty("--img-scale");
+            });
         });
     }
 
@@ -392,6 +461,7 @@
     }
 
     window.addEventListener("resize", renderCarousel);
+    window.addEventListener("scroll", updateScrollState, { passive: true });
 
     const skillsSection = document.getElementById("skills");
     const skillFills = Array.from(document.querySelectorAll("#skills .skill-fill"));
@@ -422,28 +492,70 @@
     }
 
     const contactForm = document.getElementById("contactForm");
-    const formAlert = document.getElementById("formAlert");
+    const toastStack = document.getElementById("toastStack");
     const contactSubmit = document.getElementById("contactSubmit");
     const formFields = contactForm ? Array.from(contactForm.querySelectorAll("input, textarea")) : [];
+    let activeToast = null;
+    let activeToastTimer = null;
 
-    function showFormAlert(type, message) {
-        if (!formAlert) {
+    function removeToast(toast) {
+        if (!toast) {
             return;
         }
 
-        formAlert.hidden = false;
-        formAlert.className = "form-alert " + type;
-        formAlert.textContent = message;
+        toast.classList.remove("show");
+        toast.classList.add("hide");
+
+        window.setTimeout(function () {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 320);
     }
 
-    function clearFormAlert() {
-        if (!formAlert) {
+    function showFormAlert(type, message) {
+        if (!toastStack) {
             return;
         }
 
-        formAlert.hidden = true;
-        formAlert.className = "form-alert";
-        formAlert.textContent = "";
+        if (activeToastTimer) {
+            window.clearTimeout(activeToastTimer);
+            activeToastTimer = null;
+        }
+
+        if (activeToast) {
+            removeToast(activeToast);
+        }
+
+        const toast = document.createElement("div");
+        const title = type === "success" ? "Message Sent" : "Sending Failed";
+        const icon = type === "success" ? "bi-check2-circle" : "bi-exclamation-circle";
+
+        toast.className = "toast " + type;
+        toast.setAttribute("role", "status");
+        toast.innerHTML = ""
+            + '<div class="toast-head">'
+            + '  <span class="toast-icon"><i class="bi ' + icon + '" aria-hidden="true"></i></span>'
+            + '  <div>'
+            + '      <p class="toast-title">' + title + "</p>"
+            + '      <p class="toast-message">' + message + "</p>"
+            + "  </div>"
+            + "</div>";
+
+        toastStack.appendChild(toast);
+        activeToast = toast;
+
+        window.requestAnimationFrame(function () {
+            toast.classList.add("show");
+        });
+
+        activeToastTimer = window.setTimeout(function () {
+            removeToast(toast);
+            if (activeToast === toast) {
+                activeToast = null;
+            }
+            activeToastTimer = null;
+        }, 4000);
     }
 
     function markInvalidField(field, isInvalid) {
@@ -484,16 +596,12 @@
     formFields.forEach(function (field) {
         field.addEventListener("input", function () {
             markInvalidField(field, false);
-            if (formAlert && !formAlert.hidden) {
-                clearFormAlert();
-            }
         });
     });
 
     if (contactForm) {
         contactForm.addEventListener("submit", function (event) {
             event.preventDefault();
-            clearFormAlert();
 
             if (!validateContactForm()) {
                 showFormAlert("error", "Please complete all required fields correctly.");
@@ -556,4 +664,12 @@
     if (year) {
         year.textContent = String(new Date().getFullYear());
     }
+
+    updateScrollState();
+    enableMagneticButtons();
+    enableTiltEffects();
+
+    window.requestAnimationFrame(function () {
+        body.classList.add("is-ready");
+    });
 }());

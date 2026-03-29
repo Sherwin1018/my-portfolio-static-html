@@ -341,8 +341,6 @@
                     <h2>Contact</h2>
                 </div>
 
-                <p class="form-alert" id="formAlert" hidden aria-live="polite"></p>
-
                 <form class="contact-form" id="contactForm" novalidate>
                     <div class="contact-left">
                         <input type="text" id="full_name" name="full_name" placeholder="Full Name" required>
@@ -391,6 +389,8 @@
             </div>
         </div>
     </footer>
+
+    <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/portfolio.js"></script>
