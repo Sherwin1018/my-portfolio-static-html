@@ -1635,12 +1635,17 @@ body.is-ready .hero .profile-wrap {
             }
 
             .pill-row {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
                 gap: 0.5rem;
             }
 
             .pill {
                 font-size: 0.84rem;
                 padding: 0.42rem 0.72rem;
+                width: 100%;
+                justify-content: center;
+                min-width: 0;
             }
         }
 
