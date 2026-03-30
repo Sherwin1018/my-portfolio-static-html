@@ -1646,6 +1646,9 @@ body.is-ready .hero .profile-wrap {
                 width: 100%;
                 justify-content: center;
                 min-width: 0;
+                text-align: center;
+                white-space: normal;
+                line-height: 1.25;
             }
         }
 
