@@ -67,6 +67,63 @@
         }
     }
 
+    function createHeroParticles() {
+        const heroParticles = document.getElementById("heroParticles");
+
+        if (!heroParticles || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+
+        const particleCount = window.innerWidth < 700 ? 18 : 30;
+
+        for (let index = 0; index < particleCount; index += 1) {
+            const particle = document.createElement("span");
+            const size = (Math.random() * 5 + 2.5).toFixed(2) + "px";
+            const duration = (Math.random() * 7 + 9).toFixed(2) + "s";
+            const delay = (Math.random() * -8).toFixed(2) + "s";
+
+            particle.className = "hero-particle";
+            particle.style.setProperty("--x", (Math.random() * 100).toFixed(2) + "%");
+            particle.style.setProperty("--y", (Math.random() * 100).toFixed(2) + "%");
+            particle.style.setProperty("--size", size);
+            particle.style.setProperty("--duration", duration);
+            particle.style.setProperty("--delay", delay);
+
+            heroParticles.appendChild(particle);
+        }
+    }
+
+    function enableSceneParallax() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+
+        const parallaxSections = Array.from(document.querySelectorAll(".parallax-section"));
+        const depthLayers = Array.from(document.querySelectorAll("[data-depth]"));
+
+        function updateParallax() {
+            const viewportHeight = window.innerHeight || 1;
+
+            parallaxSections.forEach(function (section) {
+                const rect = section.getBoundingClientRect();
+                const speed = Number(section.dataset.parallaxSpeed || 0);
+                const distance = (viewportHeight / 2 - rect.top - rect.height / 2) * speed;
+                section.style.setProperty("--parallax-shift", distance.toFixed(2) + "px");
+            });
+
+            depthLayers.forEach(function (layer) {
+                const rect = layer.getBoundingClientRect();
+                const depth = Number(layer.dataset.depth || 0);
+                const centerOffset = ((viewportHeight / 2) - (rect.top + rect.height / 2)) * depth;
+                layer.style.transform = "translate3d(0, " + centerOffset.toFixed(2) + "px, 0)";
+            });
+        }
+
+        updateParallax();
+        window.addEventListener("scroll", updateParallax, { passive: true });
+        window.addEventListener("resize", updateParallax);
+    }
+
     if ("IntersectionObserver" in window && observedSections.length) {
         const sectionObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
@@ -143,6 +200,88 @@
                 element.style.removeProperty("--tilt-y");
                 element.style.removeProperty("--img-scale");
             });
+        });
+    }
+
+    function enableInteractiveCards() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+
+        document.querySelectorAll(".skill-row, .cert-card").forEach(function (card) {
+            card.classList.add("interactive-card");
+
+            card.addEventListener("mousemove", function (event) {
+                const rect = card.getBoundingClientRect();
+                const x = (event.clientX - rect.left) / rect.width;
+                const y = (event.clientY - rect.top) / rect.height;
+                const rotateY = (x - 0.5) * 10;
+                const rotateX = (0.5 - y) * 10;
+
+                card.classList.add("is-tilting");
+                card.style.setProperty("--card-tilt-x", rotateX.toFixed(2) + "deg");
+                card.style.setProperty("--card-tilt-y", rotateY.toFixed(2) + "deg");
+            });
+
+            card.addEventListener("mouseleave", function () {
+                card.classList.remove("is-tilting");
+                card.style.removeProperty("--card-tilt-x");
+                card.style.removeProperty("--card-tilt-y");
+            });
+        });
+
+        slides.forEach(function (slide) {
+            slide.addEventListener("mousemove", function (event) {
+                if (!slide.classList.contains("is-active")) {
+                    return;
+                }
+
+                const rect = slide.getBoundingClientRect();
+                const x = (event.clientX - rect.left) / rect.width;
+                const y = (event.clientY - rect.top) / rect.height;
+                const rotateY = (x - 0.5) * 7;
+                const rotateX = (0.5 - y) * 5;
+
+                slide.style.setProperty("--card-tilt-x", rotateX.toFixed(2) + "deg");
+                slide.style.setProperty("--card-tilt-y", rotateY.toFixed(2) + "deg");
+            });
+
+            slide.addEventListener("mouseleave", function () {
+                slide.style.removeProperty("--card-tilt-x");
+                slide.style.removeProperty("--card-tilt-y");
+            });
+        });
+    }
+
+    function enableHeroSceneMotion() {
+        const hero = document.getElementById("hero");
+        const heroCopy = hero ? hero.querySelector(".hero-copy") : null;
+        const profileWrap = hero ? hero.querySelector(".profile-wrap") : null;
+        const heroScene = hero ? hero.querySelector(".hero-scene") : null;
+
+        if (!hero || !heroCopy || !profileWrap || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+
+        hero.addEventListener("mousemove", function (event) {
+            const rect = hero.getBoundingClientRect();
+            const offsetX = (event.clientX - rect.left) / rect.width - 0.5;
+            const offsetY = (event.clientY - rect.top) / rect.height - 0.5;
+
+            heroCopy.style.transform = "translate3d(" + (offsetX * -22).toFixed(2) + "px, " + (offsetY * -18).toFixed(2) + "px, 0)";
+            profileWrap.style.transform = "translate3d(" + (offsetX * 28).toFixed(2) + "px, " + (offsetY * 22).toFixed(2) + "px, 0)";
+
+            if (heroScene) {
+                heroScene.style.transform = "translate3d(" + (offsetX * 16).toFixed(2) + "px, " + (offsetY * 10).toFixed(2) + "px, 0)";
+            }
+        });
+
+        hero.addEventListener("mouseleave", function () {
+            heroCopy.style.transform = "";
+            profileWrap.style.transform = "";
+            if (heroScene) {
+                heroScene.style.transform = "";
+            }
         });
     }
 
@@ -666,8 +805,12 @@
     }
 
     updateScrollState();
+    createHeroParticles();
+    enableSceneParallax();
     enableMagneticButtons();
     enableTiltEffects();
+    enableInteractiveCards();
+    enableHeroSceneMotion();
 
     window.requestAnimationFrame(function () {
         body.classList.add("is-ready");

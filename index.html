@@ -3,7 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Portfolio</title>
+    <title>Sherwin Españo | Web and Mobile Developer Portfolio</title>
+    <meta name="description" content="Sherwin Españo is a web and mobile developer building clean, responsive, and user-focused digital experiences with PHP, Laravel, React, Flutter, and Firebase.">
+    <meta name="theme-color" content="#0e0f13">
+    <meta property="og:title" content="Sherwin Españo | Web and Mobile Developer Portfolio">
+    <meta property="og:description" content="Explore Sherwin Españo's projects, technical skills, certificates, and contact details in a polished web and mobile developer portfolio.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/profile.jpg">
+    <meta property="og:url" content=".">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=space-grotesk:400,500,600,700" rel="stylesheet">
@@ -37,43 +44,61 @@
                 <a href="#about">About</a>
                 <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
-                <a href="#contact">Contact</a>
+                <a href="#contact">Contact Me</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section id="hero" class="hero">
+        <section id="hero" class="hero parallax-section" data-parallax-speed="0.18">
+            <div class="hero-scene" aria-hidden="true">
+                <div class="hero-grid-lines"></div>
+                <div class="hero-particles" id="heroParticles"></div>
+                <div class="hero-glow hero-glow-a"></div>
+                <div class="hero-glow hero-glow-b"></div>
+            </div>
             <div class="container hero-grid">
-                <div>
+                <div class="hero-copy">
                     <span class="eyebrow">Web &amp; Mobile Developer Portfolio</span>
                     <h1>Hi, I'm Sherwin C. Espa&ntilde;o. I build clean and modern web and mobile experiences.</h1>
                     <p class="lead">I design and develop user-focused websites and applications that are fast, responsive, and easy to maintain. Explore my projects and skills below.</p>
                     <div class="btn-group">
                         <a class="btn btn-primary" href="#projects">View Projects</a>
-                        <a class="btn btn-secondary" href="#contact">Contact Me</a>
+                        <a class="btn btn-secondary" href="files/Sherwin-Espano-CV.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
                     </div>
                 </div>
                 <aside class="hero-card profile-wrap">
-                    <img class="profile-photo" src="images/profile.jpg" alt="Profile photo">
+                    <div class="hero-orbit" aria-hidden="true">
+                        <span class="orbit-ring orbit-ring-one"></span>
+                        <span class="orbit-ring orbit-ring-two"></span>
+                        <span class="orbit-node orbit-node-a"><i class="devicon-html5-plain colored"></i></span>
+                        <span class="orbit-node orbit-node-b"><i class="devicon-css3-plain colored"></i></span>
+                        <span class="orbit-node orbit-node-c"><i class="devicon-javascript-plain colored"></i></span>
+                        <span class="orbit-node orbit-node-d"><i class="devicon-react-original colored"></i></span>
+                    </div>
+                    <div class="hero-orb" aria-hidden="true">
+                        <span class="hero-orb-core"></span>
+                        <span class="hero-orb-halo"></span>
+                    </div>
+                    <img class="profile-photo" src="images/profile.jpg" alt="Portrait of Sherwin Españo">
                     <p class="hero-role">Web Developer | Frontend &amp; Backend | Mobile Developer</p>
                 </aside>
             </div>
         </section>
 
-        <section id="about">
+        <section id="about" class="parallax-section" data-parallax-speed="0.09">
             <div class="container about-layout">
                 <div class="about-photo-wrap">
                     <div class="about-photo-frame">
-                        <img class="about-photo" src="images/profile1.png" alt="About profile photo">
+                        <img class="about-photo" src="images/profile1.png" alt="Sherwin Españo working profile image">
                     </div>
                 </div>
                 <div class="about-content">
                     <h2>About <span>Me</span></h2>
                     <p class="about-intro">I'm <strong>Sherwin C. Espa&ntilde;o</strong>, a web and mobile developer focused on building clean, practical, and user-friendly digital experiences.</p>
                     <div class="about-growth">
-                        <p><strong>Currently learning:</strong> Advanced Flutter, Laravel, React, and learning API integration.</p>
-                        <p><strong>Open to:</strong> Web or mobile developer internships, junior developer roles, and learning collaboration with experts.</p>
+                        <p><strong>Currently learning:</strong> Mid-Level Flutter Android Programming, Advanced Laravel Development, React components and contents. </p>
+                        <p><strong>Open to:</strong> Learning collaboration with IT-professionals and experts.</p>
                     </div>
 
                     <ul class="about-list">
@@ -99,7 +124,7 @@
             </div>
         </section>
 
-        <section id="projects">
+        <section id="projects" class="parallax-section" data-parallax-speed="0.12">
             <div class="container">
                 <div class="section-head section-head-split">
                     <h2>Projects</h2>
@@ -270,64 +295,81 @@
             </div>
         </div>
 
-        <section id="skills">
+        <section id="skills" class="parallax-section" data-parallax-speed="0.1">
             <div class="container">
                 <div class="section-head">
                     <h2>SKILLS</h2>
                 </div>
+                <div class="skills-summary card">
+                    <p class="skills-summary-intro">My skills are grouped by confidence level and backed by real project usage.</p>
+                    <div class="skills-groups">
+                        <div class="skills-group">
+                            <span class="skills-group-label">Advanced</span>
+                            <p>PHP, MySQL, HTML, CSS</p>
+                        </div>
+                        <div class="skills-group">
+                            <span class="skills-group-label">Intermediate</span>
+                            <p>Laravel, React, Flutter, Firebase, Java</p>
+                        </div>
+                        <div class="skills-group">
+                            <span class="skills-group-label">Learning</span>
+                            <p>API integration, advanced frontend animation, Vite</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="skill-bars">
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-javascript-plain colored" aria-hidden="true"></i>JavaScript</span><span>50%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-javascript-plain colored" aria-hidden="true"></i>JavaScript</span><span class="skill-level">Intermediate</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="50"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: SavourRamen Website</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-php-plain colored" aria-hidden="true"></i>PHP</span><span>95%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-php-plain colored" aria-hidden="true"></i>PHP</span><span class="skill-level">Advanced</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="95"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: ERMS, IMS</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-java-plain colored" aria-hidden="true"></i>Java</span><span>70%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-java-plain colored" aria-hidden="true"></i>Java</span><span class="skill-level">Intermediate</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="70"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: BookFi</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span><span>90%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span><span class="skill-level">Advanced</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="90"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: SavourRamen Website, BookMS</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-html5-plain colored" aria-hidden="true"></i>HTML</span><span>95%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-html5-plain colored" aria-hidden="true"></i>HTML</span><span class="skill-level">Advanced</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="95"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: SavourRamen Website</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span><span>95%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span><span class="skill-level">Advanced</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="95"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: BookMS, ERMS, IMS</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-laravel-original colored" aria-hidden="true"></i>Laravel</span><span>88%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-laravel-original colored" aria-hidden="true"></i>Laravel</span><span class="skill-level">Intermediate</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="88"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: BookMS Portfolio Build</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-react-original colored" aria-hidden="true"></i>React</span><span>84%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-react-original colored" aria-hidden="true"></i>React</span><span class="skill-level">Intermediate</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="84"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: FireGuard</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-vitejs-plain colored" aria-hidden="true"></i>Vite</span><span>50%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-vitejs-plain colored" aria-hidden="true"></i>Vite</span><span class="skill-level">Learning</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="50"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: FireGuard</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span><span>80%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span><span class="skill-level">Intermediate</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="80"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: FireGuard, Portfolio Mobile App</span></div>
                     </div>
                     <div class="skill-row">
-                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-flutter-plain colored" aria-hidden="true"></i>Flutter</span><span>85%</span></div>
+                        <div class="skill-meta"><span class="skill-name"><i class="skill-icon devicon-flutter-plain colored" aria-hidden="true"></i>Flutter</span><span class="skill-level">Intermediate</span></div>
                         <div class="skill-track"><div class="skill-fill" data-level="85"></div></div>
                         <div class="skill-proof"><span class="proof-badge">Used in: Portfolio Mobile App</span></div>
                     </div>
@@ -335,10 +377,10 @@
             </div>
         </section>
 
-        <section id="contact">
+        <section id="contact" class="parallax-section" data-parallax-speed="0.08">
             <div class="container">
                 <div class="section-head">
-                    <h2>Contact</h2>
+                    <h2>Contact Me</h2>
                 </div>
 
                 <form class="contact-form" id="contactForm" novalidate>
@@ -396,4 +438,3 @@
     <script src="js/portfolio.js"></script>
 </body>
 </html>
-
