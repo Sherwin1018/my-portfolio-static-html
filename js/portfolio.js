@@ -93,6 +93,155 @@
         }
     }
 
+    function initHeroThreeScene() {
+        const canvas = document.getElementById("heroThreeCanvas");
+        const hero = document.getElementById("hero");
+
+        if (
+            !canvas ||
+            !hero ||
+            !window.THREE ||
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+            return;
+        }
+
+        const isSmallScreen = window.matchMedia("(max-width: 700px)").matches;
+        const THREE = window.THREE;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 100);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true,
+            antialias: !isSmallScreen,
+            powerPreference: "low-power"
+        });
+        const group = new THREE.Group();
+        const clock = new THREE.Clock();
+        const pointer = { x: 0, y: 0 };
+
+        scene.add(group);
+        camera.position.set(0, 0, 7.2);
+
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isSmallScreen ? 1.25 : 1.75));
+        renderer.setClearColor(0x000000, 0);
+
+        const ambient = new THREE.AmbientLight(0xffffff, 0.75);
+        const pointLight = new THREE.PointLight(0x57c9ff, 1.2, 18, 2);
+        pointLight.position.set(3.5, 2.5, 5.5);
+        scene.add(ambient);
+        scene.add(pointLight);
+
+        const orb = new THREE.Mesh(
+            new THREE.IcosahedronGeometry(isSmallScreen ? 1.05 : 1.3, 1),
+            new THREE.MeshBasicMaterial({
+                color: 0x57c9ff,
+                transparent: true,
+                opacity: isSmallScreen ? 0.08 : 0.11,
+                wireframe: true
+            })
+        );
+        orb.position.set(isSmallScreen ? 0.1 : 0.8, isSmallScreen ? -1.05 : -0.55, -0.5);
+        group.add(orb);
+
+        const ring = new THREE.Mesh(
+            new THREE.TorusGeometry(isSmallScreen ? 1.55 : 2.2, 0.03, 16, 100),
+            new THREE.MeshBasicMaterial({
+                color: 0x1fd997,
+                transparent: true,
+                opacity: isSmallScreen ? 0.18 : 0.24
+            })
+        );
+        ring.rotation.x = 1.28;
+        ring.rotation.y = 0.15;
+        ring.position.set(isSmallScreen ? -0.15 : 0.85, isSmallScreen ? -1.35 : -0.95, -0.35);
+        group.add(ring);
+
+        const particleCount = isSmallScreen ? 55 : 95;
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+        const colorA = new THREE.Color(0x57c9ff);
+        const colorB = new THREE.Color(0x1fd997);
+
+        for (let index = 0; index < particleCount; index += 1) {
+            const base = index * 3;
+            positions[base] = (Math.random() - 0.5) * (isSmallScreen ? 7.8 : 11.5);
+            positions[base + 1] = (Math.random() - 0.5) * (isSmallScreen ? 5.6 : 7.8);
+            positions[base + 2] = (Math.random() - 0.5) * 2.8;
+
+            const mixed = colorA.clone().lerp(colorB, Math.random());
+            colors[base] = mixed.r;
+            colors[base + 1] = mixed.g;
+            colors[base + 2] = mixed.b;
+        }
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        particlesGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+        const particles = new THREE.Points(
+            particlesGeometry,
+            new THREE.PointsMaterial({
+                size: isSmallScreen ? 0.038 : 0.052,
+                transparent: true,
+                opacity: isSmallScreen ? 0.62 : 0.75,
+                vertexColors: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            })
+        );
+        scene.add(particles);
+
+        function resize() {
+            const rect = hero.getBoundingClientRect();
+            const width = Math.max(rect.width, 1);
+            const height = Math.max(rect.height, 1);
+
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        }
+
+        function animate() {
+            const elapsed = clock.getElapsedTime();
+            const positionsAttr = particles.geometry.attributes.position;
+
+            orb.rotation.y = elapsed * 0.22 + pointer.x * 0.18;
+            orb.rotation.x = elapsed * 0.12 + pointer.y * 0.12;
+            ring.rotation.z = elapsed * 0.14;
+            group.rotation.y += (pointer.x * 0.18 - group.rotation.y) * 0.04;
+            group.rotation.x += ((-pointer.y) * 0.1 - group.rotation.x) * 0.04;
+
+            for (let index = 0; index < particleCount; index += 1) {
+                const base = index * 3;
+                const baseX = positions[base];
+                const baseY = positions[base + 1];
+                positionsAttr.array[base] = baseX + Math.sin(elapsed * 0.24 + index * 0.33) * 0.012;
+                positionsAttr.array[base + 1] = baseY + Math.cos(elapsed * 0.28 + index * 0.27) * 0.018;
+            }
+            positionsAttr.needsUpdate = true;
+
+            particles.rotation.y = elapsed * 0.02;
+            renderer.render(scene, camera);
+            window.requestAnimationFrame(animate);
+        }
+
+        hero.addEventListener("mousemove", function (event) {
+            const rect = hero.getBoundingClientRect();
+            pointer.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+            pointer.y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+        });
+
+        hero.addEventListener("mouseleave", function () {
+            pointer.x = 0;
+            pointer.y = 0;
+        });
+
+        resize();
+        window.addEventListener("resize", resize);
+        animate();
+    }
+
     function enableSceneParallax() {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             return;
@@ -806,6 +955,7 @@
 
     updateScrollState();
     createHeroParticles();
+    initHeroThreeScene();
     enableSceneParallax();
     enableMagneticButtons();
     enableTiltEffects();

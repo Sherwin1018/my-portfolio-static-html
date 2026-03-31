@@ -44,7 +44,7 @@
                 <a href="#about">About</a>
                 <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
-                <a href="#contact">Contact Me</a>
+                <a href="#contact">Contact</a>
             </nav>
         </div>
     </header>
@@ -52,6 +52,7 @@
     <main>
         <section id="hero" class="hero parallax-section" data-parallax-speed="0.18">
             <div class="hero-scene" aria-hidden="true">
+                <canvas class="hero-three-canvas" id="heroThreeCanvas"></canvas>
                 <div class="hero-grid-lines"></div>
                 <div class="hero-particles" id="heroParticles"></div>
                 <div class="hero-glow hero-glow-a"></div>
@@ -380,7 +381,7 @@
         <section id="contact" class="parallax-section" data-parallax-speed="0.08">
             <div class="container">
                 <div class="section-head">
-                    <h2>Contact Me</h2>
+                    <h2>Get in Touch</h2>
                 </div>
 
                 <form class="contact-form" id="contactForm" novalidate>
@@ -435,6 +436,7 @@
     <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
     <script src="js/portfolio.js"></script>
 </body>
 </html>
