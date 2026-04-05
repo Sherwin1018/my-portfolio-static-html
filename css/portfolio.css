@@ -7,6 +7,18 @@
             --accent: #ff8a3d;
             --accent-alt: #57c9ff;
             --line: #2a3041;
+            --surface-strong: #141823;
+            --bg-spot-a: rgba(255, 138, 61, 0.18);
+            --bg-spot-b: rgba(87, 201, 255, 0.14);
+            --bg-orb-a: rgba(255, 138, 61, 0.24);
+            --bg-orb-b: rgba(87, 201, 255, 0.2);
+            --nav-bg: rgba(14, 15, 19, 0.82);
+            --nav-bg-scrolled: rgba(14, 15, 19, 0.93);
+            --nav-mobile-bg: #11141d;
+            --field-bg: rgba(0, 0, 0, 0.35);
+            --field-text: #f4f7ff;
+            --field-placeholder: rgba(244, 247, 255, 0.58);
+            --timeline-node-bg: #0f151f;
             --max-width: 1100px;
             --radius: 16px;
             --space-xs: 0.5rem;
@@ -15,6 +27,123 @@
             --space-lg: 2rem;
             --space-xl: 3.5rem;
         }
+
+body[data-theme="light"] {
+    --bg: #f5f8ff;
+    --surface: #ffffff;
+    --surface-soft: #eaf0fb;
+    --text: #0d1b2c;
+    --muted: #42556f;
+    --line: #cdd9ee;
+    --surface-strong: #edf3ff;
+    --bg-spot-a: rgba(255, 138, 61, 0.12);
+    --bg-spot-b: rgba(35, 135, 255, 0.1);
+    --bg-orb-a: rgba(255, 138, 61, 0.15);
+    --bg-orb-b: rgba(35, 135, 255, 0.14);
+    --nav-bg: rgba(245, 248, 255, 0.88);
+    --nav-bg-scrolled: rgba(245, 248, 255, 0.96);
+    --nav-mobile-bg: #f4f8ff;
+    --field-bg: #ffffff;
+    --field-text: #0f243d;
+    --field-placeholder: rgba(63, 88, 120, 0.65);
+    --timeline-node-bg: #ffffff;
+}
+
+body[data-theme="dark"] {
+    --bg: #07090f;
+    --surface: #10141d;
+    --surface-soft: #171d2a;
+    --text: #edf3ff;
+    --muted: #a5b2c7;
+    --line: #202a3c;
+    --surface-strong: #0d121b;
+    --bg-spot-a: rgba(255, 138, 61, 0.1);
+    --bg-spot-b: rgba(87, 201, 255, 0.1);
+    --bg-orb-a: rgba(255, 138, 61, 0.15);
+    --bg-orb-b: rgba(87, 201, 255, 0.14);
+    --nav-bg: rgba(7, 9, 15, 0.86);
+    --nav-bg-scrolled: rgba(7, 9, 15, 0.95);
+    --nav-mobile-bg: #0b1019;
+    --field-bg: rgba(0, 0, 0, 0.35);
+    --field-text: #edf3ff;
+    --field-placeholder: rgba(237, 243, 255, 0.58);
+    --timeline-node-bg: #0f151f;
+}
+
+body[data-theme="light"] .navbar {
+    border-bottom-color: rgba(22, 48, 82, 0.14);
+}
+
+body[data-theme="light"] .navbar::after {
+    opacity: 0.35;
+}
+
+body[data-theme="light"] .hero-role {
+    color: #17314f;
+    background: rgba(35, 135, 255, 0.07);
+    border-color: rgba(35, 135, 255, 0.24);
+}
+
+body[data-theme="light"] .card,
+body[data-theme="light"] .carousel-slide,
+body[data-theme="light"] .cert-panel,
+body[data-theme="light"] .cert-image-panel {
+    border-color: rgba(30, 58, 94, 0.16);
+    box-shadow: 0 10px 26px rgba(33, 52, 80, 0.1);
+}
+
+body[data-theme="light"] .about-growth {
+    border-color: rgba(35, 135, 255, 0.26);
+    background: rgba(35, 135, 255, 0.08);
+}
+
+body[data-theme="light"] .about-growth p,
+body[data-theme="light"] .about-list,
+body[data-theme="light"] .skills-summary-intro,
+body[data-theme="light"] .skills-group p,
+body[data-theme="light"] .carousel-slide p,
+body[data-theme="light"] .cert-card p,
+body[data-theme="light"] .footer-brand p,
+body[data-theme="light"] .footer-copy {
+    color: #42556f;
+}
+
+body[data-theme="light"] .about-list strong,
+body[data-theme="light"] .about-growth strong,
+body[data-theme="light"] .skill-level,
+body[data-theme="light"] .edu-year,
+body[data-theme="light"] .exp-year,
+body[data-theme="light"] .exp-position {
+    color: #1f6eb2;
+}
+
+body[data-theme="light"] .edu-school,
+body[data-theme="light"] .exp-company,
+body[data-theme="light"] .cert-card h4,
+body[data-theme="light"] .carousel-slide h3 {
+    color: #102741;
+}
+
+body[data-theme="light"] .proof-badge {
+    border-color: rgba(35, 135, 255, 0.28);
+    background: rgba(35, 135, 255, 0.08);
+    color: #1f4f7f;
+}
+
+body[data-theme="light"] .cert-panel-head,
+body[data-theme="light"] .cert-image-head {
+    border-bottom-color: rgba(30, 58, 94, 0.12);
+    background: rgba(30, 58, 94, 0.04);
+}
+
+body[data-theme="light"] .contact-form input,
+body[data-theme="light"] .contact-form textarea {
+    border-color: rgba(35, 135, 255, 0.34);
+}
+
+body[data-theme="light"] .nav-links {
+    border-bottom-color: rgba(30, 58, 94, 0.14);
+}
 
         * {
             box-sizing: border-box;
@@ -30,8 +159,8 @@ body {
     font-family: 'Space Grotesk', sans-serif;
     color: var(--text);
             background:
-                radial-gradient(circle at 10% 20%, rgba(255, 138, 61, 0.18), transparent 35%),
-                radial-gradient(circle at 90% 10%, rgba(87, 201, 255, 0.14), transparent 40%),
+                radial-gradient(circle at 10% 20%, var(--bg-spot-a), transparent 35%),
+                radial-gradient(circle at 90% 10%, var(--bg-spot-b), transparent 40%),
                 var(--bg);
     line-height: 1.6;
     overflow-x: hidden;
@@ -68,7 +197,7 @@ section {
     right: 0;
     z-index: 50;
     backdrop-filter: blur(8px);
-    background: rgba(14, 15, 19, 0.82);
+    background: var(--nav-bg);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -83,7 +212,7 @@ section {
 }
 
 .navbar.is-scrolled {
-    background: rgba(14, 15, 19, 0.93);
+    background: var(--nav-bg-scrolled);
     border-bottom-color: rgba(87, 201, 255, 0.16);
     box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
 }
@@ -108,7 +237,7 @@ body::before {
     height: 28rem;
     top: 8%;
     left: -8%;
-    background: radial-gradient(circle, rgba(255, 138, 61, 0.24), transparent 68%);
+    background: radial-gradient(circle, var(--bg-orb-a), transparent 68%);
     animation: ambientFloatOne 16s ease-in-out infinite alternate;
 }
 
@@ -117,7 +246,7 @@ body::after {
     height: 30rem;
     top: 12%;
     right: -10%;
-    background: radial-gradient(circle, rgba(87, 201, 255, 0.2), transparent 70%);
+    background: radial-gradient(circle, var(--bg-orb-b), transparent 70%);
     animation: ambientFloatTwo 19s ease-in-out infinite alternate;
 }
 
@@ -206,76 +335,108 @@ body::after {
     box-shadow: 0 0 14px rgba(87, 201, 255, 0.28);
 }
 
-        .nav-dropdown {
-            position: relative;
-            padding-bottom: 0.42rem;
-            margin-bottom: -0.42rem;
+        .theme-control {
+            margin-left: 0.2rem;
         }
 
-        .nav-parent {
+        .theme-dropdown {
+            position: relative;
+        }
+
+        .theme-trigger {
+            border: 1px solid rgba(87, 201, 255, 0.35);
+            background: rgba(87, 201, 255, 0.08);
+            color: var(--text);
+            border-radius: 999px;
+            padding: 0.34rem 0.72rem;
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.38rem;
+            justify-content: center;
+            width: 44px;
+            height: 36px;
+            padding: 0;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
 
-        .nav-caret {
-            font-size: 0.62rem;
-            line-height: 1;
-            transition: transform 0.22s ease;
+        .theme-trigger:hover,
+        .theme-trigger:focus-visible {
+            border-color: rgba(31, 217, 151, 0.55);
+            box-shadow: 0 0 0 2px rgba(31, 217, 151, 0.2);
+            background: rgba(87, 201, 255, 0.14);
         }
 
-        .nav-dropdown:hover .nav-caret,
-        .nav-dropdown:focus-within .nav-caret,
-        .nav-dropdown.open .nav-caret {
-            transform: rotate(180deg);
-        }
-
-        .nav-submenu {
+        .theme-menu {
             position: absolute;
-            left: 0;
-            top: 100%;
-            min-width: 220px;
+            right: 0;
+            top: calc(100% + 0.45rem);
+            min-width: 0;
             border-radius: 12px;
-            border: 1px solid rgba(87, 201, 255, 0.26);
-            background: rgba(14, 17, 25, 0.98);
-            box-shadow: 0 18px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(87, 201, 255, 0.3);
+            background: var(--surface);
+            box-shadow: 0 16px 26px rgba(0, 0, 0, 0.24);
+            padding: 0.32rem;
             display: grid;
-            gap: 0.1rem;
-            padding: 0.38rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.2rem;
             opacity: 0;
-            transform: translateY(-8px);
-            visibility: hidden;
+            transform: translateY(-6px);
             pointer-events: none;
+            visibility: hidden;
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
-            z-index: 16;
+            z-index: 40;
         }
 
-        .nav-dropdown:hover .nav-submenu,
-        .nav-dropdown:focus-within .nav-submenu,
-        .nav-dropdown.open .nav-submenu {
+        .theme-dropdown.open .theme-menu {
             opacity: 1;
             transform: translateY(0);
-            visibility: visible;
             pointer-events: auto;
+            visibility: visible;
             transition: opacity 0.2s ease, transform 0.2s ease;
         }
 
-        .nav-submenu a {
-            display: block;
-            width: 100%;
-            padding: 0.5rem 0.6rem;
+        .theme-option {
+            border: 0;
+            background: transparent;
+            color: var(--text);
             border-radius: 8px;
-            font-size: 0.92rem;
-            color: #d9e8ff;
+            width: 36px;
+            height: 34px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        .nav-submenu a::after {
-            display: none;
-        }
-
-        .nav-submenu a:hover {
+        .theme-option:hover,
+        .theme-option:focus-visible {
             background: rgba(87, 201, 255, 0.12);
-            transform: none;
+            outline: none;
+        }
+
+        .theme-option.is-active {
+            background: rgba(31, 217, 151, 0.18);
+            color: #cbffec;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .menu-btn {
@@ -1054,7 +1215,7 @@ body.is-ready .hero .profile-wrap {
             height: 10px;
             border-radius: 999px;
             border: 2px solid #57c9ff;
-            background: #0f151f;
+            background: var(--timeline-node-bg);
             transform: translateY(-50%);
             box-shadow: 0 0 0 3px rgba(87, 201, 255, 0.16);
         }
@@ -1201,7 +1362,7 @@ body.is-ready .hero .profile-wrap {
             height: 10px;
             border-radius: 999px;
             border: 2px solid #57c9ff;
-            background: #0f151f;
+            background: var(--timeline-node-bg);
             transform: translateY(-50%);
             box-shadow: 0 0 0 3px rgba(87, 201, 255, 0.16);
         }
@@ -1402,7 +1563,7 @@ body.is-ready .hero .profile-wrap {
 }
 
 .card {
-    background: linear-gradient(160deg, var(--surface), #141823);
+    background: linear-gradient(160deg, var(--surface), var(--surface-strong));
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 1.4rem;
@@ -2023,8 +2184,8 @@ body.is-ready .hero .profile-wrap {
             width: 100%;
             border: 1px solid rgba(31, 217, 151, 0.7);
             border-radius: 22px;
-            background: rgba(0, 0, 0, 0.35);
-            color: #f4f7ff;
+            background: var(--field-bg);
+            color: var(--field-text);
             padding: 1rem 1.25rem;
             outline: none;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -2032,7 +2193,7 @@ body.is-ready .hero .profile-wrap {
 
         .contact-form input::placeholder,
         .contact-form textarea::placeholder {
-            color: rgba(244, 247, 255, 0.58);
+            color: var(--field-placeholder);
         }
 
 .contact-form input:focus,
@@ -2430,7 +2591,7 @@ body.is-ready .hero .profile-wrap {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0;
-                background: #11141d;
+                background: var(--nav-mobile-bg);
                 border-bottom: 1px solid var(--line);
                 transform: scaleY(0);
                 transform-origin: top;
@@ -2448,43 +2609,38 @@ body.is-ready .hero .profile-wrap {
                 padding: 0.7rem 4%;
             }
 
-            .nav-dropdown {
+            .theme-control {
                 width: 100%;
-                padding-bottom: 0;
-                margin-bottom: 0;
+                padding: 0.35rem 4% 0.6rem;
             }
 
-            .nav-parent {
-                width: 100%;
-                justify-content: space-between;
-                padding: 0.7rem 4%;
+            .theme-trigger {
+                width: 44px;
+                margin-inline: auto;
+                border-radius: 10px;
+                height: 38px;
             }
 
-            .nav-submenu {
+            .theme-menu {
                 position: static;
-                width: 100%;
-                min-width: 0;
-                border: 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.08);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 0;
-                box-shadow: none;
-                background: rgba(255, 255, 255, 0.02);
                 opacity: 1;
-                pointer-events: auto;
                 transform: none;
+                visibility: visible;
+                pointer-events: auto;
+                border-radius: 10px;
+                border-color: rgba(255, 255, 255, 0.1);
+                box-shadow: none;
+                margin-top: 0.45rem;
+                padding: 0.22rem;
+                grid-template-columns: repeat(2, 1fr);
+                justify-items: center;
                 max-height: 0;
                 overflow: hidden;
-                padding: 0;
                 transition: max-height 0.22s ease;
             }
 
-            .nav-dropdown.open .nav-submenu {
-                max-height: 120px;
-            }
-
-            .nav-submenu a {
-                padding: 0.58rem 8%;
+            .theme-dropdown.open .theme-menu {
+                max-height: 180px;
             }
 
             .hero-role {

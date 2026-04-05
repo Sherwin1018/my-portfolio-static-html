@@ -17,17 +17,102 @@
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
     const navbar = document.querySelector(".navbar");
-    const navDropdown = navLinks ? navLinks.querySelector(".nav-dropdown") : null;
-    const navParent = navDropdown ? navDropdown.querySelector(".nav-parent") : null;
+    const mobileMenuQuery = window.matchMedia("(max-width: 700px)");
+    const themeDropdown = document.getElementById("themeDropdown");
+    const themeTrigger = document.getElementById("themeTrigger");
+    const themeOptions = themeDropdown ? Array.from(themeDropdown.querySelectorAll(".theme-option")) : [];
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    const THEME_STORAGE_KEY = "portfolio-theme-mode";
+    const VALID_THEMES = new Set(["default", "dark"]);
+    const THEME_ICON_CLASS = {
+        default: "bi-circle-half",
+        dark: "bi-moon-stars-fill"
+    };
+    const THEME_LABEL = {
+        default: "Default",
+        dark: "Dark"
+    };
 
-    function closeNavDropdown() {
-        if (!navDropdown || !navParent) {
+    function closeThemeMenu() {
+        if (!themeDropdown || !themeTrigger) {
             return;
         }
-
-        navDropdown.classList.remove("open");
-        navParent.setAttribute("aria-expanded", "false");
+        themeDropdown.classList.remove("open");
+        themeTrigger.setAttribute("aria-expanded", "false");
     }
+
+    function applyTheme(themeMode, shouldPersist) {
+        const selectedMode = VALID_THEMES.has(themeMode) ? themeMode : "default";
+
+        if (selectedMode === "default") {
+            body.removeAttribute("data-theme");
+        } else {
+            body.setAttribute("data-theme", selectedMode);
+        }
+
+        if (themeTrigger) {
+            const icon = themeTrigger.querySelector("i");
+            if (icon) {
+                icon.className = "bi " + THEME_ICON_CLASS[selectedMode];
+            }
+            const label = THEME_LABEL[selectedMode] + " mode";
+            themeTrigger.setAttribute("aria-label", label);
+            themeTrigger.setAttribute("title", label);
+        }
+
+        themeOptions.forEach(function (option) {
+            const isActive = option.dataset.themeMode === selectedMode;
+            option.classList.toggle("is-active", isActive);
+            option.setAttribute("aria-pressed", String(isActive));
+        });
+
+        if (shouldPersist) {
+            try {
+                if (selectedMode === "default") {
+                    window.localStorage.removeItem(THEME_STORAGE_KEY);
+                } else {
+                    window.localStorage.setItem(THEME_STORAGE_KEY, selectedMode);
+                }
+            } catch (error) {
+                // Ignore storage failures (for example private browsing restrictions).
+            }
+        }
+
+        if (themeMeta) {
+            const bg = window.getComputedStyle(body).getPropertyValue("--bg").trim();
+            if (bg) {
+                themeMeta.setAttribute("content", bg);
+            }
+        }
+    }
+
+    let savedThemeMode = null;
+    try {
+        savedThemeMode = window.localStorage.getItem(THEME_STORAGE_KEY);
+    } catch (error) {
+        savedThemeMode = null;
+    }
+    applyTheme(savedThemeMode && VALID_THEMES.has(savedThemeMode) ? savedThemeMode : "default", false);
+
+    if (themeTrigger && themeDropdown) {
+        themeTrigger.addEventListener("click", function (event) {
+            event.stopPropagation();
+            const isOpen = !themeDropdown.classList.contains("open");
+            themeDropdown.classList.toggle("open", isOpen);
+            themeTrigger.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
+
+    themeOptions.forEach(function (option) {
+        option.addEventListener("click", function () {
+            const mode = option.dataset.themeMode || "default";
+            applyTheme(mode, true);
+            closeThemeMenu();
+            if (mobileMenuQuery.matches) {
+                closeMobileMenu();
+            }
+        });
+    });
 
     function closeMobileMenu() {
         if (!menuBtn || !navLinks) {
@@ -37,7 +122,6 @@
         menuBtn.classList.remove("open");
         menuBtn.setAttribute("aria-expanded", "false");
         navLinks.classList.remove("open");
-        closeNavDropdown();
     }
 
     if (menuBtn && navLinks) {
@@ -48,53 +132,71 @@
         });
 
         navLinks.querySelectorAll("a").forEach(function (link) {
-            link.addEventListener("click", function (event) {
-                if (link.classList.contains("nav-parent") && window.matchMedia("(max-width: 700px)").matches) {
-                    event.preventDefault();
-                    return;
-                }
+            link.addEventListener("click", function () {
                 closeMobileMenu();
             });
         });
     }
 
-    if (navDropdown && navParent) {
-        navParent.addEventListener("click", function (event) {
-            if (!window.matchMedia("(max-width: 700px)").matches) {
-                return;
-            }
+    document.addEventListener("click", function (event) {
+        if (themeDropdown && !themeDropdown.contains(event.target)) {
+            closeThemeMenu();
+        }
 
-            event.preventDefault();
-            const isOpen = navDropdown.classList.toggle("open");
-            navParent.setAttribute("aria-expanded", String(isOpen));
-        });
+        if (!mobileMenuQuery.matches || !menuBtn || !navLinks) {
+            return;
+        }
+        if (!navLinks.classList.contains("open")) {
+            return;
+        }
+        if (navLinks.contains(event.target) || menuBtn.contains(event.target)) {
+            return;
+        }
+        closeMobileMenu();
+    });
 
-        navDropdown.querySelectorAll(".nav-submenu a").forEach(function (link) {
-            link.addEventListener("click", closeNavDropdown);
-        });
+    window.addEventListener("resize", function () {
+        if (!mobileMenuQuery.matches) {
+            closeMobileMenu();
+        }
+        updateScrollState();
+    });
 
-        document.addEventListener("click", function (event) {
-            if (!navDropdown.contains(event.target)) {
-                closeNavDropdown();
-            }
-        });
-    }
-
-    const navItems = navLinks
-        ? Array.from(navLinks.querySelectorAll(':scope > a[href^="#"], :scope > .nav-dropdown > .nav-parent[href^="#"]'))
-        : [];
+    const navItems = navLinks ? Array.from(navLinks.querySelectorAll(':scope > a[href^="#"]')) : [];
     const observedSections = navItems
         .map(function (item) {
             return document.querySelector(item.getAttribute("href"));
         })
         .filter(Boolean);
-    const sectionVisibility = new Map();
 
     function setActiveNavLink(activeId) {
         navItems.forEach(function (item) {
             const targetId = item.getAttribute("href").replace("#", "");
             item.classList.toggle("active", Boolean(activeId) && targetId === activeId);
         });
+    }
+
+    function getActiveSectionId() {
+        if (!observedSections.length) {
+            return "";
+        }
+
+        const navOffset = (navbar ? navbar.offsetHeight : 72) + 28;
+        const marker = window.scrollY + navOffset;
+        let activeId = observedSections[0].id;
+
+        observedSections.forEach(function (section) {
+            if (section.offsetTop <= marker) {
+                activeId = section.id;
+            }
+        });
+
+        const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        if (isNearBottom) {
+            activeId = observedSections[observedSections.length - 1].id;
+        }
+
+        return activeId;
     }
 
     function updateScrollState() {
@@ -107,29 +209,9 @@
         if (navbar) {
             navbar.classList.toggle("is-scrolled", scrollTop > 18);
         }
+
+        setActiveNavLink(getActiveSectionId());
     }
-
-    document.querySelectorAll("[data-focus-target]").forEach(function (link) {
-        link.addEventListener("click", function () {
-            const targetId = link.getAttribute("data-focus-target");
-
-            if (!targetId) {
-                return;
-            }
-
-            window.setTimeout(function () {
-                const targetCard = document.getElementById(targetId);
-                if (!targetCard) {
-                    return;
-                }
-
-                targetCard.classList.add("is-targeted");
-                window.setTimeout(function () {
-                    targetCard.classList.remove("is-targeted");
-                }, 1300);
-            }, 220);
-        });
-    });
 
     function createHeroParticles() {
         const heroParticles = document.getElementById("heroParticles");
@@ -335,34 +417,6 @@
         updateParallax();
         window.addEventListener("scroll", updateParallax, { passive: true });
         window.addEventListener("resize", updateParallax);
-    }
-
-    if ("IntersectionObserver" in window && observedSections.length) {
-        const sectionObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                sectionVisibility.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
-            });
-
-            let currentId = "";
-            let highestRatio = 0;
-
-            sectionVisibility.forEach(function (ratio, id) {
-                if (ratio > highestRatio) {
-                    highestRatio = ratio;
-                    currentId = id;
-                }
-            });
-
-            setActiveNavLink(currentId || "");
-        }, {
-            threshold: [0, 0.2, 0.35, 0.55, 0.75],
-            rootMargin: "-15% 0px -45% 0px"
-        });
-
-        observedSections.forEach(function (section) {
-            sectionVisibility.set(section.id, 0);
-            sectionObserver.observe(section);
-        });
     }
 
     function enableMagneticButtons() {
@@ -603,6 +657,8 @@
         if (event.key !== "Escape") {
             return;
         }
+
+        closeThemeMenu();
 
         if (certImageModal && certImageModal.classList.contains("open")) {
             hideCertImageModal();
