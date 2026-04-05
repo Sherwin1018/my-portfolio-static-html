@@ -17,6 +17,17 @@
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
     const navbar = document.querySelector(".navbar");
+    const navDropdown = navLinks ? navLinks.querySelector(".nav-dropdown") : null;
+    const navParent = navDropdown ? navDropdown.querySelector(".nav-parent") : null;
+
+    function closeNavDropdown() {
+        if (!navDropdown || !navParent) {
+            return;
+        }
+
+        navDropdown.classList.remove("open");
+        navParent.setAttribute("aria-expanded", "false");
+    }
 
     function closeMobileMenu() {
         if (!menuBtn || !navLinks) {
@@ -26,6 +37,7 @@
         menuBtn.classList.remove("open");
         menuBtn.setAttribute("aria-expanded", "false");
         navLinks.classList.remove("open");
+        closeNavDropdown();
     }
 
     if (menuBtn && navLinks) {
@@ -36,11 +48,41 @@
         });
 
         navLinks.querySelectorAll("a").forEach(function (link) {
-            link.addEventListener("click", closeMobileMenu);
+            link.addEventListener("click", function (event) {
+                if (link.classList.contains("nav-parent") && window.matchMedia("(max-width: 700px)").matches) {
+                    event.preventDefault();
+                    return;
+                }
+                closeMobileMenu();
+            });
         });
     }
 
-    const navItems = navLinks ? Array.from(navLinks.querySelectorAll('a[href^="#"]')) : [];
+    if (navDropdown && navParent) {
+        navParent.addEventListener("click", function (event) {
+            if (!window.matchMedia("(max-width: 700px)").matches) {
+                return;
+            }
+
+            event.preventDefault();
+            const isOpen = navDropdown.classList.toggle("open");
+            navParent.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        navDropdown.querySelectorAll(".nav-submenu a").forEach(function (link) {
+            link.addEventListener("click", closeNavDropdown);
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!navDropdown.contains(event.target)) {
+                closeNavDropdown();
+            }
+        });
+    }
+
+    const navItems = navLinks
+        ? Array.from(navLinks.querySelectorAll(':scope > a[href^="#"], :scope > .nav-dropdown > .nav-parent[href^="#"]'))
+        : [];
     const observedSections = navItems
         .map(function (item) {
             return document.querySelector(item.getAttribute("href"));
@@ -66,6 +108,28 @@
             navbar.classList.toggle("is-scrolled", scrollTop > 18);
         }
     }
+
+    document.querySelectorAll("[data-focus-target]").forEach(function (link) {
+        link.addEventListener("click", function () {
+            const targetId = link.getAttribute("data-focus-target");
+
+            if (!targetId) {
+                return;
+            }
+
+            window.setTimeout(function () {
+                const targetCard = document.getElementById(targetId);
+                if (!targetCard) {
+                    return;
+                }
+
+                targetCard.classList.add("is-targeted");
+                window.setTimeout(function () {
+                    targetCard.classList.remove("is-targeted");
+                }, 1300);
+            }, 220);
+        });
+    });
 
     function createHeroParticles() {
         const heroParticles = document.getElementById("heroParticles");
@@ -752,13 +816,19 @@
     window.addEventListener("scroll", updateScrollState, { passive: true });
 
     const skillsSection = document.getElementById("skills");
-    const skillFills = Array.from(document.querySelectorAll("#skills .skill-fill"));
+    const skillProgressRings = Array.from(document.querySelectorAll("#skills .skill-circle-progress"));
 
     function animateSkillBars() {
-        skillFills.forEach(function (fill) {
-            const targetLevel = fill.dataset.level || "0";
-            fill.style.width = targetLevel + "%";
-            fill.classList.add("animated");
+        skillProgressRings.forEach(function (ring) {
+            const targetLevel = Number(ring.dataset.level || "0");
+            const radius = Number(ring.getAttribute("r")) || 40;
+            const circumference = 2 * Math.PI * radius;
+            const normalizedLevel = Math.max(0, Math.min(100, targetLevel));
+            const dashOffset = circumference - (normalizedLevel / 100) * circumference;
+
+            ring.style.strokeDasharray = circumference.toFixed(2);
+            ring.style.strokeDashoffset = dashOffset.toFixed(2);
+            ring.classList.add("animated");
         });
     }
 
