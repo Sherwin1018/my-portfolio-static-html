@@ -815,38 +815,46 @@
     window.addEventListener("resize", renderCarousel);
     window.addEventListener("scroll", updateScrollState, { passive: true });
 
-    const skillsSection = document.getElementById("skills");
-    const skillProgressRings = Array.from(document.querySelectorAll("#skills .skill-circle-progress"));
+    const skillRows = Array.from(document.querySelectorAll("#skills .skill-row"));
 
-    function animateSkillBars() {
-        skillProgressRings.forEach(function (ring) {
-            const targetLevel = Number(ring.dataset.level || "0");
-            const radius = Number(ring.getAttribute("r")) || 40;
-            const circumference = 2 * Math.PI * radius;
-            const normalizedLevel = Math.max(0, Math.min(100, targetLevel));
-            const dashOffset = circumference - (normalizedLevel / 100) * circumference;
+    function animateSkillRing(ring) {
+        if (!ring || ring.classList.contains("animated")) {
+            return;
+        }
 
-            ring.style.strokeDasharray = circumference.toFixed(2);
-            ring.style.strokeDashoffset = dashOffset.toFixed(2);
-            ring.classList.add("animated");
+        const targetLevel = Number(ring.dataset.level || "0");
+        const radius = Number(ring.getAttribute("r")) || 40;
+        const circumference = 2 * Math.PI * radius;
+        const normalizedLevel = Math.max(0, Math.min(100, targetLevel));
+        const dashOffset = circumference - (normalizedLevel / 100) * circumference;
+
+        ring.style.strokeDasharray = circumference.toFixed(2);
+        ring.style.strokeDashoffset = dashOffset.toFixed(2);
+        ring.classList.add("animated");
+    }
+
+    function animateAllSkillRings() {
+        document.querySelectorAll("#skills .skill-circle-progress").forEach(function (ring) {
+            animateSkillRing(ring);
         });
     }
 
-    if ("IntersectionObserver" in window) {
+    if ("IntersectionObserver" in window && skillRows.length) {
         const skillObserver = new IntersectionObserver(function (entries, observer) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
-                    animateSkillBars();
+                    const ring = entry.target.querySelector(".skill-circle-progress");
+                    animateSkillRing(ring);
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.35 });
+        }, { threshold: 0.12 });
 
-        if (skillsSection) {
-            skillObserver.observe(skillsSection);
-        }
+        skillRows.forEach(function (row) {
+            skillObserver.observe(row);
+        });
     } else {
-        animateSkillBars();
+        animateAllSkillRings();
     }
 
     const contactForm = document.getElementById("contactForm");
