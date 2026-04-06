@@ -181,6 +181,12 @@
             return "";
         }
 
+        const certModalOpen = document.getElementById("certModal")?.classList.contains("open");
+        const certImageModalOpen = document.getElementById("certImageModal")?.classList.contains("open");
+        if (certModalOpen || certImageModalOpen) {
+            return "projects";
+        }
+
         const navOffset = (navbar ? navbar.offsetHeight : 72) + 28;
         const marker = window.scrollY + navOffset;
         let activeId = observedSections[0].id;
@@ -559,6 +565,31 @@
     const closeCertImageModal = document.getElementById("closeCertImageModal");
     const certImagePreview = document.getElementById("certImagePreview");
     const certImageTitle = document.getElementById("certImageTitle");
+    let scrollLockY = 0;
+
+    function lockBodyScroll() {
+        if (document.body.classList.contains("modal-open")) {
+            return;
+        }
+
+        scrollLockY = window.scrollY || window.pageYOffset || 0;
+        document.body.style.setProperty("--scroll-lock-top", "-" + scrollLockY + "px");
+        document.body.classList.add("modal-open");
+    }
+
+    function unlockBodyScroll() {
+        const keepLocked =
+            (certModal && certModal.classList.contains("open")) ||
+            (certImageModal && certImageModal.classList.contains("open"));
+
+        if (keepLocked || !document.body.classList.contains("modal-open")) {
+            return;
+        }
+
+        document.body.classList.remove("modal-open");
+        document.body.style.removeProperty("--scroll-lock-top");
+        window.scrollTo(0, scrollLockY);
+    }
 
     function showCertModal() {
         if (!certModal) {
@@ -567,7 +598,8 @@
 
         certModal.classList.add("open");
         certModal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
+        lockBodyScroll();
+        setActiveNavLink("projects");
     }
 
     function hideCertModal() {
@@ -577,7 +609,8 @@
 
         certModal.classList.remove("open");
         certModal.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
+        unlockBodyScroll();
+        updateScrollState();
     }
 
     if (openCertModal) {
@@ -608,7 +641,8 @@
         }
         certImageModal.classList.add("open");
         certImageModal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
+        lockBodyScroll();
+        setActiveNavLink("projects");
     }
 
     function hideCertImageModal() {
@@ -619,7 +653,8 @@
         certImageModal.classList.remove("open");
         certImageModal.setAttribute("aria-hidden", "true");
         certImagePreview.src = "";
-        document.body.style.overflow = certModal && certModal.classList.contains("open") ? "hidden" : "";
+        unlockBodyScroll();
+        updateScrollState();
     }
 
     document.querySelectorAll(".cert-card").forEach(function (card) {
