@@ -823,11 +823,29 @@ body.is-ready .hero .profile-wrap {
         .hero-role {
             display: inline-block;
             color: #f4f7ff;
-            font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-            font-weight: 700;
-            line-height: 1.45;
-            letter-spacing: 0.01em;
+            font-size: clamp(1.2rem, 2vw, 1.62rem);
+            font-weight: 800;
+            font-style: normal;
+            line-height: 1.34;
+            letter-spacing: 0.012em;
             animation: roleReveal 0.85s ease-out both, roleGlow 2.8s ease-in-out 0.85s infinite;
+        }
+
+        .hero-role-dynamic {
+            display: inline-block;
+            min-height: 1.45em;
+        }
+
+        .hero-role-cursor {
+            display: inline-block;
+            width: 0.12em;
+            height: 1.08em;
+            margin-left: 0.14em;
+            vertical-align: -0.08em;
+            background: rgba(87, 201, 255, 0.95);
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(87, 201, 255, 0.45);
+            animation: cursorBlink 0.9s steps(1, end) infinite;
         }
 
         @keyframes roleReveal {
@@ -849,6 +867,15 @@ body.is-ready .hero .profile-wrap {
             }
             50% {
                 text-shadow: 0 0 12px rgba(31, 217, 151, 0.45);
+            }
+        }
+
+        @keyframes cursorBlink {
+            0%, 48% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
             }
         }
 
@@ -2666,9 +2693,9 @@ body.is-ready .hero .profile-wrap {
             }
 
             .hero-role {
-                font-size: 0.88rem;
-                line-height: 1.28;
-                max-width: 19rem;
+                font-size: 1.03rem;
+                line-height: 1.3;
+                max-width: 22rem;
                 margin-inline: auto;
             }
 
