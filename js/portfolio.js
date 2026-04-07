@@ -225,7 +225,7 @@
             return;
         }
 
-        const roles = ["WEB DEVELOPER", "FRONTEND & BACKEND", "MOBILE DEVELOPER"];
+        const roles = ["ASPIRING WEB DEVELOPER", "ASPIRING MOBILE DEVELOPER", "FRONTEND & BACKEND"];
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             roleTarget.textContent = roles.join(" | ");
             return;
