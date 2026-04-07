@@ -1549,13 +1549,13 @@ body.is-ready .hero .profile-wrap {
         .edu-item {
             position: relative;
             display: grid;
-            grid-template-columns: 34px minmax(0, 1fr) auto;
+            grid-template-columns: 38px minmax(0, 1fr) auto;
             grid-template-areas:
                 "logo title label"
                 "year year year";
             align-items: center;
             row-gap: 0.02rem;
-            gap: 0.72rem;
+            gap: 0.8rem;
             opacity: 0;
             transform: translateY(12px);
             transition: opacity 0.45s ease, transform 0.45s ease;
@@ -1564,7 +1564,7 @@ body.is-ready .hero .profile-wrap {
         .edu-item::before {
             content: "";
             position: absolute;
-            left: -0.87rem;
+            left: -1.04rem;
             top: 50%;
             width: 10px;
             height: 10px;
@@ -1578,8 +1578,8 @@ body.is-ready .hero .profile-wrap {
         .edu-logo-wrap,
         .exp-logo-wrap {
             grid-area: logo;
-            width: 34px;
-            height: 34px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -1611,7 +1611,7 @@ body.is-ready .hero .profile-wrap {
             font-size: 0.87rem;
             font-weight: 700;
             white-space: nowrap;
-            padding-left: calc(34px + 0.72rem);
+            padding-left: calc(38px + 0.8rem);
             margin-top: -6px;
             line-height: 1;
         }
@@ -1672,14 +1672,14 @@ body.is-ready .hero .profile-wrap {
         .exp-item {
             position: relative;
             display: grid;
-            grid-template-columns: 34px minmax(0, 1fr);
+            grid-template-columns: 38px minmax(0, 1fr);
             grid-template-areas:
                 "logo title"
                 "logo subtitle"
                 "year year";
             align-items: center;
             row-gap: 0.06rem;
-            gap: 0.58rem;
+            gap: 0.66rem;
             opacity: 0;
             transform: translateY(12px);
             transition: opacity 0.48s ease, transform 0.48s ease;
@@ -1700,7 +1700,7 @@ body.is-ready .hero .profile-wrap {
         }
 
         .exp-year {
-            padding-left: calc(34px + 0.58rem);
+            padding-left: calc(38px + 0.66rem);
             margin-top: -4px;
         }
 
@@ -1711,7 +1711,7 @@ body.is-ready .hero .profile-wrap {
         .exp-item::before {
             content: "";
             position: absolute;
-            left: -0.87rem;
+            left: -1.04rem;
             top: 50%;
             width: 10px;
             height: 10px;
