@@ -21,23 +21,55 @@
     <link rel="stylesheet" href="css/portfolio.css">
 </head>
 <body>
+    <div class="loading-screen" id="loadingScreen" aria-live="polite">
+        <div class="loading-content">
+            <div class="loader-icon-row" aria-hidden="true">
+                <span class="loader-icon-box"><i class="bi bi-code-slash"></i></span>
+                <span class="loader-icon-box"><i class="bi bi-stack"></i></span>
+                <span class="loader-icon-box"><i class="bi bi-lightning-charge-fill"></i></span>
+            </div>
+            <h1 class="loader-title" id="loaderTitle">
+                <span class="loader-title-row">
+                    <span>WELCOME</span>
+                    <span>TO</span>
+                    <span>MY</span>
+                </span>
+                <span class="loader-title-row">
+                    <span>PORTFOLIO</span>
+                    <span>WEBSITE</span>
+                </span>
+            </h1>
+            <div class="loader-domain-pill">
+                <span id="loaderDomainText"></span>
+                <span class="loader-domain-cursor" aria-hidden="true"></span>
+            </div>
+            <div class="loader-progress-wrap">
+                <div class="loader-progress-track">
+                    <div class="loader-progress-fill" id="loaderProgressFill"></div>
+                </div>
+                <span class="loader-progress-text" id="loaderProgressText">0%</span>
+            </div>
+        </div>
+    </div>
+
     <header class="navbar">
         <div class="container nav-inner">
             <div class="logo">
                 <img class="logo-icon-img" src="images/my-logo-circle.png" alt="WinDev logo">
                 <span class="brand-name"><span class="brand-win">WIN</span><span class="brand-dev">DEV</span></span>
             </div>
-            <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
             <nav class="nav-links" id="navLinks">
                 <a href="#hero">Home</a>
                 <a href="#about">About</a>
                 <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
                 <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-right">
+                <div class="nav-status" aria-label="Portfolio status: Available">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Available</span>
+                </div>
                 <div class="theme-control theme-dropdown" id="themeDropdown">
                     <button class="theme-trigger" id="themeTrigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="themeMenu">
                         <i class="bi bi-circle-half" aria-hidden="true"></i>
@@ -51,7 +83,12 @@
                         </button>
                     </div>
                 </div>
-            </nav>
+            </div>
+            <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </header>
 
@@ -66,7 +103,7 @@
             </div>
             <div class="container hero-grid">
                 <div class="hero-copy">
-                    <span class="eyebrow">Web &amp; Mobile Developer</span>
+                    <span class="eyebrow">ASPRING Web &amp; Mobile Developer</span>
                     <h1>Hi, I'm Sherwin C. Españo. I build clean and modern web and mobile experiences.</h1>
                     <p class="lead">I design and develop user-focused websites and applications that are fast, responsive, and easy to maintain. Explore my projects and skills below.</p>
                     <div class="btn-group">
@@ -101,6 +138,7 @@
                     <div class="about-layout">
                         <div class="about-header">
                             <h2>About <span>Me</span></h2>
+                            <button class="cert-btn about-cert-btn" id="openCertModal" type="button"><i class="bi bi-patch-check" aria-hidden="true"></i>View Certificates</button>
                         </div>
                         <div class="about-photo-wrap">
                             <span class="about-photo-string" aria-hidden="true"></span>
@@ -190,9 +228,8 @@
 
         <section id="projects" class="parallax-section" data-parallax-speed="0.12">
             <div class="container">
-                <div class="section-head section-head-split">
+                <div class="section-head">
                     <h2>Projects</h2>
-                    <button class="cert-btn" id="openCertModal" type="button"><i class="bi bi-patch-check" aria-hidden="true"></i>Certificates</button>
                 </div>
                 <div class="projects-carousel" id="projectsCarousel">
                     <button class="carousel-btn prev" type="button" aria-label="Previous project">&#10094;</button>
@@ -533,7 +570,7 @@
 
                         <div class="contact-right">
                             <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                            <button class="contact-submit" id="contactSubmit" type="submit">Send Message</button>
+                            <button class="contact-submit" id="contactSubmit" type="submit"><i class="bi bi-send-fill" aria-hidden="true"></i>Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -543,12 +580,33 @@
 
     <footer>
         <div class="container footer-inner">
-            <div class="footer-brand">
-                <strong>WINDEV</strong>
-                <p>Building clean web and mobile experiences.</p>
+            <div class="footer-col footer-brand">
+                <div class="footer-brand-top">
+                    <img class="footer-logo" src="images/my-logo-circle.png" alt="WinDev logo">
+                    <span class="footer-brand-name"><span class="brand-win">WIN</span><span class="brand-dev">DEV</span></span>
+                </div>
+                <p class="footer-full-name">Sherwin C. Españo</p>
+                <p class="footer-brand-tag">(WINDEV)</p>
+                <p class="footer-location"><i class="bi bi-geo-alt-fill" aria-hidden="true"></i>Davao City, Philippines</p>
+            </div>
+
+            <div class="footer-col footer-links">
+                <h4>Quick Links</h4>
+                <a href="#hero">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h4>Contact</h4>
+                <p><i class="bi bi-envelope-fill" aria-hidden="true"></i>espanosherwin10@gmail.com</p>
+                <p><i class="bi bi-telephone-fill" aria-hidden="true"></i>+63 963 506 7030</p>
+                <p><i class="bi bi-briefcase-fill" aria-hidden="true"></i>Open for Opportunities</p>
             </div>
             <div class="footer-copy">
-                &copy; <span id="year"></span> WINDEV. All rights reserved.
+                &copy; 2026 <strong>Sherwin C. Españo</strong>. All rights reserved.
             </div>
         </div>
     </footer>

@@ -33,6 +33,107 @@
         dark: "Dark"
     };
 
+    function initLoadingScreen() {
+        const loadingScreen = document.getElementById("loadingScreen");
+        const iconBoxes = loadingScreen ? Array.from(loadingScreen.querySelectorAll(".loader-icon-box")) : [];
+        const titleWords = loadingScreen ? Array.from(loadingScreen.querySelectorAll(".loader-title-row > span")) : [];
+        const domainText = document.getElementById("loaderDomainText");
+        const progressFill = document.getElementById("loaderProgressFill");
+        const progressText = document.getElementById("loaderProgressText");
+
+        if (!loadingScreen || !domainText || !progressFill || !progressText) {
+            return Promise.resolve();
+        }
+
+        document.body.classList.add("loader-active");
+
+        return new Promise(function (resolve) {
+            let progressValue = 0;
+
+            function setProgress(value) {
+                const normalized = Math.max(0, Math.min(100, Math.round(value)));
+                progressValue = normalized;
+                progressFill.style.width = normalized + "%";
+                progressText.textContent = normalized + "%";
+            }
+
+            function animateProgressTo(target, duration, onDone) {
+                const start = progressValue;
+                const startTime = performance.now();
+
+                function step(now) {
+                    const ratio = Math.min((now - startTime) / duration, 1);
+                    const eased = 1 - Math.pow(1 - ratio, 3);
+                    setProgress(start + (target - start) * eased);
+
+                    if (ratio < 1) {
+                        window.requestAnimationFrame(step);
+                        return;
+                    }
+
+                    if (onDone) {
+                        onDone();
+                    }
+                }
+
+                window.requestAnimationFrame(step);
+            }
+
+            setProgress(0);
+
+            iconBoxes.forEach(function (icon, index) {
+                window.setTimeout(function () {
+                    icon.classList.add("is-visible");
+                }, index * 180);
+            });
+
+            window.setTimeout(function () {
+                titleWords.forEach(function (word, index) {
+                    window.setTimeout(function () {
+                        word.classList.add("is-visible");
+                    }, index * 200);
+                });
+            }, 540);
+
+            // Stage 1: icon boxes = 35%
+            window.setTimeout(function () {
+                animateProgressTo(35, 520);
+            }, 420);
+
+            // Stage 2: title words complete = 70%
+            window.setTimeout(function () {
+                animateProgressTo(70, 640);
+            }, 1360);
+
+            // Stage 3: typewriter drives 70% -> 100%
+            window.setTimeout(function () {
+                const source = "windev.com";
+                let index = 0;
+
+                function typeDomain() {
+                    index += 1;
+                    domainText.textContent = source.slice(0, index);
+
+                    const ratio = index / source.length;
+                    setProgress(70 + ratio * 30);
+
+                    if (index < source.length) {
+                        window.setTimeout(typeDomain, 110);
+                        return;
+                    }
+
+                    window.setTimeout(function () {
+                        loadingScreen.classList.add("is-hidden");
+                        document.body.classList.remove("loader-active");
+                        resolve();
+                    }, 260);
+                }
+
+                typeDomain();
+            }, 2060);
+        });
+    }
+
     function closeThemeMenu() {
         if (!themeDropdown || !themeTrigger) {
             return;
@@ -1154,30 +1255,32 @@
         });
     }
 
-    initScrollAnimations();
-    renderCarousel();
-    startAutoplay();
-
-    window.addEventListener("pageshow", function () {
+    initLoadingScreen().finally(function () {
         initScrollAnimations();
-    });
+        renderCarousel();
+        startAutoplay();
 
-    const year = document.getElementById("year");
-    if (year) {
-        year.textContent = String(new Date().getFullYear());
-    }
+        window.addEventListener("pageshow", function () {
+            initScrollAnimations();
+        });
 
-    updateScrollState();
-    createHeroParticles();
-    initHeroThreeScene();
-    enableSceneParallax();
-    enableMagneticButtons();
-    enableTiltEffects();
-    enableInteractiveCards();
-    enableHeroSceneMotion();
-    initHeroRoleTypewriter();
+        const year = document.getElementById("year");
+        if (year) {
+            year.textContent = String(new Date().getFullYear());
+        }
 
-    window.requestAnimationFrame(function () {
-        body.classList.add("is-ready");
+        updateScrollState();
+        createHeroParticles();
+        initHeroThreeScene();
+        enableSceneParallax();
+        enableMagneticButtons();
+        enableTiltEffects();
+        enableInteractiveCards();
+        enableHeroSceneMotion();
+        initHeroRoleTypewriter();
+
+        window.requestAnimationFrame(function () {
+            body.classList.add("is-ready");
+        });
     });
 }());
