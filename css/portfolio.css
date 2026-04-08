@@ -1471,8 +1471,9 @@ body.is-ready .hero .profile-wrap {
 
         #aboutEducationCard,
         #aboutExperienceCard {
-            align-self: start;
+            align-self: stretch;
             width: 100%;
+            height: 100%;
         }
 
         .about-card {
@@ -1480,6 +1481,7 @@ body.is-ready .hero .profile-wrap {
             grid-template-rows: auto 1fr;
             gap: 0.9rem;
             padding: 1.2rem;
+            height: 100%;
             border-radius: 16px;
             position: relative;
             overflow: hidden;
@@ -3074,6 +3076,7 @@ body.is-ready .hero .profile-wrap {
 
             .about-background {
                 grid-template-columns: 1fr;
+                row-gap: 1rem;
             }
 
             .about-background-group > .about-subtitle,
@@ -3103,6 +3106,7 @@ body.is-ready .hero .profile-wrap {
 
             .about-background {
                 grid-template-columns: 1fr;
+                row-gap: 1rem;
             }
 
             .skills-grid {
