@@ -61,7 +61,7 @@
             <nav class="nav-links" id="navLinks">
                 <a href="#hero">Home</a>
                 <a href="#about">About</a>
-                <a href="#projects">Projects</a>
+                <a href="#projects">Achievements</a>
                 <a href="#skills">Skills</a>
                 <a href="#contact">Contact</a>
                 <div class="mobile-nav-footer" aria-label="Mobile navigation extras">
@@ -234,7 +234,7 @@
         <section id="projects" class="parallax-section" data-parallax-speed="0.12">
             <div class="container">
                 <div class="section-head">
-                    <h2>Projects</h2>
+                    <h2>Achievements</h2>
                 </div>
                 <div class="cert-preview-strip card" aria-label="Certificates preview">
                     <div class="cert-preview-head">
@@ -247,7 +247,7 @@
                             <span>View Certificates</span>
                         </button>
                     </div>
-                    <div class="cert-preview-list" aria-hidden="true">
+                    <div class="cert-preview-list">
                         <img src="images/cert/asd1.png" alt="Advanced Seminar Day 1 certificate preview" loading="lazy" decoding="async">
                         <img src="images/cert/asd2.png" alt="Advanced Seminar Day 2 certificate preview" loading="lazy" decoding="async">
                         <img src="images/cert/cse.png" alt="CyberSecurity Essentials certificate preview" loading="lazy" decoding="async">
@@ -608,26 +608,35 @@
                     </aside>
 
                     <form class="contact-form" id="contactForm" novalidate>
+                        <div class="sr-only" aria-hidden="true">
+                            <label for="website_field">Leave this field empty</label>
+                            <input type="text" id="website_field" name="website_field" tabindex="-1" autocomplete="off">
+                        </div>
                         <div class="contact-left">
                             <div class="field-with-icon">
+                                <label class="sr-only" for="full_name">Full Name</label>
                                 <i class="bi bi-person" aria-hidden="true"></i>
                                 <input type="text" id="full_name" name="full_name" placeholder="Full Name" required>
                             </div>
                             <div class="field-with-icon">
+                                <label class="sr-only" for="email">Email Address</label>
                                 <i class="bi bi-envelope" aria-hidden="true"></i>
                                 <input type="email" id="email" name="email" placeholder="Email" required>
                             </div>
                             <div class="field-with-icon">
+                                <label class="sr-only" for="phone_number">Phone Number</label>
                                 <i class="bi bi-telephone" aria-hidden="true"></i>
                                 <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required>
                             </div>
                             <div class="field-with-icon">
+                                <label class="sr-only" for="subject">Subject</label>
                                 <i class="bi bi-chat-left-text" aria-hidden="true"></i>
                                 <input type="text" id="subject" name="subject" placeholder="Subject" required>
                             </div>
                         </div>
 
                         <div class="contact-right">
+                            <label class="sr-only" for="message">Your Message</label>
                             <textarea id="message" name="message" placeholder="Your Message" required></textarea>
                             <button class="contact-submit" id="contactSubmit" type="submit"><i class="bi bi-send-fill" aria-hidden="true"></i>Send Message</button>
                         </div>
@@ -653,7 +662,7 @@
                 <h4>Quick Links</h4>
                 <a href="#hero">Home</a>
                 <a href="#about">About</a>
-                <a href="#projects">Projects</a>
+                <a href="#projects">Achievements</a>
                 <a href="#skills">Skills</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -665,7 +674,7 @@
                 <p><i class="bi bi-briefcase-fill" aria-hidden="true"></i>Open for Opportunities</p>
             </div>
             <div class="footer-copy">
-                &copy; 2026 <strong>Sherwin C. Españo</strong>. All rights reserved.
+                &copy; <span id="year">2026</span> <strong>Sherwin C. Españo</strong>. All rights reserved.
             </div>
         </div>
     </footer>

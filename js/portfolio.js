@@ -2,6 +2,8 @@
     const EMAILJS_PUBLIC_KEY = "0SNcJ4xyZlmGEwTct";
     const EMAILJS_SERVICE_ID = "service_ybrpukc";
     const EMAILJS_TEMPLATE_ID = "template_0fhi9em";
+    const LAST_CONTACT_SUBMIT_KEY = "portfolio-last-contact-submit";
+    const CONTACT_SUBMIT_COOLDOWN_MS = 15000;
     const body = document.body;
 
     if (window.emailjs && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
@@ -319,6 +321,58 @@
 
         setActiveNavLink(getActiveSectionId());
     }
+
+    function scrollToHashTarget(hash, useSmoothScroll) {
+        if (!hash || hash.charAt(0) !== "#") {
+            return false;
+        }
+
+        const target = document.querySelector(hash);
+        if (!target) {
+            return false;
+        }
+
+        const targetId = target.id || hash.slice(1);
+        const navOffset = (navbar ? navbar.offsetHeight : 72) + 26;
+        const targetTop = targetId === "hero"
+            ? 0
+            : Math.max(0, window.scrollY + target.getBoundingClientRect().top - navOffset);
+
+        window.scrollTo({
+            top: targetTop,
+            behavior: useSmoothScroll ? "smooth" : "auto"
+        });
+
+        setActiveNavLink(targetId);
+        return true;
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchorLink) {
+        anchorLink.addEventListener("click", function (event) {
+            const hash = anchorLink.getAttribute("href");
+            if (!hash || hash === "#") {
+                return;
+            }
+
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const didHandle = scrollToHashTarget(hash, !prefersReducedMotion);
+            if (!didHandle) {
+                return;
+            }
+
+            event.preventDefault();
+            if (window.location.hash !== hash) {
+                window.history.pushState(null, "", hash);
+            }
+            updateScrollState();
+        });
+    });
+
+    window.addEventListener("hashchange", function () {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        scrollToHashTarget(window.location.hash, !prefersReducedMotion);
+        updateScrollState();
+    });
 
     function initHeroRoleTypewriter() {
         const roleTarget = document.getElementById("heroRoleDynamic");
@@ -822,6 +876,106 @@
         card.appendChild(action);
     });
 
+    let flippedPreviewCard = null;
+    document.querySelectorAll(".cert-preview-list img").forEach(function (image, index) {
+        try {
+            const rawAlt = (image.alt || "").trim();
+            const titleText = rawAlt
+                ? rawAlt.replace(/\s+certificate preview$/i, "").replace(/\s+preview$/i, "")
+                : "Certificate " + (index + 1);
+            const previewImageSrc = image.currentSrc || image.src;
+            const imageClone = image.cloneNode(true);
+
+            const card = document.createElement("article");
+            card.className = "cert-preview-card";
+
+            const inner = document.createElement("div");
+            inner.className = "cert-preview-card-inner";
+
+            const front = document.createElement("div");
+            front.className = "cert-preview-face cert-preview-front";
+
+            const title = document.createElement("h4");
+            title.className = "cert-preview-title";
+            title.textContent = titleText;
+
+            const hint = document.createElement("p");
+            hint.className = "cert-preview-hint";
+            hint.innerHTML = "Tap <strong>Flip Me</strong> to reveal the certificate image.";
+
+            const flipBtn = document.createElement("button");
+            flipBtn.type = "button";
+            flipBtn.className = "cert-preview-flip-btn";
+            flipBtn.setAttribute("aria-expanded", "false");
+            flipBtn.innerHTML = '<i class="bi bi-arrow-repeat" aria-hidden="true"></i><span>Flip me</span>';
+
+            front.appendChild(title);
+            front.appendChild(hint);
+            front.appendChild(flipBtn);
+
+            const back = document.createElement("div");
+            back.className = "cert-preview-face cert-preview-back";
+
+            const imageWrap = document.createElement("div");
+            imageWrap.className = "cert-preview-image-wrap";
+            imageWrap.appendChild(imageClone);
+
+            const viewFullBtn = document.createElement("button");
+            viewFullBtn.type = "button";
+            viewFullBtn.className = "cert-preview-image-overlay-btn";
+            viewFullBtn.innerHTML = '<i class="bi bi-arrows-fullscreen" aria-hidden="true"></i><span>View Full Image</span>';
+            viewFullBtn.addEventListener("click", function () {
+                showCertImageModal(previewImageSrc, titleText);
+            });
+            imageWrap.appendChild(viewFullBtn);
+            back.appendChild(imageWrap);
+
+            const backBtn = document.createElement("button");
+            backBtn.type = "button";
+            backBtn.className = "cert-preview-flip-btn";
+            backBtn.setAttribute("aria-expanded", "false");
+            backBtn.innerHTML = '<i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i><span>Back</span>';
+            back.appendChild(backBtn);
+
+            inner.appendChild(front);
+            inner.appendChild(back);
+            card.appendChild(inner);
+            image.replaceWith(card);
+
+            function setPreviewFlipped(shouldFlip) {
+                card.classList.toggle("is-flipped", shouldFlip);
+                flipBtn.setAttribute("aria-expanded", String(shouldFlip));
+                backBtn.setAttribute("aria-expanded", String(shouldFlip));
+            }
+
+            function togglePreview() {
+                const isFlipped = card.classList.contains("is-flipped");
+                if (isFlipped) {
+                    setPreviewFlipped(false);
+                    if (flippedPreviewCard === card) {
+                        flippedPreviewCard = null;
+                    }
+                    return;
+                }
+
+                if (flippedPreviewCard && flippedPreviewCard !== card) {
+                    flippedPreviewCard.classList.remove("is-flipped");
+                    flippedPreviewCard.querySelectorAll(".cert-preview-flip-btn").forEach(function (button) {
+                        button.setAttribute("aria-expanded", "false");
+                    });
+                }
+
+                setPreviewFlipped(true);
+                flippedPreviewCard = card;
+            }
+
+            flipBtn.addEventListener("click", togglePreview);
+            backBtn.addEventListener("click", togglePreview);
+        } catch (error) {
+            // Keep the page usable even if preview-card enhancement fails.
+        }
+    });
+
     if (closeCertImageModal) {
         closeCertImageModal.addEventListener("click", hideCertImageModal);
     }
@@ -1097,7 +1251,7 @@
     const contactForm = document.getElementById("contactForm");
     const toastStack = document.getElementById("toastStack");
     const contactSubmit = document.getElementById("contactSubmit");
-    const formFields = contactForm ? Array.from(contactForm.querySelectorAll("input, textarea")) : [];
+    const formFields = contactForm ? Array.from(contactForm.querySelectorAll('input:not([type="hidden"]), textarea')) : [];
     let activeToast = null;
     let activeToastTimer = null;
 
@@ -1206,6 +1360,27 @@
         contactForm.addEventListener("submit", function (event) {
             event.preventDefault();
 
+            const trapField = contactForm.querySelector('input[name="website_field"]');
+            if (trapField && trapField.value.trim()) {
+                showFormAlert("error", "Unable to send message right now. Please try again.");
+                return;
+            }
+
+            let lastSubmitAt = 0;
+            try {
+                lastSubmitAt = Number(window.localStorage.getItem(LAST_CONTACT_SUBMIT_KEY) || "0");
+            } catch (error) {
+                lastSubmitAt = 0;
+            }
+
+            const now = Date.now();
+            const elapsed = now - lastSubmitAt;
+            if (lastSubmitAt > 0 && elapsed < CONTACT_SUBMIT_COOLDOWN_MS) {
+                const secondsLeft = Math.ceil((CONTACT_SUBMIT_COOLDOWN_MS - elapsed) / 1000);
+                showFormAlert("error", "Please wait " + secondsLeft + "s before sending another message.");
+                return;
+            }
+
             if (!validateContactForm()) {
                 showFormAlert("error", "Please complete all required fields correctly.");
                 return;
@@ -1229,6 +1404,12 @@
                 contactSubmit.disabled = true;
                 contactSubmit.classList.add("is-loading");
                 contactSubmit.textContent = "Sending...";
+            }
+
+            try {
+                window.localStorage.setItem(LAST_CONTACT_SUBMIT_KEY, String(now));
+            } catch (error) {
+                // Ignore storage failures.
             }
 
             window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
