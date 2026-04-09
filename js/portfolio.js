@@ -97,13 +97,13 @@
 
             // Stage 1: icon boxes = 35%
             window.setTimeout(function () {
-                animateProgressTo(35, 520);
-            }, 420);
+                animateProgressTo(35, 360);
+            }, 220);
 
             // Stage 2: title words complete = 70%
             window.setTimeout(function () {
-                animateProgressTo(70, 640);
-            }, 1360);
+                animateProgressTo(70, 440);
+            }, 900);
 
             // Stage 3: typewriter drives 70% -> 100%
             window.setTimeout(function () {
@@ -118,7 +118,7 @@
                     setProgress(70 + ratio * 30);
 
                     if (index < source.length) {
-                        window.setTimeout(typeDomain, 110);
+                        window.setTimeout(typeDomain, 75);
                         return;
                     }
 
@@ -126,11 +126,11 @@
                         loadingScreen.classList.add("is-hidden");
                         document.body.classList.remove("loader-active");
                         resolve();
-                    }, 260);
+                    }, 180);
                 }
 
                 typeDomain();
-            }, 2060);
+            }, 1400);
         });
     }
 
@@ -705,7 +705,7 @@
     }
 
     const certModal = document.getElementById("certModal");
-    const openCertModal = document.getElementById("openCertModal");
+    const openCertModalPreview = document.getElementById("openCertModalPreview");
     const closeCertModal = document.getElementById("closeCertModal");
     const certImageModal = document.getElementById("certImageModal");
     const closeCertImageModal = document.getElementById("closeCertImageModal");
@@ -759,8 +759,8 @@
         updateScrollState();
     }
 
-    if (openCertModal) {
-        openCertModal.addEventListener("click", showCertModal);
+    if (openCertModalPreview) {
+        openCertModalPreview.addEventListener("click", showCertModal);
     }
 
     if (closeCertModal) {

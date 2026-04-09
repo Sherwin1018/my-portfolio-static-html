@@ -55,7 +55,7 @@
     <header class="navbar">
         <div class="container nav-inner">
             <div class="logo">
-                <img class="logo-icon-img" src="images/my-logo-circle.png" alt="WinDev logo">
+                <img class="logo-icon-img" src="images/my-logo-circle.png" alt="WinDev logo" decoding="async">
                 <span class="brand-name"><span class="brand-win">WIN</span><span class="brand-dev">DEV</span></span>
             </div>
             <nav class="nav-links" id="navLinks">
@@ -65,16 +65,16 @@
                 <a href="#skills">Skills</a>
                 <a href="#contact">Contact</a>
                 <div class="mobile-nav-footer" aria-label="Mobile navigation extras">
-                    <div class="nav-status mobile-nav-status" aria-label="Portfolio status: Available">
+                    <div class="nav-status mobile-nav-status" aria-label="Portfolio status: Online">
                         <span class="status-dot" aria-hidden="true"></span>
-                        <span>Available</span>
+                        <span>Online</span>
                     </div>
                 </div>
             </nav>
             <div class="nav-right">
-                <div class="nav-status" aria-label="Portfolio status: Available">
+                <div class="nav-status" aria-label="Portfolio status: Online">
                     <span class="status-dot" aria-hidden="true"></span>
-                    <span>Available</span>
+                    <span>Online</span>
                 </div>
                 <div class="theme-control theme-dropdown" id="themeDropdown">
                     <button class="theme-trigger" id="themeTrigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="themeMenu">
@@ -109,12 +109,12 @@
             </div>
             <div class="container hero-grid">
                 <div class="hero-copy">
-                <span class="eyebrow">ASPIRING WEB & MOBILE DEVELOPER</span>
+                    <span class="eyebrow">ASPIRING WEB &amp; MOBILE DEVELOPER</span>
                     <h1>Hi, I'm Sherwin C. Españo. I build clean and modern web and mobile experiences.</h1>
                     <p class="lead">I design and develop user-focused websites and applications that are fast, responsive, and easy to maintain. Explore my projects and skills below.</p>
                     <div class="btn-group">
                         <a class="btn btn-primary" href="#projects"><i class="bi bi-folder2-open btn-icon" aria-hidden="true"></i>VIEW PROJECTS</a>
-                        <a class="btn btn-secondary" href="files/Sherwin-Espano-CV-2026.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-file-earmark-person btn-icon" aria-hidden="true"></i>DOWNLOAD CV</a>
+                        <a class="btn btn-secondary" href="files/Sherwin-Espano-CV-2026.pdf" target="_blank" rel="noopener noreferrer"><i class="bi bi-file-earmark-person btn-icon" aria-hidden="true"></i>VIEW RESUME</a>
                     </div>
                 </div>
                 <aside class="hero-card profile-wrap">
@@ -130,9 +130,9 @@
                         <span class="hero-orb-core"></span>
                         <span class="hero-orb-halo"></span>
                     </div>
-                    <img class="profile-photo" src="images/profile.jpg" alt="Portrait of Sherwin Españo">
+                    <img class="profile-photo" src="images/profile.jpg" alt="Portrait of Sherwin Españo" fetchpriority="high" decoding="async">
                     <p class="hero-role" aria-live="polite">
-                        <span class="hero-role-dynamic" id="heroRoleDynamic">Web Developer</span><span class="hero-role-cursor" aria-hidden="true"></span>
+                        <span class="hero-role-dynamic" id="heroRoleDynamic">ASPIRING WEB DEVELOPER</span><span class="hero-role-cursor" aria-hidden="true"></span>
                     </p>
                 </aside>
             </div>
@@ -144,20 +144,19 @@
                     <div class="about-layout">
                         <div class="about-header">
                             <h2>About <span>Me</span></h2>
-                            <button class="cert-btn about-cert-btn" id="openCertModal" type="button" aria-label="View Certificates"><i class="bi bi-patch-check" aria-hidden="true"></i><span class="cert-btn-label">View Certificates</span></button>
                         </div>
                         <div class="about-photo-wrap">
                             <span class="about-photo-string" aria-hidden="true"></span>
                             <span class="about-photo-knot" aria-hidden="true"></span>
                             <div class="about-photo-frame">
-                                <img class="about-photo" src="images/profile1.png" alt="Sherwin Españo working profile image">
+                                <img class="about-photo" src="images/profile1.png" alt="Sherwin Españo working profile image" loading="lazy" decoding="async">
                             </div>
                         </div>
                         <div class="about-content">
                             <p class="about-intro">I'm <strong>Sherwin C. Españo</strong>, a web and mobile developer focused on building clean, practical, and user-friendly digital experiences.</p>
                             <div class="about-growth">
-                                <p><strong>Currently learning:</strong> Mid-Level Flutter Android Programming, Advanced Laravel Development, React components and contents. </p>
-                                <p><strong>Open to:</strong> Learning collaboration with IT-professionals and experts.</p>
+                                <p><strong>Currently learning:</strong> Advanced Laravel Development, React components and contents, Mid-Level Flutter Android Programming </p>
+                                <p><strong>Open to:</strong> Learning collaboration with IT professionals and experts.</p>
                             </div>
 
                             <ul class="about-list">
@@ -191,19 +190,19 @@
                                     </div>
                                     <div class="timeline-education">
                                         <div class="edu-item">
-                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/dnsc.jpg" alt="Davao del Norte State College logo"></span>
+                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/dnsc.jpg" alt="Davao del Norte State College logo" loading="lazy" decoding="async"></span>
                                             <span class="edu-school">Davao del Norte State College</span>
                                             <span class="edu-grade">College</span>
                                             <span class="edu-year">2022-2026</span>
                                         </div>
                                         <div class="edu-item">
-                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/fbnhs.jpg" alt="Francisco Bangoy National High School logo"></span>
+                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/fbnhs.jpg" alt="Francisco Bangoy National High School logo" loading="lazy" decoding="async"></span>
                                             <span class="edu-school">Francisco Bustamante National High School</span>
                                             <span class="edu-grade">SHS</span>
                                             <span class="edu-year">2020-2022</span>
                                         </div>
                                         <div class="edu-item">
-                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/fbnhs.jpg" alt="Francisco Bangoy National High School logo"></span>
+                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/fbnhs.jpg" alt="Francisco Bangoy National High School logo" loading="lazy" decoding="async"></span>
                                             <span class="edu-school">Francisco Bustamante National High School</span>
                                             <span class="edu-grade">JHS</span>
                                             <span class="edu-year">2016-2020</span>
@@ -217,7 +216,7 @@
                                     </div>
                                     <div class="timeline-experience">
                                         <div class="exp-item">
-                                            <span class="exp-logo-wrap"><img class="exp-logo" src="images/nehemiahlogo.png" alt="Nehemiah company logo"></span>
+                                            <span class="exp-logo-wrap"><img class="exp-logo" src="images/nehemiahlogo.png" alt="Nehemiah company logo" loading="lazy" decoding="async"></span>
                                             <span class="exp-company">Nehemiah Solutions Corp.</span>
                                             <span class="exp-position">Intern - Web Developer</span>
                                             <span class="exp-year">Feb. 2026 - May 2026</span>
@@ -237,11 +236,29 @@
                 <div class="section-head">
                     <h2>Projects</h2>
                 </div>
+                <div class="cert-preview-strip card" aria-label="Certificates preview">
+                    <div class="cert-preview-head">
+                        <div class="cert-preview-copy">
+                            <h3>MY CERTIFICATES</h3>
+                            <p>Full list of my certificates is available via <strong>View Certificates</strong> button.</p>
+                        </div>
+                        <button class="cert-btn cert-preview-btn" id="openCertModalPreview" type="button" aria-label="View Certificates">
+                            <i class="bi bi-patch-check" aria-hidden="true"></i>
+                            <span>View Certificates</span>
+                        </button>
+                    </div>
+                    <div class="cert-preview-list" aria-hidden="true">
+                        <img src="images/cert/asd1.png" alt="Advanced Seminar Day 1 certificate preview" loading="lazy" decoding="async">
+                        <img src="images/cert/asd2.png" alt="Advanced Seminar Day 2 certificate preview" loading="lazy" decoding="async">
+                        <img src="images/cert/cse.png" alt="CyberSecurity Essentials certificate preview" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <h3 class="projects-subhead">MY PROJECTS</h3>
                 <div class="projects-carousel" id="projectsCarousel">
                     <button class="carousel-btn prev" type="button" aria-label="Previous project">&#10094;</button>
                     <div class="carousel-stage">
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/bookfi.png" alt="BookFi project screenshot">
+                            <img class="project-image" src="images/bookfi.png" alt="BookFi project screenshot" loading="lazy" decoding="async">
                             <h3>BookFi</h3>
                             <p>A book finder platform that helps users quickly search titles, view availability, and access curated recommendations.</p>
                             <div class="pill-row">
@@ -250,7 +267,7 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/bookms.png" alt="BookMS project screenshot">
+                            <img class="project-image" src="images/bookms.png" alt="BookMS project screenshot" loading="lazy" decoding="async">
                             <h3>Book Management System</h3>
                             <p>A book management system for organizing catalog records, borrowing workflows, and inventory updates efficiently.</p>
                             <div class="pill-row">
@@ -260,7 +277,7 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/erms.png" alt="ERMS project screenshot">
+                            <img class="project-image" src="images/erms.png" alt="ERMS project screenshot" loading="lazy" decoding="async">
                             <h3>Employee Record Management System</h3>
                             <p>An event records management system built to centralize event data, attendee tracking, and report generation.</p>
                             <div class="pill-row">
@@ -270,7 +287,7 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/fms.png" alt="FMS project screenshot">
+                            <img class="project-image" src="images/fms.png" alt="FMS project screenshot" loading="lazy" decoding="async">
                             <h3>FireGuard</h3>
                             <p>A safety monitoring system that detects smoke, fire, carbon monoxide, and gas, sends alerts and notifications, and records true active alerts for real-time response tracking.</p>
                             <div class="pill-row">
@@ -280,7 +297,7 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/ims.png" alt="IMS project screenshot">
+                            <img class="project-image" src="images/ims.png" alt="IMS project screenshot" loading="lazy" decoding="async">
                             <h3>Inventory Management System</h3>
                             <p>An inventory management system for tracking stock levels, movement logs, and low-item alerts in real time.</p>
                             <div class="pill-row">
@@ -290,7 +307,7 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/savour.png" alt="SavourRamen website screenshot">
+                            <img class="project-image" src="images/savour.png" alt="SavourRamen website screenshot" loading="lazy" decoding="async">
                             <h3>SavourRamen Website</h3>
                             <p>A modern restaurant website showcasing ramen menu highlights, brand story, and a smooth ordering-focused user experience.</p>
                             <div class="pill-row">
@@ -300,7 +317,7 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/mobileapp.png" alt="Portfolio Project mobile app screenshot">
+                            <img class="project-image" src="images/mobileapp.png" alt="Portfolio Project mobile app screenshot" loading="lazy" decoding="async">
                             <h3>Portfolio Mobile App</h3>
                             <p>A mobile app that consists of my initial portfolio contents, built and run using Flutter and Firebase.</p>
                             <div class="pill-row">
@@ -309,7 +326,7 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/sas.jpg" alt="SAS project screenshot">
+                            <img class="project-image" src="images/sas.jpg" alt="SAS project screenshot" loading="lazy" decoding="async">
                             <h3>SaaS Sales and Funnel Management System</h3>
                             <p>A sales and funnel management system designed to help businesses organize leads, track customer progress, manage funnel stages, and streamline sales workflows efficiently.</p>
                             <div class="pill-row">
@@ -343,49 +360,85 @@
                 </div>
                 <div class="cert-grid">
                     <article class="cert-card">
-                        <img src="images/cert/asd1.png" alt="ASD 1 certificate">
+                        <img src="images/cert/asd1.png" alt="ASD 1 certificate" loading="lazy" decoding="async">
                         <h4>Advanced Seminar Day 1 Certificate</h4>
                         <p>Participation and achievement certificate for Advanced Seminar learning and practical competency training.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">DNSC</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">October 8, 2025</span></div>
+                        </div>
                     </article>
                     <article class="cert-card">
-                        <img src="images/cert/asd2.png" alt="ASD 2 certificate">
+                        <img src="images/cert/asd2.png" alt="ASD 2 certificate" loading="lazy" decoding="async">
                         <h4>Advanced Seminar Day 2 Certificate</h4>
                         <p>Advanced Seminar certificate focused on applying learned concepts through project-based activities.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">DNSC</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">November 5, 2025</span></div>
+                        </div>
                     </article>
                     <article class="cert-card">
-                        <img src="images/cert/cse.png" alt="CSE certificate">
+                        <img src="images/cert/cse.png" alt="CSE certificate" loading="lazy" decoding="async">
                         <h4>CyberSecurity Essentials Certificate</h4>
                         <p>Certification validating technical knowledge and practical understanding in CyberSecurity Essentials-related training.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">CISCO</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">May 01, 2025</span></div>
+                        </div>
                     </article>
                     <article class="cert-card">
-                        <img src="images/cert/cseh.png" alt="CSEH certificate">
+                        <img src="images/cert/cseh.png" alt="CSEH certificate" loading="lazy" decoding="async">
                         <h4>CyberSecurity Ethical Hacking Certificate</h4>
                         <p>Recognition of completion for CyberSecurity Ethical Hacking coursework covering security-focused digital competencies.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">CISCO</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">December 02, 2025</span></div>
+                        </div>
                     </article>
                     <article class="cert-card">
-                        <img src="images/cert/dict.png" alt="DICT certificate">
+                        <img src="images/cert/dict.png" alt="DICT certificate" loading="lazy" decoding="async">
                         <h4>DICT Level 1 Certificate</h4>
                         <p>Certificate from DICT training sessions focused on digital literacy and ICT skill development.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">DICT</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">June 11, 2025</span></div>
+                        </div>
                     </article>
                     <article class="cert-card">
-                        <img src="images/cert/itpt.png" alt="ITPT certificate">
+                        <img src="images/cert/itpt.png" alt="ITPT certificate" loading="lazy" decoding="async">
                         <h4>Introduction To Packet Tracer Certificate</h4>
                         <p>Introduction To Packet Tracer certificate demonstrating applied technical proficiency and consistent task completion.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">CISCO</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">February 05, 2024</span></div>
+                        </div>
                     </article>
                     <article class="cert-card">
-                        <img src="images/cert/jcsp.png" alt="JCSP certificate">
+                        <img src="images/cert/jcsp.png" alt="JCSP certificate" loading="lazy" decoding="async">
                         <h4>Junior CyberSecurity Career Path Certificate</h4>
                         <p>Certification for Junior CyberSecurity Career Path participation emphasizing collaborative project experience and discipline.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">CISCO</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">May 01, 2025</span></div>
+                        </div>
                     </article>
                     <article class="cert-card">
-                        <img src="images/cert/techno.png" alt="Techno certificate">
+                        <img src="images/cert/techno.png" alt="Techno certificate" loading="lazy" decoding="async">
                         <h4>Technopreneurship Certificate</h4>
                         <p>Technopreneurship certificate awarded for demonstrated engagement in innovation and technical skills.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">DNSC</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">May 16, 2025</span></div>
+                        </div>
                     </article>
                     <article class="cert-card">
-                        <img src="images/cert/tnc2.png" alt="TNC 2 certificate">
+                        <img src="images/cert/tnc2.png" alt="TNC 2 certificate" loading="lazy" decoding="async">
                         <h4>TESDA NCII Certificate</h4>
                         <p>TESDA NCII completion certificate highlighting progress in ICT competencies and practical execution.</p>
+                        <div class="cert-meta">
+                            <div class="cert-meta-row"><strong>Issuer:</strong><span class="cert-meta-pill">TESDA</span></div>
+                            <div class="cert-meta-row"><strong>Date:</strong><span class="cert-meta-pill">June 17, 2022</span></div>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -528,7 +581,7 @@
                             <span class="contact-info-icon" aria-hidden="true"><i class="bi bi-whatsapp"></i></span>
                             <div class="contact-info-copy">
                                 <p class="contact-info-label">Phone Number</p>
-                                <a href="https://wa.me/639635067030" target="_blank" rel="noopener noreferrer">+63 963 506 7030</a>
+                                <span>+63 963 506 7030</span>
                             </div>
                         </article>
 
@@ -588,7 +641,7 @@
         <div class="container footer-inner">
             <div class="footer-col footer-brand">
                 <div class="footer-brand-top">
-                    <img class="footer-logo" src="images/my-logo-circle.png" alt="WinDev logo">
+                    <img class="footer-logo" src="images/my-logo-circle.png" alt="WinDev logo" loading="lazy" decoding="async">
                     <span class="footer-brand-name"><span class="brand-win">WIN</span><span class="brand-dev">DEV</span></span>
                 </div>
                 <p class="footer-full-name">Sherwin C. Españo</p>

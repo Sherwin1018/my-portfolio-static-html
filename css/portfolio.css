@@ -1223,10 +1223,6 @@ body.is-ready .hero .profile-wrap {
             color: #ff8a3d;
         }
 
-        .about-cert-btn {
-            flex: 0 0 auto;
-            white-space: nowrap;
-        }
 
 
         .about-layout {
@@ -1260,7 +1256,8 @@ body.is-ready .hero .profile-wrap {
 
         .about-photo-frame {
             width: clamp(280px, 31vw, 360px);
-            height: clamp(280px, 31vw, 360px);
+            height: auto;
+            aspect-ratio: 1 / 1;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid rgba(31, 217, 151, 0.9);
@@ -1801,8 +1798,14 @@ body.is-ready .hero .profile-wrap {
 
         .skill-bars {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 0.95rem;
+        }
+
+        @media (max-width: 1100px) {
+            .skill-bars {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
         }
 
 .skill-row {
@@ -1962,6 +1965,73 @@ body.is-ready .hero .profile-wrap {
             padding-inline: 3.3rem;
         }
 
+.projects-subhead {
+    margin: 0.15rem 0 0.9rem 1rem;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.42rem 0.78rem;
+    border-radius: 10px;
+    border: 1px solid rgba(87, 201, 255, 0.2);
+    background: linear-gradient(145deg, rgba(17, 22, 34, 0.86), rgba(11, 15, 24, 0.86));
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    font-size: 1.02rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #edf4ff;
+}
+
+.cert-preview-strip {
+    margin-top: 0.65rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.cert-preview-head h3 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.cert-preview-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.cert-preview-copy {
+    min-width: 0;
+}
+
+.cert-preview-head p {
+    margin: 0.3rem 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.cert-preview-btn {
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+
+.cert-preview-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+}
+
+.cert-preview-list img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #0c111a;
+}
+
 .cert-modal {
     position: fixed;
     inset: 0;
@@ -2049,6 +2119,9 @@ body.is-ready .hero .profile-wrap {
             font-size: 1.4rem;
             line-height: 1;
             cursor: pointer;
+            position: sticky;
+            top: 0.35rem;
+            z-index: 4;
         }
 
 .cert-grid {
@@ -2096,6 +2169,39 @@ body.is-ready .hero .profile-wrap {
             font-size: 0.94rem;
             line-height: 1.45;
         }
+
+.cert-meta {
+    margin-top: 0.5rem;
+    display: grid;
+    gap: 0.3rem;
+}
+
+.cert-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.cert-meta-row strong {
+    color: #d9e6fb;
+    font-size: 0.84rem;
+    font-weight: 800;
+}
+
+.cert-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0.14rem 0.56rem;
+    border-radius: 999px;
+    border: 1px solid rgba(87, 201, 255, 0.36);
+    background: rgba(87, 201, 255, 0.1);
+    color: #e3f4ff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
 
 .cert-view-btn {
             margin-top: 0.65rem;
@@ -3071,7 +3177,8 @@ body.is-ready .hero .profile-wrap {
 
             .about-photo-frame {
                 width: min(280px, 80vw);
-                height: min(280px, 80vw);
+                height: auto;
+                aspect-ratio: 1 / 1;
             }
 
             .about-background {
@@ -3145,6 +3252,15 @@ body.is-ready .hero .profile-wrap {
                 grid-template-columns: 1fr;
             }
 
+            .cert-preview-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .cert-preview-head {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             .cert-modal,
             .cert-image-modal {
                 padding-top: clamp(4.25rem, 9vh, 5.25rem);
@@ -3199,6 +3315,14 @@ body.is-ready .hero .profile-wrap {
                 column-gap: 1rem;
                 row-gap: 0.35rem;
                 justify-items: center;
+            }
+
+            .footer-links a {
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.25rem 0.45rem;
             }
 
             .footer-links h4 {
@@ -3320,6 +3444,8 @@ body.is-ready .hero .profile-wrap {
                 display: inline-flex;
                 order: 3;
                 margin-left: 0.15rem;
+                width: 44px;
+                height: 44px;
             }
 
             .nav-status {
@@ -3355,6 +3481,9 @@ body.is-ready .hero .profile-wrap {
             .nav-links a {
                 width: 100%;
                 padding: 0.7rem 4%;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
             }
 
             .mobile-nav-footer {
@@ -3375,7 +3504,7 @@ body.is-ready .hero .profile-wrap {
                 width: 44px;
                 margin-inline: 0;
                 border-radius: 10px;
-                height: 38px;
+                height: 44px;
             }
 
             .theme-menu {
@@ -3432,24 +3561,11 @@ body.is-ready .hero .profile-wrap {
                 pointer-events: auto;
             }
 
-            .about-cert-btn {
+            .theme-option {
                 width: 44px;
                 height: 44px;
-                min-width: 44px;
-                padding: 0;
-                border-radius: 12px;
-                justify-content: center;
-                align-items: center;
-                gap: 0;
             }
 
-            .about-cert-btn .cert-btn-label {
-                display: none;
-            }
-
-            .about-cert-btn i {
-                font-size: 1.24rem;
-            }
 
             .hero-role {
                 font-size: 1.03rem;
@@ -3505,6 +3621,10 @@ body.is-ready .hero .profile-wrap {
             .skills-grid,
             .interest-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .skill-bars {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .projects-carousel {
@@ -3575,6 +3695,38 @@ body.is-ready .hero .profile-wrap {
                 line-height: 1.25;
             }
 
+            .cert-preview-list {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-preview-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+        }
+
+        @media (max-width: 380px) {
+            .navbar {
+                top: 8px;
+                width: min(1320px, 97%);
+            }
+
+            .navbar .container {
+                padding-inline: 0.72rem;
+            }
+
+            .nav-inner {
+                gap: 0.38rem;
+            }
+
+            .nav-links {
+                inset: 62px 0 auto 0;
+            }
+
+            .footer-inner {
+                gap: 0.72rem;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -3619,7 +3771,3 @@ body.is-ready .hero .profile-wrap {
                 filter: none;
             }
         }
-            .about-header {
-                padding-left: 0;
-                flex-wrap: wrap;
-            }
