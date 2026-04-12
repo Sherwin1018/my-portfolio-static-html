@@ -3110,6 +3110,7 @@ body.is-ready .hero .profile-wrap {
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            position: relative;
     transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
 }
 
@@ -3118,6 +3119,35 @@ body.is-ready .hero .profile-wrap {
     border-color: rgba(31, 217, 151, 0.6);
     box-shadow: 0 0 14px rgba(31, 217, 151, 0.24);
     background: rgba(87, 201, 255, 0.13);
+}
+
+.trust-links a::after {
+    content: attr(aria-label);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 0.45rem);
+    transform: translateX(-50%) translateY(4px);
+    padding: 0.26rem 0.5rem;
+    border-radius: 8px;
+    background: rgba(11, 18, 31, 0.96);
+    border: 1px solid rgba(87, 201, 255, 0.35);
+    color: #eaf6ff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    z-index: 5;
+}
+
+.trust-links a:hover::after,
+.trust-links a:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 .scroll-progress {
@@ -3504,6 +3534,14 @@ body.is-ready .hero .profile-wrap {
 
             .contact-info::after {
                 display: none;
+            }
+
+            .contact-trust {
+                text-align: center;
+            }
+
+            .trust-links {
+                justify-content: center;
             }
 
             .contact-form {
