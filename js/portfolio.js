@@ -16,6 +16,10 @@
     scrollProgress.className = "scroll-progress";
     body.appendChild(scrollProgress);
 
+    if ("scrollRestoration" in window.history && window.location.hash) {
+        window.history.scrollRestoration = "manual";
+    }
+
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
     const navbar = document.querySelector(".navbar");
@@ -322,17 +326,49 @@
         setActiveNavLink(getActiveSectionId());
     }
 
-    function scrollToHashTarget(hash, useSmoothScroll) {
+    function normalizeHash(hash) {
         if (!hash || hash.charAt(0) !== "#") {
+            return "";
+        }
+
+        if (hash === "#home") {
+            return "#hero";
+        }
+
+        return hash;
+    }
+
+    function applyInitialHashPosition() {
+        const normalizedHash = normalizeHash(window.location.hash);
+        if (!normalizedHash) {
+            return;
+        }
+
+        if (window.location.hash !== normalizedHash) {
+            window.history.replaceState(null, "", normalizedHash);
+        }
+
+        scrollToHashTarget(normalizedHash, false);
+        updateScrollState();
+
+        window.setTimeout(function () {
+            scrollToHashTarget(normalizedHash, false);
+            updateScrollState();
+        }, 140);
+    }
+
+    function scrollToHashTarget(hash, useSmoothScroll) {
+        const normalizedHash = normalizeHash(hash);
+        if (!normalizedHash) {
             return false;
         }
 
-        const target = document.querySelector(hash);
+        const target = document.querySelector(normalizedHash);
         if (!target) {
             return false;
         }
 
-        const targetId = target.id || hash.slice(1);
+        const targetId = target.id || normalizedHash.slice(1);
         const navOffset = (navbar ? navbar.offsetHeight : 72) + 26;
         const targetTop = targetId === "hero"
             ? 0
@@ -349,11 +385,12 @@
 
     document.querySelectorAll('a[href^="#"]').forEach(function (anchorLink) {
         anchorLink.addEventListener("click", function (event) {
-            const hash = anchorLink.getAttribute("href");
-            if (!hash || hash === "#") {
+            const rawHash = anchorLink.getAttribute("href");
+            if (!rawHash || rawHash === "#") {
                 return;
             }
 
+            const hash = normalizeHash(rawHash);
             const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
             const didHandle = scrollToHashTarget(hash, !prefersReducedMotion);
             if (!didHandle) {
@@ -370,7 +407,11 @@
 
     window.addEventListener("hashchange", function () {
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        scrollToHashTarget(window.location.hash, !prefersReducedMotion);
+        const normalizedHash = normalizeHash(window.location.hash);
+        if (window.location.hash !== normalizedHash && normalizedHash) {
+            window.history.replaceState(null, "", normalizedHash);
+        }
+        scrollToHashTarget(normalizedHash, !prefersReducedMotion);
         updateScrollState();
     });
 
@@ -380,7 +421,7 @@
             return;
         }
 
-        const roles = ["ASPIRING WEB DEVELOPER", "ASPIRING MOBILE DEVELOPER", "FRONTEND & BACKEND"];
+        const roles = ["FRONTEND & BACKEND DEV", "ASPIRING MOBILE DEVELOPER", "ASPIRING WEB DEVELOPER"];
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             roleTarget.textContent = roles.join(" | ");
             return;
@@ -1451,6 +1492,7 @@
         }
 
         updateScrollState();
+        applyInitialHashPosition();
         createHeroParticles();
         initHeroThreeScene();
         enableSceneParallax();
