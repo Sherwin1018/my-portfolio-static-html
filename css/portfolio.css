@@ -1845,15 +1845,22 @@ body.is-ready .hero .profile-wrap {
         }
 
         .skills-tech-list {
+            --skills-tech-gap: 0.55rem;
             list-style: none;
             margin: 0.75rem 0 0;
             padding: 0;
             width: 100%;
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.55rem;
+            gap: var(--skills-tech-gap);
             min-height: calc(84px + 0.55rem);
             align-content: start;
+        }
+
+        .skills-tech-list > .skills-tech-item:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            width: min(100%, calc((100% - var(--skills-tech-gap)) / 2));
         }
 
         .skills-tech-item {
@@ -1867,7 +1874,8 @@ body.is-ready .hero .profile-wrap {
             background: rgba(87, 201, 255, 0.06);
             color: #e9f3ff;
             font-weight: 700;
-            justify-content: flex-start;
+            justify-content: center;
+            text-align: center;
         }
 
         .skills-tech-item strong {
@@ -1891,6 +1899,19 @@ body.is-ready .hero .profile-wrap {
         .skills-tech-icon i {
             font-size: 1rem;
             line-height: 1;
+        }
+
+        @media (min-width: 901px) {
+            .skills-group-mobile .skills-tech-list {
+                grid-template-columns: 1fr;
+                min-height: 0;
+                justify-items: center;
+            }
+
+            .skills-group-mobile .skills-tech-item {
+                width: min(100%, calc((100% - var(--skills-tech-gap)) / 2));
+                justify-self: center;
+            }
         }
 
         .skills-group-label {
@@ -3744,7 +3765,7 @@ body.is-ready .hero .profile-wrap {
             }
 
             .hero-grid {
-                gap: 1.35rem;
+                gap: 0.75rem;
                 align-items: start;
                 overflow: visible;
             }
@@ -3752,8 +3773,13 @@ body.is-ready .hero .profile-wrap {
             .profile-wrap {
                 min-height: 10.5rem;
                 padding-top: 0;
-                margin-bottom: 0.2rem;
+                margin-bottom: 0;
                 overflow: visible;
+            }
+
+            .profile-photo {
+                width: min(280px, 80vw);
+                margin-bottom: 0.35rem;
             }
 
             .hero-scene {
@@ -3799,6 +3825,14 @@ body.is-ready .hero .profile-wrap {
 
             .hero-copy .hero-role {
                 margin-inline: auto;
+                text-align: center;
+                width: 100%;
+            }
+
+            .about-intro,
+            .skills-summary-intro {
+                text-align: center;
+                margin-inline: auto;
             }
 
             .skills-groups {
@@ -3812,6 +3846,10 @@ body.is-ready .hero .profile-wrap {
 
             .skills-group-label {
                 justify-content: center;
+            }
+
+            .skills-tech-list {
+                min-height: 0;
             }
 
             .toast-stack {
@@ -3956,7 +3994,8 @@ body.is-ready .hero .profile-wrap {
             }
 
             .hero-copy .hero-role {
-                margin-inline: 0;
+                margin-inline: auto;
+                text-align: center;
             }
 
             .hero-grid-lines {
@@ -3981,8 +4020,8 @@ body.is-ready .hero .profile-wrap {
             }
 
             .profile-photo {
-                width: min(12.25rem, 58vw);
-                margin-bottom: 0.85rem;
+                width: min(280px, 80vw);
+                margin-bottom: 0.35rem;
             }
 
             .orbit-node {
