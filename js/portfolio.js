@@ -372,7 +372,7 @@
         const navOffset = (navbar ? navbar.offsetHeight : 72) + 26;
         const targetTop = targetId === "hero"
             ? 0
-            : Math.max(0, window.scrollY + target.getBoundingClientRect().top - navOffset);
+            : Math.max(0, target.offsetTop - navOffset);
 
         window.scrollTo({
             top: targetTop,
@@ -401,7 +401,9 @@
             if (window.location.hash !== hash) {
                 window.history.pushState(null, "", hash);
             }
-            updateScrollState();
+            if (prefersReducedMotion) {
+                updateScrollState();
+            }
         });
     });
 
