@@ -831,7 +831,15 @@
 
         document.body.classList.remove("modal-open");
         document.body.style.removeProperty("--scroll-lock-top");
+        // Force instant restoration so modal close does not animate due to global smooth scroll.
+        const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = "auto";
         window.scrollTo(0, scrollLockY);
+        if (previousScrollBehavior) {
+            document.documentElement.style.scrollBehavior = previousScrollBehavior;
+        } else {
+            document.documentElement.style.removeProperty("scroll-behavior");
+        }
     }
 
     function showCertModal() {
