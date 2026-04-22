@@ -1917,6 +1917,7 @@ body.is-ready .hero .profile-wrap {
         .skills-group-label {
             display: inline-flex;
             align-items: center;
+            gap: 0.36rem;
             min-height: 32px;
             padding: 0.3rem 0.72rem;
             border-radius: 999px;
@@ -1928,6 +1929,11 @@ body.is-ready .hero .profile-wrap {
             border: 1px solid rgba(31, 217, 151, 0.28);
             color: #cbffec;
             transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease, background-color 0.28s ease;
+        }
+
+        .skills-group-label i {
+            font-size: 0.9rem;
+            line-height: 1;
         }
 
         .skills-group:hover .skills-group-label,
