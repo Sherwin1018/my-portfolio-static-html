@@ -1785,8 +1785,9 @@ body.is-ready .hero .profile-wrap {
 
         .skills-groups {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 0.85rem;
+            align-items: stretch;
         }
 
         .skills-group {
@@ -1802,6 +1803,7 @@ body.is-ready .hero .profile-wrap {
             overflow: hidden;
             transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease, background-color 0.28s ease, filter 0.28s ease;
             will-change: transform;
+            height: 100%;
         }
 
         .skills-group::after {
@@ -1835,6 +1837,8 @@ body.is-ready .hero .profile-wrap {
         .skills-group p {
             margin: 0.45rem 0 0;
             color: #dbe4f4;
+            font-size: 0.95rem;
+            line-height: 1.65;
             transition: color 0.28s ease, transform 0.28s ease;
         }
 
@@ -1844,6 +1848,29 @@ body.is-ready .hero .profile-wrap {
             transform: translateY(-1px);
         }
 
+        .skills-group-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.45rem;
+            margin-top: 0.8rem;
+        }
+
+        .skills-group-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.28rem 0.7rem;
+            border-radius: 999px;
+            border: 1px solid rgba(87, 201, 255, 0.28);
+            background: rgba(87, 201, 255, 0.1);
+            color: #cfefff;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
         .skills-tech-list {
             --skills-tech-gap: 0.55rem;
             list-style: none;
@@ -1851,13 +1878,13 @@ body.is-ready .hero .profile-wrap {
             padding: 0;
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: var(--skills-tech-gap);
             min-height: calc(84px + 0.55rem);
             align-content: start;
         }
 
-        .skills-tech-list > .skills-tech-item:last-child:nth-child(odd) {
+        .skills-tech-list > .skills-tech-item:last-child:nth-child(odd):not(:first-child) {
             grid-column: 1 / -1;
             justify-self: center;
             width: min(100%, calc((100% - var(--skills-tech-gap)) / 2));
@@ -1901,19 +1928,6 @@ body.is-ready .hero .profile-wrap {
             line-height: 1;
         }
 
-        @media (min-width: 901px) {
-            .skills-group-mobile .skills-tech-list {
-                grid-template-columns: 1fr;
-                min-height: 0;
-                justify-items: center;
-            }
-
-            .skills-group-mobile .skills-tech-item {
-                width: min(100%, calc((100% - var(--skills-tech-gap)) / 2));
-                justify-self: center;
-            }
-        }
-
         .skills-group-label {
             display: inline-flex;
             align-items: center;
@@ -1946,8 +1960,14 @@ body.is-ready .hero .profile-wrap {
 
         .skill-bars {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 0.95rem;
+        }
+
+        @media (max-width: 1400px) {
+            .skill-bars {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
         }
 
         @media (max-width: 1100px) {
@@ -3871,7 +3891,12 @@ body.is-ready .hero .profile-wrap {
             }
 
             .skills-tech-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
                 min-height: 0;
+            }
+
+            .skills-tech-list > .skills-tech-item:last-child:nth-child(odd):not(:first-child) {
+                width: 100%;
             }
 
             .toast-stack {
