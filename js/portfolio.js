@@ -480,13 +480,34 @@
         const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
         const ringPointer = { x: pointer.x, y: pointer.y };
         let isPointerVisible = false;
+        let isAnimating = false;
+        let lastHoverTarget = null;
+
+        function applyCursorTransform() {
+            cursor.style.transform = "translate3d(" + pointer.x + "px, " + pointer.y + "px, 0) translate(-50%, -50%)";
+        }
+
+        function applyRingTransform() {
+            ring.style.transform = "translate3d(" + ringPointer.x + "px, " + ringPointer.y + "px, 0) translate(-50%, -50%)";
+        }
 
         function renderCursor() {
-            ringPointer.x += (pointer.x - ringPointer.x) * 0.18;
-            ringPointer.y += (pointer.y - ringPointer.y) * 0.18;
+            const deltaX = pointer.x - ringPointer.x;
+            const deltaY = pointer.y - ringPointer.y;
 
-            cursor.style.transform = "translate3d(" + pointer.x.toFixed(2) + "px, " + pointer.y.toFixed(2) + "px, 0) translate(-50%, -50%)";
-            ring.style.transform = "translate3d(" + ringPointer.x.toFixed(2) + "px, " + ringPointer.y.toFixed(2) + "px, 0) translate(-50%, -50%)";
+            ringPointer.x += deltaX * 0.32;
+            ringPointer.y += deltaY * 0.32;
+            applyRingTransform();
+
+            if (Math.abs(deltaX) < 0.12 && Math.abs(deltaY) < 0.12) {
+                ringPointer.x = pointer.x;
+                ringPointer.y = pointer.y;
+                applyRingTransform();
+                rafId = 0;
+                isAnimating = false;
+                return;
+            }
+
             rafId = window.requestAnimationFrame(renderCursor);
         }
 
@@ -495,22 +516,43 @@
             body.classList.toggle("cursor-hovering", shouldHover);
         }
 
-        body.classList.add("has-custom-cursor");
-        rafId = window.requestAnimationFrame(renderCursor);
+        function requestCursorFrame() {
+            if (isAnimating) {
+                return;
+            }
+            isAnimating = true;
+            rafId = window.requestAnimationFrame(renderCursor);
+        }
 
-        document.addEventListener("mousemove", function (event) {
+        body.classList.add("has-custom-cursor");
+        applyCursorTransform();
+        applyRingTransform();
+
+        document.addEventListener("pointermove", function (event) {
+            if (event.pointerType && event.pointerType !== "mouse") {
+                return;
+            }
             pointer.x = event.clientX;
             pointer.y = event.clientY;
+            applyCursorTransform();
             if (!isPointerVisible) {
                 isPointerVisible = true;
                 body.classList.add("cursor-ready");
             }
-            setHoverState(event.target);
-        });
+            if (event.target !== lastHoverTarget) {
+                lastHoverTarget = event.target;
+                setHoverState(event.target);
+            }
+            requestCursorFrame();
+        }, { passive: true });
 
-        document.addEventListener("mouseover", function (event) {
+        document.addEventListener("pointerover", function (event) {
+            if (event.pointerType && event.pointerType !== "mouse") {
+                return;
+            }
+            lastHoverTarget = event.target;
             setHoverState(event.target);
-        });
+        }, { passive: true });
 
         document.addEventListener("mousedown", function () {
             body.classList.add("cursor-pressed");
@@ -523,11 +565,22 @@
         document.addEventListener("mouseleave", function () {
             body.classList.remove("cursor-ready", "cursor-hovering", "cursor-pressed");
             isPointerVisible = false;
+            lastHoverTarget = null;
         });
 
         window.addEventListener("blur", function () {
             body.classList.remove("cursor-ready", "cursor-hovering", "cursor-pressed");
             isPointerVisible = false;
+            lastHoverTarget = null;
+            if (rafId) {
+                window.cancelAnimationFrame(rafId);
+                rafId = 0;
+            }
+            isAnimating = false;
+            ringPointer.x = pointer.x;
+            ringPointer.y = pointer.y;
+            applyCursorTransform();
+            applyRingTransform();
         });
 
         window.addEventListener("beforeunload", function () {

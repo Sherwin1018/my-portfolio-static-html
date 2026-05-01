@@ -336,6 +336,8 @@ main {
     transform: translate3d(-50%, -50%, 0);
     transition: opacity 0.18s ease, width 0.18s ease, height 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
     will-change: transform;
+    backface-visibility: hidden;
+    contain: layout style paint;
 }
 
 .custom-cursor::before,
@@ -1419,8 +1421,24 @@ body.is-ready .hero .profile-wrap {
         }
 
         .about-header .section-display {
-            max-width: min(12ch, 100%);
+            max-width: none;
+            line-height: 0.98;
+            text-wrap: initial;
         }
+
+.about-display-line,
+.about-display-accent {
+    display: block;
+}
+
+.about-header .section-display .about-display-line {
+    color: #eef3ff;
+}
+
+.about-header .section-display .about-display-accent {
+    color: var(--accent);
+    padding-top: 0.08em;
+}
 
 
 
