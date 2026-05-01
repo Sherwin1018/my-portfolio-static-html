@@ -423,7 +423,7 @@
             return;
         }
 
-        const roles = ["FRONTEND & BACKEND DEV", "ASPIRING MOBILE DEVELOPER", "ASPIRING WEB DEVELOPER"];
+        const roles = ["WEB DEVELOPER", "FRONTEND & BACKEND", "MOBILE DEVELOPER"];
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             roleTarget.textContent = roles.join(" | ");
             return;
@@ -460,6 +460,81 @@
 
         roleTarget.textContent = "";
         window.setTimeout(tick, 350);
+    }
+
+    function initCustomCursor() {
+        const cursor = document.getElementById("customCursor");
+        const ring = document.getElementById("customCursorRing");
+        const canUseCustomCursor =
+            cursor &&
+            ring &&
+            window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!canUseCustomCursor) {
+            return;
+        }
+
+        const hoverTargets = "a, button, input, textarea, select, summary, label[for], .dot, .carousel-btn, .theme-option, .menu-btn, .trust-links a";
+        let rafId = 0;
+        const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        const ringPointer = { x: pointer.x, y: pointer.y };
+        let isPointerVisible = false;
+
+        function renderCursor() {
+            ringPointer.x += (pointer.x - ringPointer.x) * 0.18;
+            ringPointer.y += (pointer.y - ringPointer.y) * 0.18;
+
+            cursor.style.transform = "translate3d(" + pointer.x.toFixed(2) + "px, " + pointer.y.toFixed(2) + "px, 0) translate(-50%, -50%)";
+            ring.style.transform = "translate3d(" + ringPointer.x.toFixed(2) + "px, " + ringPointer.y.toFixed(2) + "px, 0) translate(-50%, -50%)";
+            rafId = window.requestAnimationFrame(renderCursor);
+        }
+
+        function setHoverState(target) {
+            const shouldHover = Boolean(target && target.closest(hoverTargets));
+            body.classList.toggle("cursor-hovering", shouldHover);
+        }
+
+        body.classList.add("has-custom-cursor");
+        rafId = window.requestAnimationFrame(renderCursor);
+
+        document.addEventListener("mousemove", function (event) {
+            pointer.x = event.clientX;
+            pointer.y = event.clientY;
+            if (!isPointerVisible) {
+                isPointerVisible = true;
+                body.classList.add("cursor-ready");
+            }
+            setHoverState(event.target);
+        });
+
+        document.addEventListener("mouseover", function (event) {
+            setHoverState(event.target);
+        });
+
+        document.addEventListener("mousedown", function () {
+            body.classList.add("cursor-pressed");
+        });
+
+        document.addEventListener("mouseup", function () {
+            body.classList.remove("cursor-pressed");
+        });
+
+        document.addEventListener("mouseleave", function () {
+            body.classList.remove("cursor-ready", "cursor-hovering", "cursor-pressed");
+            isPointerVisible = false;
+        });
+
+        window.addEventListener("blur", function () {
+            body.classList.remove("cursor-ready", "cursor-hovering", "cursor-pressed");
+            isPointerVisible = false;
+        });
+
+        window.addEventListener("beforeunload", function () {
+            if (rafId) {
+                window.cancelAnimationFrame(rafId);
+            }
+        });
     }
 
     function createHeroParticles() {
@@ -694,7 +769,7 @@
             return;
         }
 
-        document.querySelectorAll(".project-image, .profile-photo, .about-photo-frame").forEach(function (element) {
+        document.querySelectorAll(".project-image").forEach(function (element) {
             element.classList.add("interactive-tilt");
 
             element.addEventListener("mousemove", function (event) {
@@ -772,10 +847,9 @@
     function enableHeroSceneMotion() {
         const hero = document.getElementById("hero");
         const heroCopy = hero ? hero.querySelector(".hero-copy") : null;
-        const profileWrap = hero ? hero.querySelector(".profile-wrap") : null;
         const heroScene = hero ? hero.querySelector(".hero-scene") : null;
 
-        if (!hero || !heroCopy || !profileWrap || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (!hero || !heroCopy || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             return;
         }
 
@@ -785,7 +859,6 @@
             const offsetY = (event.clientY - rect.top) / rect.height - 0.5;
 
             heroCopy.style.transform = "translate3d(" + (offsetX * -22).toFixed(2) + "px, " + (offsetY * -18).toFixed(2) + "px, 0)";
-            profileWrap.style.transform = "translate3d(" + (offsetX * 28).toFixed(2) + "px, " + (offsetY * 22).toFixed(2) + "px, 0)";
 
             if (heroScene) {
                 heroScene.style.transform = "translate3d(" + (offsetX * 16).toFixed(2) + "px, " + (offsetY * 10).toFixed(2) + "px, 0)";
@@ -794,13 +867,17 @@
 
         hero.addEventListener("mouseleave", function () {
             heroCopy.style.transform = "";
-            profileWrap.style.transform = "";
             if (heroScene) {
                 heroScene.style.transform = "";
             }
         });
     }
 
+    const aboutModal = document.getElementById("aboutModal");
+    const closeAboutModal = document.getElementById("closeAboutModal");
+    const aboutModalTitle = document.getElementById("aboutModalTitle");
+    const aboutModalTriggers = Array.from(document.querySelectorAll("[data-about-modal-open]"));
+    const aboutModalPanels = Array.from(document.querySelectorAll("[data-about-modal-panel]"));
     const certModal = document.getElementById("certModal");
     const openCertModalPreview = document.getElementById("openCertModalPreview");
     const closeCertModal = document.getElementById("closeCertModal");
@@ -809,6 +886,10 @@
     const certImagePreview = document.getElementById("certImagePreview");
     const certImageTitle = document.getElementById("certImageTitle");
     let scrollLockY = 0;
+
+    if (aboutModal && aboutModal.parentElement !== document.body) {
+        document.body.appendChild(aboutModal);
+    }
 
     function lockBodyScroll() {
         if (document.body.classList.contains("modal-open")) {
@@ -822,6 +903,7 @@
 
     function unlockBodyScroll() {
         const keepLocked =
+            (aboutModal && aboutModal.classList.contains("open")) ||
             (certModal && certModal.classList.contains("open")) ||
             (certImageModal && certImageModal.classList.contains("open"));
 
@@ -840,6 +922,67 @@
         } else {
             document.documentElement.style.removeProperty("scroll-behavior");
         }
+    }
+
+    function setActiveAboutPanel(targetKey) {
+        if (!aboutModalPanels.length) {
+            return;
+        }
+
+        aboutModalPanels.forEach(function (panel) {
+            const isActive = panel.dataset.aboutModalPanel === targetKey;
+            panel.classList.toggle("is-active", isActive);
+            panel.hidden = !isActive;
+        });
+
+        if (aboutModalTitle) {
+            const activePanel = aboutModalPanels.find(function (panel) {
+                return panel.dataset.aboutModalPanel === targetKey;
+            });
+            const panelTitle = activePanel ? activePanel.dataset.aboutModalTitle : "";
+            aboutModalTitle.textContent = panelTitle || "About Details";
+        }
+    }
+
+    function showAboutModal(targetKey) {
+        if (!aboutModal) {
+            return;
+        }
+
+        setActiveAboutPanel(targetKey);
+        aboutModal.classList.add("open");
+        aboutModal.setAttribute("aria-hidden", "false");
+        lockBodyScroll();
+        setActiveNavLink("about");
+    }
+
+    function hideAboutModal() {
+        if (!aboutModal) {
+            return;
+        }
+
+        aboutModal.classList.remove("open");
+        aboutModal.setAttribute("aria-hidden", "true");
+        unlockBodyScroll();
+        updateScrollState();
+    }
+
+    aboutModalTriggers.forEach(function (button) {
+        button.addEventListener("click", function () {
+            showAboutModal(button.dataset.aboutModalOpen || "experience");
+        });
+    });
+
+    if (closeAboutModal) {
+        closeAboutModal.addEventListener("click", hideAboutModal);
+    }
+
+    if (aboutModal) {
+        aboutModal.addEventListener("click", function (event) {
+            if (event.target.hasAttribute("data-close-about-modal")) {
+                hideAboutModal();
+            }
+        });
     }
 
     function showCertModal() {
@@ -1048,6 +1191,8 @@
 
         if (certImageModal && certImageModal.classList.contains("open")) {
             hideCertImageModal();
+        } else if (aboutModal && aboutModal.classList.contains("open")) {
+            hideAboutModal();
         } else if (certModal && certModal.classList.contains("open")) {
             hideCertModal();
         } else {
@@ -1302,7 +1447,10 @@
     const contactForm = document.getElementById("contactForm");
     const toastStack = document.getElementById("toastStack");
     const contactSubmit = document.getElementById("contactSubmit");
-    const formFields = contactForm ? Array.from(contactForm.querySelectorAll('input:not([type="hidden"]), textarea')) : [];
+    const contactSubmitMarkup = contactSubmit ? contactSubmit.innerHTML : "";
+    const formFields = contactForm
+        ? Array.from(contactForm.querySelectorAll('input:not([type="hidden"]):not([name="website_field"]), textarea'))
+        : [];
     let activeToast = null;
     let activeToastTimer = null;
 
@@ -1410,6 +1558,10 @@
     if (contactForm) {
         contactForm.addEventListener("submit", function (event) {
             event.preventDefault();
+            const phoneField = contactForm.elements.namedItem("phone_number");
+            const phoneNumber = phoneField && typeof phoneField.value === "string"
+                ? phoneField.value.trim()
+                : "";
 
             const trapField = contactForm.querySelector('input[name="website_field"]');
             if (trapField && trapField.value.trim()) {
@@ -1454,7 +1606,7 @@
             if (contactSubmit) {
                 contactSubmit.disabled = true;
                 contactSubmit.classList.add("is-loading");
-                contactSubmit.textContent = "Sending...";
+                contactSubmit.innerHTML = "Sending...";
             }
 
             try {
@@ -1466,7 +1618,7 @@
             window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 full_name: contactForm.full_name.value.trim(),
                 email: contactForm.email.value.trim(),
-                phone_number: contactForm.phone_number.value.trim(),
+                phone_number: phoneNumber,
                 subject: contactForm.subject.value.trim(),
                 message: contactForm.message.value.trim()
             }).then(function () {
@@ -1481,7 +1633,7 @@
                 if (contactSubmit) {
                     contactSubmit.disabled = false;
                     contactSubmit.classList.remove("is-loading");
-                    contactSubmit.textContent = "Send Message";
+                    contactSubmit.innerHTML = contactSubmitMarkup || "Send Message";
                 }
             });
         });
@@ -1503,6 +1655,7 @@
 
         updateScrollState();
         applyInitialHashPosition();
+        initCustomCursor();
         createHeroParticles();
         initHeroThreeScene();
         enableSceneParallax();

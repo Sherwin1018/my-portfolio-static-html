@@ -52,7 +52,7 @@
             <nav class="nav-links" id="navLinks">
                 <a href="#hero">Home</a>
                 <a href="#about">About</a>
-                <a href="#projects">Achievements</a>
+                <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
                 <a href="#contact">Contact</a>
                 <div class="mobile-nav-footer" aria-label="Mobile navigation extras">
@@ -90,20 +90,19 @@
     </header>
 
     <main>
-        <section id="hero" class="hero parallax-section" data-parallax-speed="0.18">
+        <section id="hero" class="hero parallax-section" data-parallax-speed="0.08">
             <div class="hero-scene" aria-hidden="true">
-                <canvas class="hero-three-canvas" id="heroThreeCanvas"></canvas>
                 <div class="hero-grid-lines"></div>
-                <div class="hero-particles" id="heroParticles"></div>
                 <div class="hero-glow hero-glow-a"></div>
                 <div class="hero-glow hero-glow-b"></div>
             </div>
             <div class="container hero-grid">
                 <div class="hero-copy">
+                    <span class="eyebrow">BSIT Student · Full-Stack Focus · Davao City, PH</span>
                     <h1>Hi, I'm Sherwin C. Espa&ntilde;o</h1>
-                    <p class="lead">Information Technology Undergraduate and I build clean and modern web and mobile experiences. I design and develop user-focused websites and applications that are fast, responsive, and easy to maintain.</p>
+                    <p class="lead">A fourth-year BSIT student and aspiring full-stack developer building responsive websites and practical mobile experiences with a focus on clean interfaces, reliable backend logic, and maintainable code.</p>
                     <p class="hero-role" aria-live="polite">
-                        <span>I'm a </span><span class="hero-role-dynamic" id="heroRoleDynamic">FRONTEND &amp; BACKEND</span><span class="hero-role-cursor" aria-hidden="true"></span>
+                        <span>I'm a </span><span class="hero-role-dynamic" id="heroRoleDynamic">WEB DEVELOPER</span><span class="hero-role-cursor" aria-hidden="true"></span>
                     </p>
                     <div class="btn-group">
                         <a class="btn btn-primary" href="#projects"><i class="bi bi-folder2-open btn-icon" aria-hidden="true"></i>View Projects</a>
@@ -111,47 +110,88 @@
                     </div>
                 </div>
                 <aside class="hero-card profile-wrap">
-                    <div class="hero-orbit" aria-hidden="true">
-                        <span class="orbit-ring orbit-ring-one"></span>
-                        <span class="orbit-ring orbit-ring-two"></span>
-                        <span class="orbit-node orbit-node-a"><i class="devicon-html5-plain colored"></i></span>
-                        <span class="orbit-node orbit-node-b"><i class="devicon-css3-plain colored"></i></span>
-                        <span class="orbit-node orbit-node-c"><i class="devicon-javascript-plain colored"></i></span>
-                        <span class="orbit-node orbit-node-d"><i class="devicon-react-original colored"></i></span>
-                    </div>
-                    <div class="hero-orb" aria-hidden="true">
-                        <span class="hero-orb-core"></span>
-                        <span class="hero-orb-halo"></span>
-                    </div>
                     <img class="profile-photo" src="images/por-prof1.jpg" alt="Portrait of Sherwin Españo" fetchpriority="high" decoding="async">
                 </aside>
             </div>
         </section>
 
-        <section id="about" class="parallax-section" data-parallax-speed="0.09">
+        <section id="about" class="parallax-section" data-parallax-speed="0.04">
             <div class="container">
                 <div class="about-shell">
                     <div class="about-layout">
                         <div class="about-header">
                             <h2>About <span>Me</span></h2>
+                            <p class="section-display">Curiosity shapes <span>how I build.</span></p>
                         </div>
                         <div class="about-photo-wrap">
                             <span class="about-photo-string" aria-hidden="true"></span>
                             <span class="about-photo-knot" aria-hidden="true"></span>
                             <div class="about-photo-frame">
-                                <img class="about-photo" src="images/profile1.png" alt="Sherwin Españo working profile image" loading="lazy" decoding="async">
+                                <img class="about-photo" src="images/profile1.jpg" alt="Sherwin Españo working profile image" loading="lazy" decoding="async">
                             </div>
                         </div>
                         <div class="about-content">
-                            <p class="about-intro">I'm <strong>Sherwin C. Españo</strong>, a <strong> 4th year Bachelor of Science in Information Technology undergraduate</strong>, and an aspiring web and mobile developer focused on building clean, practical, and user-friendly digital experiences.</p>
+                            <p class="about-intro">I'm <strong>Sherwin C. Españo</strong>, a <strong>fourth-year BSIT student</strong> and aspiring full-stack developer focused on building clean, practical, and user-friendly digital experiences for the web and mobile.</p>
                             <div class="about-growth">
-                                <p><strong>Currently learning:</strong> Laravel Development, React components development, Mid-Level Flutter Android Programming, n8n automation </p>
-                                <p><strong>Open to:</strong> Learning collaboration with IT professionals and experts.</p>
+                                <p><strong>Currently learning:</strong> Laravel application structure, React component workflows, Flutter app development, and beginner-friendly n8n automation.</p>
+                                <p><strong>Open to:</strong> Internships, collaborative projects, and mentorship from experienced IT professionals.</p>
+                            </div>
+                            <div class="about-detail-actions" aria-label="Open more about details">
+                                <button class="about-detail-button" type="button" data-about-modal-open="experience">Experience</button>
+                                <button class="about-detail-button" type="button" data-about-modal-open="education">Education</button>
+                                <button class="about-detail-button" type="button" data-about-modal-open="hobbies">Hobbies</button>
                             </div>
                         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-modal" id="aboutModal" aria-hidden="true">
+                <div class="about-modal-backdrop" data-close-about-modal></div>
+                <div class="about-modal-panel" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+                    <div class="about-modal-head">
+                        <div class="about-modal-copy">
+                            <p class="about-modal-kicker">About Details</p>
+                            <h3 id="aboutModalTitle">Experience</h3>
+                        </div>
+                        <button class="about-modal-close" id="closeAboutModal" type="button" aria-label="Close about details modal">&times;</button>
+                    </div>
+                    <div class="about-modal-body">
+                        <article class="about-modal-pane about-card card is-active" id="aboutPanelExperience" data-about-modal-panel="experience" data-about-modal-title="Experience">
+                            <div class="timeline-experience">
+                                <div class="exp-item">
+                                    <span class="exp-logo-wrap"><img class="exp-logo" src="images/nehemiahlogo.png" alt="Nehemiah company logo" loading="lazy" decoding="async"></span>
+                                    <span class="exp-company">Nehemiah Solutions Corp.</span>
+                                    <span class="exp-position">Intern - Web Developer</span>
+                                    <span class="exp-year">Feb. 2026 - May 2026</span>
+                                </div>
+                            </div>
+                        </article>
 
-                        <div class="about-hobbies-group">
-                            <h3 class="about-subtitle">Hobbies &amp; Interests</h3>
+                        <article class="about-modal-pane about-card card" id="aboutPanelEducation" data-about-modal-panel="education" data-about-modal-title="Education" hidden>
+                            <div class="timeline-education">
+                                <div class="edu-item">
+                                    <span class="edu-logo-wrap"><img class="edu-logo" src="images/dnsc.jpg" alt="Davao del Norte State College logo" loading="lazy" decoding="async"></span>
+                                    <span class="edu-school">Davao del Norte State College</span>
+                                    <span class="edu-grade">College</span>
+                                    <span class="edu-year">2022-2026</span>
+                                </div>
+                                <div class="edu-item">
+                                    <span class="edu-logo-wrap"><img class="edu-logo" src="images/fbnhs.jpg" alt="Francisco Bustamante National High School logo" loading="lazy" decoding="async"></span>
+                                    <span class="edu-school">Francisco Bustamante National High School</span>
+                                    <span class="edu-grade">SHS</span>
+                                    <span class="edu-year">2020-2022</span>
+                                </div>
+                                <div class="edu-item">
+                                    <span class="edu-logo-wrap"><img class="edu-logo" src="images/fbnhs.jpg" alt="Francisco Bustamante National High School logo" loading="lazy" decoding="async"></span>
+                                    <span class="edu-school">Francisco Bustamante National High School</span>
+                                    <span class="edu-grade">JHS</span>
+                                    <span class="edu-year">2016-2020</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="about-modal-pane about-card card" id="aboutPanelHobbies" data-about-modal-panel="hobbies" data-about-modal-title="Hobbies &amp; Interests" hidden>
                             <div class="about-hobbies">
                                 <div class="interest-grid">
                                     <div class="interest-item"><span class="interest-icon" aria-hidden="true">&#9835;</span>MUSIC</div>
@@ -162,67 +202,22 @@
                                     <div class="interest-item"><i class="interest-icon bi bi-tv-fill" aria-hidden="true"></i>WATCHING ANIME</div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="about-background-group">
-                            <h3 class="about-subtitle">Background</h3>
-                            <div class="about-background">
-                                <article class="about-card card interactive-card" id="aboutEducationCard">
-                                    <div class="about-card-head">
-                                        <h4>Education</h4>
-                                    </div>
-                                    <div class="timeline-education">
-                                        <div class="edu-item">
-                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/dnsc.jpg" alt="Davao del Norte State College logo" loading="lazy" decoding="async"></span>
-                                            <span class="edu-school">Davao del Norte State College</span>
-                                            <span class="edu-grade">College</span>
-                                            <span class="edu-year">2022-2026</span>
-                                        </div>
-                                        <div class="edu-item">
-                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/fbnhs.jpg" alt="Francisco Bangoy National High School logo" loading="lazy" decoding="async"></span>
-                                            <span class="edu-school">Francisco Bustamante National High School</span>
-                                            <span class="edu-grade">SHS</span>
-                                            <span class="edu-year">2020-2022</span>
-                                        </div>
-                                        <div class="edu-item">
-                                            <span class="edu-logo-wrap"><img class="edu-logo" src="images/fbnhs.jpg" alt="Francisco Bangoy National High School logo" loading="lazy" decoding="async"></span>
-                                            <span class="edu-school">Francisco Bustamante National High School</span>
-                                            <span class="edu-grade">JHS</span>
-                                            <span class="edu-year">2016-2020</span>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                <article class="about-card card interactive-card" id="aboutExperienceCard">
-                                    <div class="about-card-head">
-                                        <h4>Experience</h4>
-                                    </div>
-                                    <div class="timeline-experience">
-                                        <div class="exp-item">
-                                            <span class="exp-logo-wrap"><img class="exp-logo" src="images/nehemiahlogo.png" alt="Nehemiah company logo" loading="lazy" decoding="async"></span>
-                                            <span class="exp-company">Nehemiah Solutions Corp.</span>
-                                            <span class="exp-position">Intern - Web Developer</span>
-                                            <span class="exp-year">Feb. 2026 - May 2026</span>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="parallax-section" data-parallax-speed="0.12">
+        <section id="projects" class="parallax-section" data-parallax-speed="0.05">
             <div class="container">
                 <div class="section-head">
-                    <h2>Achievements</h2>
+                    <h2>Projects &amp; Credentials</h2>
+                    <p class="section-display">Work shaped by <span>practice and progress.</span></p>
                 </div>
                 <div class="cert-preview-strip card" aria-label="Certificates preview">
                     <div class="cert-preview-head">
                         <div class="cert-preview-copy">
-                            <h3>MY CERTIFICATES</h3>
+                            <h3>Certificates</h3>
                             <p>
                                 <span class="cert-desc-desktop">Full list of my certificates can be viewed via <strong>View Certificates</strong> button.</span>
                                 <span class="cert-desc-mobile">Full list of my certificates can be viewed via clicking the <strong>Certificates Icon.</strong></span>
@@ -239,35 +234,16 @@
                         <img src="images/cert/cse.png" alt="CyberSecurity Essentials certificate preview" loading="lazy" decoding="async">
                     </div>
                 </div>
-                <h3 class="projects-subhead">MY PROJECTS</h3>
+                <h3 class="projects-subhead">Featured Projects</h3>
                 <div class="projects-carousel" id="projectsCarousel">
                     <button class="carousel-btn prev" type="button" aria-label="Previous project">&#10094;</button>
                     <div class="carousel-stage">
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/bookfi.png" alt="BookFi project screenshot" loading="lazy" decoding="async">
-                            <h3>BookFi</h3>
-                            <p>A book finder platform that helps users quickly search titles, view availability, and access curated recommendations.</p>
-                            <div class="pill-row">
-                                <span class="pill"><i class="tech-icon devicon-java-plain colored" aria-hidden="true"></i>Java</span>
-                                <span class="pill"><i class="tech-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span>
-                            </div>
-                        </article>
-                        <article class="carousel-slide card">
                             <img class="project-image" src="images/bookms.png" alt="BookMS project screenshot" loading="lazy" decoding="async">
                             <h3>LibraSphere</h3>
-                            <p>A book management system for organizing catalog records, borrowing workflows, and inventory updates efficiently.</p>
+                            <p>A library and catalog management system built to organize book records, streamline borrowing workflows, and keep inventory updates easy to manage.</p>
                             <div class="pill-row">
                                 <span class="pill"><i class="tech-icon devicon-laravel-original colored" aria-hidden="true"></i>Laravel</span>
-                                <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
-                                <span class="pill"><i class="tech-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span>
-                            </div>
-                        </article>
-                        <article class="carousel-slide card">
-                            <img class="project-image" src="images/erms.png" alt="ERMS project screenshot" loading="lazy" decoding="async">
-                            <h3>Employee Record Management System</h3>
-                            <p>An event records management system built to centralize event data, attendee tracking, and report generation.</p>
-                            <div class="pill-row">
-                                <span class="pill"><i class="tech-icon devicon-php-plain colored" aria-hidden="true"></i>PHP</span>
                                 <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
                                 <span class="pill"><i class="tech-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span>
                             </div>
@@ -275,7 +251,7 @@
                         <article class="carousel-slide card">
                             <img class="project-image" src="images/fms.png" alt="FMS project screenshot" loading="lazy" decoding="async">
                             <h3>FireGuard</h3>
-                            <p>A safety monitoring system that detects smoke, fire, carbon monoxide, and gas, sends alerts and notifications, and records true active alerts for real-time response tracking.</p>
+                            <p>A safety monitoring system that detects smoke, fire, gas, and carbon monoxide, then sends alerts and records active incidents for real-time response tracking.</p>
                             <div class="pill-row">
                                 <span class="pill"><i class="tech-icon devicon-react-original colored" aria-hidden="true"></i>React</span>
                                 <span class="pill"><i class="tech-icon devicon-vitejs-plain colored" aria-hidden="true"></i>Vite</span>
@@ -283,19 +259,9 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/ims.png" alt="IMS project screenshot" loading="lazy" decoding="async">
-                            <h3>Inventory Management System</h3>
-                            <p>An inventory management system for tracking stock levels, movement logs, and low-item alerts in real time.</p>
-                            <div class="pill-row">
-                                <span class="pill"><i class="tech-icon devicon-php-plain colored" aria-hidden="true"></i>PHP</span>
-                                <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
-                                <span class="pill"><i class="tech-icon devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span>
-                            </div>
-                        </article>
-                        <article class="carousel-slide card">
                             <img class="project-image" src="images/savour.png" alt="SavourRamen website screenshot" loading="lazy" decoding="async">
                             <h3>SavourRamen Website</h3>
-                            <p>A modern restaurant website showcasing ramen menu highlights, brand story, and a smooth ordering-focused user experience.</p>
+                            <p>A restaurant website designed to present the brand story, menu highlights, and a smooth browsing experience centered on customer conversion.</p>
                             <div class="pill-row">
                                 <span class="pill"><i class="tech-icon devicon-html5-plain colored" aria-hidden="true"></i>HTML</span>
                                 <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
@@ -303,18 +269,9 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
-                            <img class="project-image" src="images/mobileapp.png" alt="Portfolio Project mobile app screenshot" loading="lazy" decoding="async">
-                            <h3>Portfolio Mobile App</h3>
-                            <p>A mobile app that consists of my initial portfolio contents, built and run using Flutter and Firebase.</p>
-                            <div class="pill-row">
-                                <span class="pill"><i class="tech-icon devicon-flutter-plain colored" aria-hidden="true"></i>Flutter</span>
-                                <span class="pill"><i class="tech-icon devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span>
-                            </div>
-                        </article>
-                        <article class="carousel-slide card">
-                            <img class="project-image" src="images/sas.jpg" alt="SAS project screenshot" loading="lazy" decoding="async">
+                            <img class="project-image" src="images/sas.jpg" alt="SaaS Sales and Funnel Management System screenshot" loading="lazy" decoding="async">
                             <h3>SaaS Sales and Funnel Management System</h3>
-                            <p>A sales and funnel management system designed to help businesses organize leads, track customer progress, manage funnel stages, and streamline sales workflows efficiently.</p>
+                            <p>A business-focused system for organizing leads, tracking customer progress, managing funnel stages, and supporting smoother day-to-day sales workflows.</p>
                             <div class="pill-row">
                                 <span class="pill"><i class="tech-icon devicon-laravel-original colored" aria-hidden="true"></i>Laravel</span>
                                 <span class="pill"><i class="tech-icon devicon-css3-plain colored" aria-hidden="true"></i>CSS</span>
@@ -322,9 +279,18 @@
                             </div>
                         </article>
                         <article class="carousel-slide card">
+                            <img class="project-image" src="images/mobileapp.png" alt="Portfolio Project mobile app screenshot" loading="lazy" decoding="async">
+                            <h3>Portfolio Mobile App</h3>
+                            <p>A mobile version of my portfolio that translates my core profile, projects, and contact content into a Flutter-based app experience.</p>
+                            <div class="pill-row">
+                                <span class="pill"><i class="tech-icon devicon-flutter-plain colored" aria-hidden="true"></i>Flutter</span>
+                                <span class="pill"><i class="tech-icon devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span>
+                            </div>
+                        </article>
+                        <article class="carousel-slide card">
                             <img class="project-image" src="images/agri.jpg" alt="AgriXprezz screenshot" loading="lazy" decoding="async">
                             <h3>AgriXprezz Mobile App</h3>
-                            <p>Mobile app that helps farmers capture their farm products and sell directly without middlemen intervening.</p>
+                            <p>A mobile app concept that helps farmers showcase their products and connect directly with buyers without relying heavily on middlemen.</p>
                             <div class="pill-row">
                                 <span class="pill"><i class="tech-icon devicon-flutter-plain colored" aria-hidden="true"></i>Flutter</span>
                                 <span class="pill"><i class="tech-icon devicon-firebase-plain colored" aria-hidden="true"></i>Firebase</span>
@@ -339,9 +305,6 @@
                         <button type="button" class="dot" aria-label="Go to project 4"></button>
                         <button type="button" class="dot" aria-label="Go to project 5"></button>
                         <button type="button" class="dot" aria-label="Go to project 6"></button>
-                        <button type="button" class="dot" aria-label="Go to project 7"></button>
-                        <button type="button" class="dot" aria-label="Go to project 8"></button>
-                        <button type="button" class="dot" aria-label="Go to project 9"></button>
                     </div>
                 </div>
             </div>
@@ -460,214 +423,190 @@
             </div>
         </div>
 
-        <section id="skills" class="parallax-section" data-parallax-speed="0.1">
+        <section id="skills" class="parallax-section" data-parallax-speed="0.04">
             <div class="container">
                 <div class="section-head">
                     <h2>Skills</h2>
+                    <p class="section-display">Tools I use to <span>make ideas work.</span></p>
                 </div>
-                <div class="skills-summary card">
-                    <p class="skills-summary-intro">My skills are organized by development area, highlighting the tools and technologies below that I use to build responsive websites, mobile apps, and automated workflows.</p>
-                    <div class="skills-groups">
-                        <div class="skills-group">
-                            <span class="skills-group-label"><i class="bi bi-code-slash" aria-hidden="true"></i>Web Development</span>
-                            <p>Building responsive websites and web applications across both <strong>frontend</strong> and <strong>backend</strong> development.</p>
+                <div class="skill-bars skills-board">
+                    <article class="skills-panel card skills-panel-interface">
+                        <div class="skills-panel-head">
+                            <div>
+                                <h3 class="skills-panel-title">Frontend</h3>
+                            </div>
+                            <span class="skills-panel-badge">UI Layer</span>
                         </div>
-                        <div class="skills-group">
-                            <span class="skills-group-label"><i class="bi bi-phone" aria-hidden="true"></i>Mobile Development</span>
-                            <p>Creating cross-platform mobile applications with clean interfaces and smooth user experiences.</p>
-                            
+                        <div class="skills-meter-list">
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="devicon-html5-plain colored" aria-hidden="true"></i>HTML</span><span>88%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:88%;"></span></div>
+                            </div>
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="devicon-css3-plain colored" aria-hidden="true"></i>CSS</span><span>84%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:84%;"></span></div>
+                            </div>
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="devicon-javascript-plain colored" aria-hidden="true"></i>JavaScript</span><span>70%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:70%;"></span></div>
+                            </div>
                         </div>
-                        <div class="skills-group">
-                            <span class="skills-group-label"><i class="bi bi-diagram-3" aria-hidden="true"></i>Automation</span>
-                            <p>Currently learning beginner-level n8n automation to connect tools, simplify repetitive tasks, and improve workflow efficiency.</p>
-                        
+                    </article>
+
+                    <article class="skills-panel card skills-panel-systems">
+                        <div class="skills-panel-head">
+                            <div>
+                                <h3 class="skills-panel-title">Backend</h3>
+                            </div>
+                            <span class="skills-panel-badge">Core Logic</span>
                         </div>
-                    </div>
-                </div>
-                <h3 class="projects-subhead">LEARNING PERCENTAGE</h3>
-                <div class="skill-bars">
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="95"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-html5-plain colored" aria-hidden="true"></i><span class="skill-percent">95%</span></div>
+                        <div class="skills-meter-list">
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="devicon-php-plain colored" aria-hidden="true"></i>PHP</span><span>82%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:82%;"></span></div>
+                            </div>
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="devicon-laravel-original colored" aria-hidden="true"></i>Laravel</span><span>78%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:78%;"></span></div>
+                            </div>
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="devicon-mysql-original colored" aria-hidden="true"></i>MySQL</span><span>74%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:74%;"></span></div>
+                            </div>
                         </div>
-                        <div class="skill-meta"><span class="skill-name">HTML</span><span class="skill-level">Frontend</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="90"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-css3-plain colored" aria-hidden="true"></i><span class="skill-percent">90%</span></div>
+                    </article>
+
+                    <article class="skills-panel card skills-panel-mobile">
+                        <div class="skills-panel-head">
+                            <div>
+                                <h3 class="skills-panel-title">Mobile Development</h3>
+                            </div>
+                            <span class="skills-panel-badge">App Flow</span>
                         </div>
-                        <div class="skill-meta"><span class="skill-name">CSS</span><span class="skill-level">Frontend</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="50"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-javascript-plain colored" aria-hidden="true"></i><span class="skill-percent">50%</span></div>
+                        <div class="skills-meter-list">
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="devicon-flutter-plain colored" aria-hidden="true"></i>Flutter</span><span>62%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:62%;"></span></div>
+                            </div>
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="devicon-react-original colored" aria-hidden="true"></i>React Native</span><span>58%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:58%;"></span></div>
+                            </div>
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="bi bi-layout-text-window-reverse" aria-hidden="true"></i>Responsive Thinking</span><span>80%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:80%;"></span></div>
+                            </div>
                         </div>
-                        <div class="skill-meta"><span class="skill-name">JavaScript</span><span class="skill-level">Frontend</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="95"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-php-plain colored" aria-hidden="true"></i><span class="skill-percent">95%</span></div>
+                    </article>
+
+                    <article class="skills-panel card skills-panel-workflow">
+                        <div class="skills-panel-head">
+                            <div>
+                                <h3 class="skills-panel-title">Automation</h3>
+                            </div>
+                            <span class="skills-panel-badge">Process</span>
                         </div>
-                        <div class="skill-meta"><span class="skill-name">PHP</span><span class="skill-level">Backend</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="60"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-flutter-plain colored" aria-hidden="true"></i><span class="skill-percent">60%</span></div>
+                        <div class="skills-meter-list">
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="bi bi-diagram-3" aria-hidden="true"></i>n8n</span><span>35%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:35%;"></span></div>
+                            </div>
+                            <div class="skills-meter">
+                                <div class="skills-meter-meta"><span class="skills-meter-label"><i class="bi bi-plug" aria-hidden="true"></i>API Handling</span><span>60%</span></div>
+                                <div class="skills-meter-track"><span class="skills-meter-fill" style="--meter-level:60%;"></span></div>
+                            </div>
                         </div>
-                        <div class="skill-meta"><span class="skill-name">Flutter</span><span class="skill-level">Mobile</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="88"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-laravel-original colored" aria-hidden="true"></i><span class="skill-percent">88%</span></div>
-                        </div>
-                        <div class="skill-meta"><span class="skill-name">Laravel</span><span class="skill-level">Backend</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="50"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-react-original colored" aria-hidden="true"></i><span class="skill-percent">50%</span></div>
-                        </div>
-                        <div class="skill-meta"><span class="skill-name">React</span><span class="skill-level">Frontend</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="45"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-java-plain colored" aria-hidden="true"></i><span class="skill-percent">45%</span></div>
-                        </div>
-                        <div class="skill-meta"><span class="skill-name">Java</span><span class="skill-level">Backend</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="40"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon devicon-react-original colored" aria-hidden="true"></i><span class="skill-percent">40%</span></div>
-                        </div>
-                        <div class="skill-meta"><span class="skill-name">React Native</span><span class="skill-level">Mobile</span></div>
-                    </div>
-                    <div class="skill-row">
-                        <div class="skill-circle">
-                            <svg class="skill-circle-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="skill-circle-track" cx="50" cy="50" r="40"></circle>
-                                <circle class="skill-circle-progress" cx="50" cy="50" r="40" data-level="35"></circle>
-                            </svg>
-                            <div class="skill-circle-center"><i class="skill-icon bi bi-diagram-3" aria-hidden="true"></i><span class="skill-percent">35%</span></div>
-                        </div>
-                        <div class="skill-meta"><span class="skill-name">n8n</span><span class="skill-level">Automation</span></div>
-                    </div>
+                        <p class="skills-panel-note">Currently strengthening automation habits through small experiments, integrations, and repeatable workflow practice.</p>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="parallax-section" data-parallax-speed="0.08">
+        <section id="contact" class="parallax-section" data-parallax-speed="0.03">
             <div class="container">
-                <div class="section-head">
+                <div class="contact-section-label section-head">
                     <h2 class="contact-title">Get in <span>Touch</span></h2>
                 </div>
-
                 <div class="contact-shell">
-                    <aside class="contact-info">
-                        <article class="contact-info-card">
-                            <span class="contact-info-icon" aria-hidden="true"><i class="bi bi-envelope"></i></span>
-                            <div class="contact-info-copy">
-                                <p class="contact-info-label">Email Me</p>
-                                <a href="mailto:espanosherwin10@gmail.com">espanosherwin10@gmail.com</a>
-                            </div>
-                        </article>
-                        <article class="contact-info-card">
-                            <span class="contact-info-icon" aria-hidden="true"><i class="bi bi-whatsapp"></i></span>
-                            <div class="contact-info-copy">
-                                <p class="contact-info-label">Phone Number</p>
-                                <span><strong>+63 963 506 7030</strong></span>
-                            </div>
-                        </article>
-
-                        <div class="contact-trust">
-                            <h3>Connect with me</h3>
-                            <div class="trust-links">
-                                <a href="https://github.com/Sherwin1018/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                                    <i class="bi bi-github" aria-hidden="true"></i>
-                                </a>
-                                <a href="https://www.linkedin.com/in/sherwin-espa%C3%B1o-b2313634a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                                    <i class="bi bi-linkedin" aria-hidden="true"></i>
-                                </a>
-                                <a href="https://www.facebook.com/yo.choyeii" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                    <i class="bi bi-facebook" aria-hidden="true"></i>
-                                </a>
-                                <a href="https://www.instagram.com/espanosherwin18/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                    <i class="bi bi-instagram" aria-hidden="true"></i>
-                                </a>
-                                <a href="files/Sherwin-Espano-CV-2026.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download CV PDF">
-                                    <i class="bi bi-file-earmark-person-fill" aria-hidden="true"></i>
-                                </a>
-                            </div>
+                    <div class="contact-side">
+                        <div class="contact-intro">
+                            <p class="section-display">Open to <span>build and connect.</span></p>
+                            <p class="section-lead contact-lead">Open to internships, freelance work, and collaborative opportunities where I can contribute, keep learning fast, and help build dependable digital products.</p>
                         </div>
-                    </aside>
+
+                        <aside class="contact-info">
+                            <article class="contact-info-card">
+                                <span class="contact-info-icon" aria-hidden="true"><i class="bi bi-envelope"></i></span>
+                                <div class="contact-info-copy">
+                                    <p class="contact-info-label">Email Me</p>
+                                    <a href="mailto:espanosherwin10@gmail.com">espanosherwin10@gmail.com</a>
+                                </div>
+                            </article>
+                            <article class="contact-info-card">
+                                <span class="contact-info-icon" aria-hidden="true"><i class="bi bi-whatsapp"></i></span>
+                                <div class="contact-info-copy">
+                                    <p class="contact-info-label">Phone Number</p>
+                                    <span><strong>+63 963 506 7030</strong></span>
+                                </div>
+                            </article>
+
+                            <div class="contact-trust">
+                                <h3>Find me online</h3>
+                                <div class="trust-links">
+                                    <a href="https://github.com/Sherwin1018/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                        <i class="bi bi-github" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/sherwin-espa%C3%B1o-b2313634a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                        <i class="bi bi-linkedin" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/yo.choyeii" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                        <i class="bi bi-facebook" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/espanosherwin18/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                        <i class="bi bi-instagram" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="files/Sherwin-Espano-CV-2026.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download CV PDF">
+                                        <i class="bi bi-file-earmark-person-fill" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
 
                     <form class="contact-form" id="contactForm" novalidate>
                         <div class="sr-only" aria-hidden="true">
                             <label for="website_field">Leave this field empty</label>
                             <input type="text" id="website_field" name="website_field" tabindex="-1" autocomplete="off">
                         </div>
-                        <div class="contact-left">
+                        <h3 class="contact-form-title">Send me a Message</h3>
+                        <div class="contact-form-grid">
                             <div class="field-with-icon">
-                                <label class="sr-only" for="full_name">Full Name</label>
-                                <i class="bi bi-person" aria-hidden="true"></i>
-                                <input type="text" id="full_name" name="full_name" placeholder="Full Name" required>
+                                <label class="contact-field-label" for="full_name">Full Name</label>
+                                <div class="contact-input-shell">
+                                    <i class="bi bi-person" aria-hidden="true"></i>
+                                    <input type="text" id="full_name" name="full_name" placeholder="Your name" required>
+                                </div>
                             </div>
                             <div class="field-with-icon">
-                                <label class="sr-only" for="email">Email Address</label>
-                                <i class="bi bi-envelope" aria-hidden="true"></i>
-                                <input type="email" id="email" name="email" placeholder="Email" required>
+                                <label class="contact-field-label" for="email">Email</label>
+                                <div class="contact-input-shell">
+                                    <i class="bi bi-envelope" aria-hidden="true"></i>
+                                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                                </div>
                             </div>
-                            <div class="field-with-icon">
-                                <label class="sr-only" for="phone_number">Phone Number</label>
-                                <i class="bi bi-telephone" aria-hidden="true"></i>
-                                <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                            <div class="field-with-icon field-full">
+                                <label class="contact-field-label" for="subject">Subject</label>
+                                <div class="contact-input-shell">
+                                    <i class="bi bi-chat-left-text" aria-hidden="true"></i>
+                                    <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+                                </div>
                             </div>
-                            <div class="field-with-icon">
-                                <label class="sr-only" for="subject">Subject</label>
-                                <i class="bi bi-chat-left-text" aria-hidden="true"></i>
-                                <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                            <div class="field-stack field-full">
+                                <label class="contact-field-label" for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="Tell me about your project, opportunity, or idea..." required></textarea>
                             </div>
                         </div>
-
-                        <div class="contact-right">
-                            <label class="sr-only" for="message">Your Message</label>
-                            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                            <button class="contact-submit" id="contactSubmit" type="submit"><i class="bi bi-send-fill" aria-hidden="true"></i>Send Message</button>
-                        </div>
+                        <button class="contact-submit" id="contactSubmit" type="submit"><i class="bi bi-send-fill" aria-hidden="true"></i>Send Message</button>
                     </form>
                 </div>
             </div>
@@ -690,7 +629,7 @@
                 <h4>Quick Links</h4>
                 <a href="#hero">Home</a>
                 <a href="#about">About</a>
-                <a href="#projects">Achievements</a>
+                <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -699,7 +638,7 @@
                 <h4>Contact Me</h4>
                 <p><i class="bi bi-envelope-fill" aria-hidden="true"></i>espanosherwin10@gmail.com</p>
                 <p><i class="bi bi-telephone-fill" aria-hidden="true"></i>+63 963 506 7030</p>
-                <p><i class="bi bi-briefcase-fill" aria-hidden="true"></i>Open for Opportunities & Possibilities</p>
+                <p><i class="bi bi-briefcase-fill" aria-hidden="true"></i>Open to internships, freelance work, and collaboration</p>
             </div>
             <div class="footer-copy">
                 &copy; <span id="year">2026</span> <strong>Sherwin C. Españo</strong>. All rights reserved.
@@ -707,10 +646,11 @@
         </div>
     </footer>
 
+    <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+    <div class="custom-cursor-ring" id="customCursorRing" aria-hidden="true"></div>
     <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
     <script src="js/portfolio.js"></script>
 </body>
 </html>
