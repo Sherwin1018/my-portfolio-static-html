@@ -4319,22 +4319,28 @@ body.is-ready .hero .profile-wrap {
 
             .footer-contact p {
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: center;
                 gap: 0.5rem;
                 margin: 0.34rem 0;
-                white-space: nowrap;
+                margin-inline: auto;
+                width: 100%;
+                max-width: 100%;
+                line-height: 1.45;
+                white-space: normal;
             }
 
             .footer-contact p i {
                 margin-right: 0;
                 flex: 0 0 auto;
+                margin-top: 0.08rem;
             }
 
-            .footer-contact p:first-of-type {
-                white-space: normal;
+            .footer-contact p span {
+                display: block;
+                max-width: 28ch;
                 overflow-wrap: anywhere;
-                justify-content: center;
+                text-align: left;
             }
 
             .footer-copy {
