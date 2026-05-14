@@ -1475,12 +1475,14 @@
         slides.forEach(function (slide, index) {
             const offset = getCircularOffset(index, currentSlide, totalSlides);
             slide.style.setProperty("--offset", offset);
-            slide.classList.remove("is-active", "is-side");
+            slide.classList.remove("is-active", "is-side", "is-prev", "is-next");
 
             if (offset === 0) {
                 slide.classList.add("is-active");
-            } else if (Math.abs(offset) === 1) {
-                slide.classList.add("is-side");
+            } else if (offset === -1) {
+                slide.classList.add("is-side", "is-prev");
+            } else if (offset === 1) {
+                slide.classList.add("is-side", "is-next");
             }
         });
 

@@ -6,6 +6,7 @@
     <title>Sherwin Españo | Web Portfolio</title>
     <meta name="description" content="Sherwin Españo is a web and mobile developer building clean, responsive, and user-focused digital experiences with PHP, Laravel, React, Flutter, and Firebase.">
     <link rel="icon" href="images/my-logo-circle.png" type="image/png">
+    <link rel="preload" as="image" href="images/my-logo-circle.png" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link href="https://fonts.bunny.net/css?family=space-grotesk:400,500,600,700" rel="stylesheet">
@@ -17,9 +18,25 @@
     <div class="loading-screen" id="loadingScreen" aria-live="polite">
         <div class="loading-content">
             <div class="loader-icon-row" aria-hidden="true">
-                <span class="loader-icon-box"><i class="bi bi-code-slash"></i></span>
-                <span class="loader-icon-box"><i class="bi bi-stack"></i></span>
-                <span class="loader-icon-box"><i class="bi bi-lightning-charge-fill"></i></span>
+                <span class="loader-icon-box">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M8 7 3 12l5 5"></path>
+                        <path d="m16 7 5 5-5 5"></path>
+                        <path d="m14 4-4 16"></path>
+                    </svg>
+                </span>
+                <span class="loader-icon-box">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <rect x="4" y="4" width="16" height="5" rx="2.5"></rect>
+                        <rect x="4" y="10" width="16" height="5" rx="2.5"></rect>
+                        <rect x="4" y="16" width="16" height="4" rx="2"></rect>
+                    </svg>
+                </span>
+                <span class="loader-icon-box">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M13 2 6 13h4l-1 9 9-13h-4l1-7Z"></path>
+                    </svg>
+                </span>
             </div>
             <h1 class="loader-title" id="loaderTitle">
                 <span class="loader-title-row">
@@ -48,7 +65,7 @@
     <header class="navbar">
         <div class="container nav-inner">
             <a class="logo" href="#hero" aria-label="Go to Home section">
-                <img class="logo-icon-img" src="images/my-logo-circle.png" alt="WinDev logo" width="944" height="944" decoding="async">
+                <img class="logo-icon-img" src="images/my-logo-circle.png" alt="WinDev logo" width="944" height="944" loading="eager" fetchpriority="high" decoding="sync">
                 <span class="brand-name"><span class="brand-win">WIN</span><span class="brand-dev">DEV</span></span>
             </a>
             <nav class="nav-links" id="navLinks">

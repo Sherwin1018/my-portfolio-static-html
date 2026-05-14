@@ -221,6 +221,21 @@ body.loader-active {
     opacity: 0;
 }
 
+.loader-icon-box svg {
+    width: 1.45rem;
+    height: 1.45rem;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: 0 0 auto;
+}
+
+.loader-icon-box svg rect {
+    fill: rgba(87, 201, 255, 0.08);
+}
+
 .loader-icon-box.is-visible {
     animation: loaderIconIn 0.45s ease forwards;
 }
@@ -557,7 +572,7 @@ body::after {
             text-decoration: none;
         }
 
-        .logo-icon-img {
+.logo-icon-img {
             width: 2.1rem;
             height: 2.1rem;
             flex: 0 0 auto;
@@ -566,7 +581,8 @@ body::after {
             padding: 1px;
             border: 1px solid rgba(255, 255, 255, 0.72);
             box-shadow: 0 0 0 1px rgba(31, 217, 151, 0.38), 0 0 10px rgba(31, 217, 151, 0.32);
-            background: #ffffff;
+            background:
+                radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.95), rgba(222, 244, 255, 0.78) 55%, rgba(87, 201, 255, 0.22) 100%);
         }
 
         .brand-name {
@@ -2698,12 +2714,12 @@ body.is-ready .hero .profile-wrap {
             color: var(--muted);
         }
 
-        .projects-carousel {
+.projects-carousel {
             position: relative;
             margin-top: 1rem;
-            width: min(100%, 860px);
+            width: min(100%, 1040px);
             margin-inline: auto;
-            padding-inline: clamp(2rem, 4vw, 2.8rem);
+            padding-inline: clamp(2rem, 5vw, 4.5rem);
         }
 
 .projects-subhead {
@@ -3269,6 +3285,61 @@ body.is-ready .hero .profile-wrap {
     visibility: hidden;
     transform: translateX(-50%) scale(0.94);
     filter: blur(0);
+}
+
+@media (min-width: 901px) {
+    .projects-carousel {
+        overflow: visible;
+    }
+
+    .carousel-stage {
+        max-width: 940px;
+        overflow: visible;
+    }
+
+    .carousel-slide {
+        width: min(100%, 760px);
+    }
+
+    .carousel-slide.is-side {
+        opacity: 0.48;
+        visibility: visible;
+        filter: saturate(0.74) brightness(0.82);
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+        z-index: 1;
+    }
+
+    .carousel-slide.is-prev {
+        transform: translateX(calc(-50% - clamp(17rem, 21vw, 20rem))) scale(0.84);
+        -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.08) 16%, rgba(0, 0, 0, 0.88) 40%, #000 70%);
+        mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.08) 16%, rgba(0, 0, 0, 0.88) 40%, #000 70%);
+    }
+
+    .carousel-slide.is-next {
+        transform: translateX(calc(-50% + clamp(17rem, 21vw, 20rem))) scale(0.84);
+        -webkit-mask-image: linear-gradient(to left, transparent 0, rgba(0, 0, 0, 0.08) 16%, rgba(0, 0, 0, 0.88) 40%, #000 70%);
+        mask-image: linear-gradient(to left, transparent 0, rgba(0, 0, 0, 0.08) 16%, rgba(0, 0, 0, 0.88) 40%, #000 70%);
+    }
+
+    .carousel-slide.is-side h3,
+    .carousel-slide.is-side p,
+    .carousel-slide.is-side .pill-row {
+        opacity: 0.22;
+    }
+
+    .carousel-slide.is-side .project-image {
+        filter: brightness(0.76) saturate(0.76);
+        box-shadow: none;
+    }
+
+    .carousel-btn.prev {
+        left: clamp(0.6rem, 1vw, 1rem);
+    }
+
+    .carousel-btn.next {
+        right: clamp(0.6rem, 1vw, 1rem);
+    }
 }
 
 .carousel-slide.is-active {
