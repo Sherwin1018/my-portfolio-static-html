@@ -6,6 +6,8 @@
     <title>Sherwin Españo | Web Portfolio</title>
     <meta name="description" content="Sherwin Españo is a web and mobile developer building clean, responsive, and user-focused digital experiences with PHP, Laravel, React, Flutter, and Firebase.">
     <link rel="icon" href="images/my-logo-circle.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link href="https://fonts.bunny.net/css?family=space-grotesk:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -46,7 +48,7 @@
     <header class="navbar">
         <div class="container nav-inner">
             <a class="logo" href="#hero" aria-label="Go to Home section">
-                <img class="logo-icon-img" src="images/my-logo-circle.png" alt="WinDev logo" decoding="async">
+                <img class="logo-icon-img" src="images/my-logo-circle.png" alt="WinDev logo" width="944" height="944" decoding="async">
                 <span class="brand-name"><span class="brand-win">WIN</span><span class="brand-dev">DEV</span></span>
             </a>
             <nav class="nav-links" id="navLinks">
@@ -110,7 +112,7 @@
                     </div>
                 </div>
                 <aside class="hero-card profile-wrap">
-                    <img class="profile-photo" src="images/por-prof1.jpg" alt="Portrait of Sherwin Españo" fetchpriority="high" decoding="async">
+                    <img class="profile-photo" src="images/por-prof1.jpg" alt="Portrait of Sherwin Españo" width="401" height="458" fetchpriority="high" decoding="async">
                 </aside>
             </div>
         </section>
@@ -130,7 +132,7 @@
                             <span class="about-photo-string" aria-hidden="true"></span>
                             <span class="about-photo-knot" aria-hidden="true"></span>
                             <div class="about-photo-frame">
-                                <img class="about-photo" src="images/profile1.jpg" alt="Sherwin Españo working profile image" loading="lazy" decoding="async">
+                                <img class="about-photo" src="images/profile1.jpg" alt="Sherwin Españo working profile image" width="1047" height="1489" loading="lazy" decoding="async">
                             </div>
                         </div>
                         <div class="about-content">
@@ -140,9 +142,9 @@
                                 <p><strong>Open to:</strong> Internships, collaborative projects, and mentorship from experienced IT professionals.</p>
                             </div>
                             <div class="about-detail-actions" aria-label="Open more about details">
-                                <button class="about-detail-button" type="button" data-about-modal-open="experience">Experience</button>
-                                <button class="about-detail-button" type="button" data-about-modal-open="education">Education</button>
-                                <button class="about-detail-button" type="button" data-about-modal-open="hobbies">Hobbies</button>
+                                <button class="about-detail-button" type="button" data-about-modal-open="experience"><i class="bi bi-briefcase-fill" aria-hidden="true"></i><span>Experience</span></button>
+                                <button class="about-detail-button" type="button" data-about-modal-open="education"><i class="bi bi-mortarboard-fill" aria-hidden="true"></i><span>Education</span></button>
+                                <button class="about-detail-button" type="button" data-about-modal-open="hobbies"><i class="bi bi-controller" aria-hidden="true"></i><span>Hobbies</span></button>
                             </div>
                         </div>
                     </div>
@@ -162,7 +164,7 @@
                         <article class="about-modal-pane about-card card is-active" id="aboutPanelExperience" data-about-modal-panel="experience" data-about-modal-title="Experience">
                             <div class="timeline-experience">
                                 <div class="exp-item">
-                                    <span class="exp-logo-wrap"><img class="exp-logo" src="images/nehemiahlogo.png" alt="Nehemiah company logo" loading="lazy" decoding="async"></span>
+                                    <span class="exp-logo-wrap"><img class="exp-logo" src="images/nehemiahlogo.png" alt="Nehemiah company logo" width="3800" height="3800" loading="lazy" decoding="async"></span>
                                     <span class="exp-company">Nehemiah Solutions Corp.</span>
                                     <span class="exp-position">Intern - Web Developer</span>
                                     <span class="exp-year">Feb. 2026 - May 2026</span>
@@ -652,7 +654,6 @@
     <div class="custom-cursor-ring" id="customCursorRing" aria-hidden="true"></div>
     <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="js/portfolio.js"></script>
+    <script src="js/portfolio.js" defer></script>
 </body>
 </html>

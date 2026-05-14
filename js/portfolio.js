@@ -2,14 +2,63 @@
     const EMAILJS_PUBLIC_KEY = "0SNcJ4xyZlmGEwTct";
     const EMAILJS_SERVICE_ID = "service_ybrpukc";
     const EMAILJS_TEMPLATE_ID = "template_0fhi9em";
+    const EMAILJS_SCRIPT_URL = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
     const LAST_CONTACT_SUBMIT_KEY = "portfolio-last-contact-submit";
     const CONTACT_SUBMIT_COOLDOWN_MS = 15000;
     const body = document.body;
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    let emailJsLoader = null;
+    let emailJsInitialized = false;
 
-    if (window.emailjs && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
+    function prefersReducedMotion() {
+        return reducedMotionQuery.matches;
+    }
+
+    function supportsAdvancedMotion() {
+        return finePointerQuery.matches && !prefersReducedMotion() && window.innerWidth > 900;
+    }
+
+    function initEmailJs() {
+        if (emailJsInitialized || !window.emailjs || EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
+            return;
+        }
+
         window.emailjs.init({
             publicKey: EMAILJS_PUBLIC_KEY
         });
+        emailJsInitialized = true;
+    }
+
+    function loadEmailJs() {
+        if (window.emailjs) {
+            initEmailJs();
+            return Promise.resolve(window.emailjs);
+        }
+
+        if (emailJsLoader) {
+            return emailJsLoader;
+        }
+
+        emailJsLoader = new Promise(function (resolve, reject) {
+            const script = document.createElement("script");
+            script.src = EMAILJS_SCRIPT_URL;
+            script.async = true;
+
+            script.onload = function () {
+                initEmailJs();
+                resolve(window.emailjs);
+            };
+
+            script.onerror = function () {
+                emailJsLoader = null;
+                reject(new Error("Failed to load EmailJS."));
+            };
+
+            document.head.appendChild(script);
+        });
+
+        return emailJsLoader;
     }
 
     const scrollProgress = document.createElement("div");
@@ -87,31 +136,27 @@
 
             setProgress(0);
 
-            iconBoxes.forEach(function (icon, index) {
-                window.setTimeout(function () {
-                    icon.classList.add("is-visible");
-                }, index * 180);
+            iconBoxes.forEach(function (icon) {
+                icon.classList.add("is-visible");
             });
 
             window.setTimeout(function () {
-                titleWords.forEach(function (word, index) {
-                    window.setTimeout(function () {
-                        word.classList.add("is-visible");
-                    }, index * 200);
+                titleWords.forEach(function (word) {
+                    word.classList.add("is-visible");
                 });
-            }, 540);
+            }, 120);
 
-            // Stage 1: icon boxes = 35%
+            // Stage 1: icons appear immediately, progress moves sooner
             window.setTimeout(function () {
-                animateProgressTo(35, 360);
-            }, 220);
+                animateProgressTo(40, 220);
+            }, 70);
 
-            // Stage 2: title words complete = 70%
+            // Stage 2: title words complete = 75%
             window.setTimeout(function () {
-                animateProgressTo(70, 440);
-            }, 900);
+                animateProgressTo(75, 260);
+            }, 360);
 
-            // Stage 3: typewriter drives 70% -> 100%
+            // Stage 3: typewriter drives 75% -> 100%
             window.setTimeout(function () {
                 const source = "windev.com";
                 let index = 0;
@@ -121,10 +166,10 @@
                     domainText.textContent = source.slice(0, index);
 
                     const ratio = index / source.length;
-                    setProgress(70 + ratio * 30);
+                    setProgress(75 + ratio * 25);
 
                     if (index < source.length) {
-                        window.setTimeout(typeDomain, 75);
+                        window.setTimeout(typeDomain, 55);
                         return;
                     }
 
@@ -132,11 +177,11 @@
                         loadingScreen.classList.add("is-hidden");
                         document.body.classList.remove("loader-active");
                         resolve();
-                    }, 180);
+                    }, 120);
                 }
 
                 typeDomain();
-            }, 1400);
+            }, 680);
         });
     }
 
@@ -424,16 +469,34 @@
         }
 
         const roles = ["WEB DEVELOPER", "FRONTEND & BACKEND", "MOBILE DEVELOPER"];
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            roleTarget.textContent = roles.join(" | ");
-            return;
-        }
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const timing = prefersReducedMotion
+            ? {
+                startDelay: 200,
+                typingDelay: 120,
+                deletingDelay: 85,
+                fullPause: 2000,
+                emptyPause: 320
+            }
+            : {
+                startDelay: 350,
+                typingDelay: 82,
+                deletingDelay: 58,
+                fullPause: 1200,
+                emptyPause: 250
+            };
 
         let roleIndex = 0;
         let charIndex = 0;
         let deleting = false;
+        let timeoutId = 0;
 
         function tick() {
+            if (document.hidden) {
+                timeoutId = 0;
+                return;
+            }
+
             const currentRole = roles[roleIndex];
 
             if (deleting) {
@@ -444,22 +507,30 @@
 
             roleTarget.textContent = currentRole.slice(0, charIndex);
 
-            let delay = deleting ? 58 : 82;
+            let delay = deleting ? timing.deletingDelay : timing.typingDelay;
 
             if (!deleting && charIndex === currentRole.length) {
-                delay = 1200;
+                delay = timing.fullPause;
                 deleting = true;
             } else if (deleting && charIndex === 0) {
                 deleting = false;
                 roleIndex = (roleIndex + 1) % roles.length;
-                delay = 250;
+                delay = timing.emptyPause;
             }
 
-            window.setTimeout(tick, delay);
+            timeoutId = window.setTimeout(tick, delay);
         }
 
         roleTarget.textContent = "";
-        window.setTimeout(tick, 350);
+        timeoutId = window.setTimeout(tick, timing.startDelay);
+
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden || timeoutId) {
+                return;
+            }
+
+            timeoutId = window.setTimeout(tick, timing.startDelay);
+        });
     }
 
     function initCustomCursor() {
@@ -468,8 +539,7 @@
         const canUseCustomCursor =
             cursor &&
             ring &&
-            window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
-            !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            supportsAdvancedMotion();
 
         if (!canUseCustomCursor) {
             return;
@@ -593,11 +663,11 @@
     function createHeroParticles() {
         const heroParticles = document.getElementById("heroParticles");
 
-        if (!heroParticles || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (!heroParticles || !supportsAdvancedMotion()) {
             return;
         }
 
-        const particleCount = window.innerWidth < 700 ? 18 : 30;
+        const particleCount = window.innerWidth < 1200 ? 10 : 18;
 
         for (let index = 0; index < particleCount; index += 1) {
             const particle = document.createElement("span");
@@ -624,7 +694,7 @@
             !canvas ||
             !hero ||
             !window.THREE ||
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            !supportsAdvancedMotion()
         ) {
             return;
         }
@@ -680,7 +750,7 @@
         ring.position.set(isSmallScreen ? -0.15 : 0.85, isSmallScreen ? -1.35 : -0.95, -0.35);
         group.add(ring);
 
-        const particleCount = isSmallScreen ? 55 : 95;
+        const particleCount = isSmallScreen ? 34 : 60;
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
         const colorA = new THREE.Color(0x57c9ff);
@@ -725,7 +795,14 @@
             camera.updateProjectionMatrix();
         }
 
+        let sceneFrame = 0;
+
         function animate() {
+            if (document.hidden) {
+                sceneFrame = 0;
+                return;
+            }
+
             const elapsed = clock.getElapsedTime();
             const positionsAttr = particles.geometry.attributes.position;
 
@@ -746,7 +823,7 @@
 
             particles.rotation.y = elapsed * 0.02;
             renderer.render(scene, camera);
-            window.requestAnimationFrame(animate);
+            sceneFrame = window.requestAnimationFrame(animate);
         }
 
         hero.addEventListener("mousemove", function (event) {
@@ -762,16 +839,24 @@
 
         resize();
         window.addEventListener("resize", resize);
-        animate();
+        sceneFrame = window.requestAnimationFrame(animate);
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden || sceneFrame) {
+                return;
+            }
+
+            sceneFrame = window.requestAnimationFrame(animate);
+        });
     }
 
     function enableSceneParallax() {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (!supportsAdvancedMotion()) {
             return;
         }
 
         const parallaxSections = Array.from(document.querySelectorAll(".parallax-section"));
         const depthLayers = Array.from(document.querySelectorAll("[data-depth]"));
+        let frameId = 0;
 
         function updateParallax() {
             const viewportHeight = window.innerHeight || 1;
@@ -791,13 +876,24 @@
             });
         }
 
+        function requestParallaxUpdate() {
+            if (frameId) {
+                return;
+            }
+
+            frameId = window.requestAnimationFrame(function () {
+                frameId = 0;
+                updateParallax();
+            });
+        }
+
         updateParallax();
-        window.addEventListener("scroll", updateParallax, { passive: true });
-        window.addEventListener("resize", updateParallax);
+        window.addEventListener("scroll", requestParallaxUpdate, { passive: true });
+        window.addEventListener("resize", requestParallaxUpdate);
     }
 
     function enableMagneticButtons() {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (!supportsAdvancedMotion()) {
             return;
         }
 
@@ -818,7 +914,7 @@
     }
 
     function enableTiltEffects() {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (!supportsAdvancedMotion()) {
             return;
         }
 
@@ -848,7 +944,7 @@
     }
 
     function enableInteractiveCards() {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (!supportsAdvancedMotion()) {
             return;
         }
 
@@ -883,8 +979,8 @@
                 const rect = slide.getBoundingClientRect();
                 const x = (event.clientX - rect.left) / rect.width;
                 const y = (event.clientY - rect.top) / rect.height;
-                const rotateY = (x - 0.5) * 7;
-                const rotateX = (0.5 - y) * 5;
+                const rotateY = (x - 0.5) * 4;
+                const rotateX = (0.5 - y) * 3;
 
                 slide.style.setProperty("--card-tilt-x", rotateX.toFixed(2) + "deg");
                 slide.style.setProperty("--card-tilt-y", rotateY.toFixed(2) + "deg");
@@ -901,9 +997,21 @@
         const hero = document.getElementById("hero");
         const heroCopy = hero ? hero.querySelector(".hero-copy") : null;
         const heroScene = hero ? hero.querySelector(".hero-scene") : null;
+        let frameId = 0;
+        let nextCopyTransform = "";
+        let nextSceneTransform = "";
 
-        if (!hero || !heroCopy || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (!hero || !heroCopy || !supportsAdvancedMotion()) {
             return;
+        }
+
+        function applyMotionFrame() {
+            frameId = 0;
+            heroCopy.style.transform = nextCopyTransform;
+
+            if (heroScene) {
+                heroScene.style.transform = nextSceneTransform;
+            }
         }
 
         hero.addEventListener("mousemove", function (event) {
@@ -911,14 +1019,20 @@
             const offsetX = (event.clientX - rect.left) / rect.width - 0.5;
             const offsetY = (event.clientY - rect.top) / rect.height - 0.5;
 
-            heroCopy.style.transform = "translate3d(" + (offsetX * -22).toFixed(2) + "px, " + (offsetY * -18).toFixed(2) + "px, 0)";
+            nextCopyTransform = "translate3d(" + (offsetX * -22).toFixed(2) + "px, " + (offsetY * -18).toFixed(2) + "px, 0)";
 
             if (heroScene) {
-                heroScene.style.transform = "translate3d(" + (offsetX * 16).toFixed(2) + "px, " + (offsetY * 10).toFixed(2) + "px, 0)";
+                nextSceneTransform = "translate3d(" + (offsetX * 16).toFixed(2) + "px, " + (offsetY * 10).toFixed(2) + "px, 0)";
+            }
+
+            if (!frameId) {
+                frameId = window.requestAnimationFrame(applyMotionFrame);
             }
         });
 
         hero.addEventListener("mouseleave", function () {
+            nextCopyTransform = "";
+            nextSceneTransform = "";
             heroCopy.style.transform = "";
             if (heroScene) {
                 heroScene.style.transform = "";
@@ -1285,8 +1399,15 @@
             });
         });
 
+        document.querySelectorAll(".carousel-slide").forEach(function (slide) {
+            slide.classList.remove("scroll-reveal", "is-visible", "reveal-left", "reveal-right", "reveal-zoom");
+            slide.style.removeProperty("--reveal-delay");
+        });
+
         document.querySelectorAll("section").forEach(function (section) {
-            const staggerTargets = Array.from(section.querySelectorAll(".card, .interest-item, .skill-row, .carousel-slide, .pill"));
+            const staggerTargets = Array.from(section.querySelectorAll(".card, .interest-item, .skill-row, .pill")).filter(function (el) {
+                return !el.classList.contains("carousel-slide");
+            });
             staggerTargets.forEach(function (el, index) {
                 if (!el.classList.contains("scroll-reveal")) {
                     el.classList.add("scroll-reveal");
@@ -1498,6 +1619,7 @@
     }
 
     const contactForm = document.getElementById("contactForm");
+    const contactSection = document.getElementById("contact");
     const toastStack = document.getElementById("toastStack");
     const contactSubmit = document.getElementById("contactSubmit");
     const contactSubmitMarkup = contactSubmit ? contactSubmit.innerHTML : "";
@@ -1608,6 +1730,33 @@
         });
     });
 
+    if (contactSection) {
+        if ("IntersectionObserver" in window) {
+            const emailObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    loadEmailJs().catch(function () {
+                        // If preloading fails, submit will still retry later.
+                    });
+                    emailObserver.disconnect();
+                });
+            }, {
+                rootMargin: "220px 0px"
+            });
+
+            emailObserver.observe(contactSection);
+        }
+
+        contactSection.addEventListener("focusin", function () {
+            loadEmailJs().catch(function () {
+                // If preloading fails, submit will still retry later.
+            });
+        }, { once: true });
+    }
+
     if (contactForm) {
         contactForm.addEventListener("submit", function (event) {
             event.preventDefault();
@@ -1642,11 +1791,6 @@
                 return;
             }
 
-            if (!window.emailjs) {
-                showFormAlert("error", "Email service is unavailable right now. Please try again later.");
-                return;
-            }
-
             if (
                 EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY" ||
                 EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID" ||
@@ -1668,19 +1812,25 @@
                 // Ignore storage failures.
             }
 
-            window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-                full_name: contactForm.full_name.value.trim(),
-                email: contactForm.email.value.trim(),
-                phone_number: phoneNumber,
-                subject: contactForm.subject.value.trim(),
-                message: contactForm.message.value.trim()
-            }).then(function () {
-                contactForm.reset();
-                formFields.forEach(function (field) {
-                    markInvalidField(field, false);
+            loadEmailJs().then(function () {
+                if (!window.emailjs) {
+                    throw new Error("Email service unavailable.");
+                }
+
+                return window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                    full_name: contactForm.full_name.value.trim(),
+                    email: contactForm.email.value.trim(),
+                    phone_number: phoneNumber,
+                    subject: contactForm.subject.value.trim(),
+                    message: contactForm.message.value.trim()
                 });
-                showFormAlert("success", "Your message has been sent successfully.");
-            }).catch(function () {
+            }).then(function () {
+                    contactForm.reset();
+                    formFields.forEach(function (field) {
+                        markInvalidField(field, false);
+                    });
+                    showFormAlert("success", "Your message has been sent successfully.");
+                }).catch(function () {
                 showFormAlert("error", "Something went wrong while sending your message. Please try again.");
             }).finally(function () {
                 if (contactSubmit) {
