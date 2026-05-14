@@ -1231,7 +1231,7 @@
         action.className = "cert-view-btn";
         action.textContent = "View full image";
         action.addEventListener("click", function () {
-            showCertImageModal(image.src, title ? title.textContent : "Certificate");
+            showCertImageModal(image.dataset.fullSrc || image.currentSrc || image.src, title ? title.textContent : "Certificate");
         });
 
         card.appendChild(action);
@@ -1244,7 +1244,7 @@
             const titleText = rawAlt
                 ? rawAlt.replace(/\s+certificate preview$/i, "").replace(/\s+preview$/i, "")
                 : "Certificate " + (index + 1);
-            const previewImageSrc = image.currentSrc || image.src;
+            const previewImageSrc = image.dataset.fullSrc || image.currentSrc || image.src;
             const imageClone = image.cloneNode(true);
 
             const card = document.createElement("article");
