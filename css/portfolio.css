@@ -2932,15 +2932,52 @@ body.is-ready .hero .profile-wrap {
 }
 
 @media (hover: none) {
+    .cert-preview-card {
+        min-height: 0;
+    }
+
+    .cert-preview-image-wrap {
+        display: grid;
+        gap: 0.7rem;
+        min-height: 0;
+        padding: 0.8rem;
+        align-items: stretch;
+        justify-items: stretch;
+    }
+
+    .cert-preview-image-wrap img,
+    .cert-preview-image-wrap img.cert-preview-portrait {
+        aspect-ratio: auto;
+        height: auto;
+        max-height: 250px;
+        object-fit: contain;
+    }
+
     .cert-preview-overlay-title,
     .cert-preview-image-overlay-btn {
+        position: static;
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
     }
 
     .cert-preview-overlay-title {
+        left: auto;
+        right: auto;
+        top: auto;
+        padding: 0.65rem 0.8rem;
+        font-size: 0.84rem;
+        line-height: 1.3;
         pointer-events: none;
+    }
+
+    .cert-preview-image-overlay-btn {
+        top: auto;
+        left: auto;
+        width: 100%;
+        justify-content: center;
+        padding: 0.7rem 0.95rem;
+        font-size: 0.88rem;
     }
 }
 
@@ -4980,32 +5017,34 @@ body.is-ready .hero .profile-wrap {
             }
 
             .cert-preview-head {
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: space-between;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
             }
 
             .cert-preview-copy {
                 flex: 1 1 auto;
+                width: 100%;
             }
 
             .cert-preview-btn {
-                width: 44px;
-                height: 44px;
-                min-width: 44px;
-                padding: 0;
-                border-radius: 12px;
+                width: 100%;
+                min-width: 0;
+                min-height: 46px;
+                padding: 0.68rem 0.95rem;
+                border-radius: 14px;
                 justify-content: center;
                 align-items: center;
+                gap: 0.5rem;
             }
 
             .cert-preview-btn span {
-                display: none;
+                display: inline;
             }
 
             .cert-preview-btn i {
                 margin-right: 0;
-                font-size: 1.05rem;
+                font-size: 1rem;
             }
 
             .cert-desc-desktop {
