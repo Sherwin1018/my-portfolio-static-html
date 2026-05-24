@@ -1237,7 +1237,6 @@
         card.appendChild(action);
     });
 
-    let flippedPreviewCard = null;
     document.querySelectorAll(".cert-preview-list img").forEach(function (image, index) {
         try {
             const rawAlt = (image.alt || "").trim();
@@ -1250,36 +1249,14 @@
             const card = document.createElement("article");
             card.className = "cert-preview-card";
 
-            const inner = document.createElement("div");
-            inner.className = "cert-preview-card-inner";
-
-            const front = document.createElement("div");
-            front.className = "cert-preview-face cert-preview-front";
-
-            const title = document.createElement("h4");
-            title.className = "cert-preview-title";
-            title.textContent = titleText;
-
-            const hint = document.createElement("p");
-            hint.className = "cert-preview-hint";
-            hint.innerHTML = "Tap <strong>Flip Me</strong> to reveal the certificate image.";
-
-            const flipBtn = document.createElement("button");
-            flipBtn.type = "button";
-            flipBtn.className = "cert-preview-flip-btn";
-            flipBtn.setAttribute("aria-expanded", "false");
-            flipBtn.innerHTML = '<i class="bi bi-arrow-repeat" aria-hidden="true"></i><span>Flip me</span>';
-
-            front.appendChild(title);
-            front.appendChild(hint);
-            front.appendChild(flipBtn);
-
-            const back = document.createElement("div");
-            back.className = "cert-preview-face cert-preview-back";
-
             const imageWrap = document.createElement("div");
             imageWrap.className = "cert-preview-image-wrap";
             imageWrap.appendChild(imageClone);
+
+            const previewTitle = document.createElement("h4");
+            previewTitle.className = "cert-preview-overlay-title";
+            previewTitle.textContent = titleText;
+            imageWrap.appendChild(previewTitle);
 
             const viewFullBtn = document.createElement("button");
             viewFullBtn.type = "button";
@@ -1289,49 +1266,8 @@
                 showCertImageModal(previewImageSrc, titleText);
             });
             imageWrap.appendChild(viewFullBtn);
-            back.appendChild(imageWrap);
-
-            const backBtn = document.createElement("button");
-            backBtn.type = "button";
-            backBtn.className = "cert-preview-flip-btn";
-            backBtn.setAttribute("aria-expanded", "false");
-            backBtn.innerHTML = '<i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i><span>Back</span>';
-            back.appendChild(backBtn);
-
-            inner.appendChild(front);
-            inner.appendChild(back);
-            card.appendChild(inner);
+            card.appendChild(imageWrap);
             image.replaceWith(card);
-
-            function setPreviewFlipped(shouldFlip) {
-                card.classList.toggle("is-flipped", shouldFlip);
-                flipBtn.setAttribute("aria-expanded", String(shouldFlip));
-                backBtn.setAttribute("aria-expanded", String(shouldFlip));
-            }
-
-            function togglePreview() {
-                const isFlipped = card.classList.contains("is-flipped");
-                if (isFlipped) {
-                    setPreviewFlipped(false);
-                    if (flippedPreviewCard === card) {
-                        flippedPreviewCard = null;
-                    }
-                    return;
-                }
-
-                if (flippedPreviewCard && flippedPreviewCard !== card) {
-                    flippedPreviewCard.classList.remove("is-flipped");
-                    flippedPreviewCard.querySelectorAll(".cert-preview-flip-btn").forEach(function (button) {
-                        button.setAttribute("aria-expanded", "false");
-                    });
-                }
-
-                setPreviewFlipped(true);
-                flippedPreviewCard = card;
-            }
-
-            flipBtn.addEventListener("click", togglePreview);
-            backBtn.addEventListener("click", togglePreview);
         } catch (error) {
             // Keep the page usable even if preview-card enhancement fails.
         }

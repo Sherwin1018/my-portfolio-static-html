@@ -2794,6 +2794,10 @@ body.is-ready .hero .profile-wrap {
     background: #0c111a;
 }
 
+.cert-preview-list img.cert-preview-portrait {
+    object-fit: contain;
+}
+
 .cert-preview-card {
     position: relative;
     border-radius: 10px;
@@ -2834,111 +2838,58 @@ body.is-ready .hero .profile-wrap {
     transform: rotate(8deg) translateX(248%);
 }
 
-.cert-preview-card-inner {
-    position: relative;
+.cert-preview-image-wrap img {
     width: 100%;
-    min-height: 200px;
-    transform-style: preserve-3d;
-    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cert-preview-card.is-flipped .cert-preview-card-inner {
-    transform: rotateY(180deg);
-}
-
-.cert-preview-face {
-    position: absolute;
-    inset: 0;
-    padding: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-.cert-preview-front {
-    background: linear-gradient(150deg, rgba(15, 20, 31, 0.9), rgba(11, 15, 24, 0.92));
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.cert-preview-back {
-    transform: rotateY(180deg);
-    background: #0c111a;
-}
-
-.cert-preview-title {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.25;
-    text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    max-width: 100%;
-    padding: 0.58rem 0.8rem;
-    border-radius: 10px;
-    border: 1px solid rgba(87, 201, 255, 0.22);
-    background: linear-gradient(145deg, rgba(8, 14, 24, 0.96), rgba(11, 20, 34, 0.92));
-    color: #f3f8ff;
-    box-shadow: 0 8px 20px rgba(2, 8, 18, 0.38);
-    white-space: nowrap;
-}
-
-.cert-preview-hint {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.84rem;
-}
-
-.cert-preview-flip-btn {
-    margin-top: 0.2rem;
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.42rem;
-    border: 1px solid rgba(87, 201, 255, 0.42);
-    background: rgba(87, 201, 255, 0.13);
-    color: #e3f4ff;
-    border-radius: 999px;
-    padding: 0.4rem 0.74rem;
-    font-size: 0.8rem;
-    font-weight: 800;
-    text-transform: none;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cert-preview-flip-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 14px rgba(87, 201, 255, 0.2);
-}
-
-.cert-preview-back img {
-    width: 100%;
-    flex: 1 1 auto;
-    min-height: 0;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    aspect-ratio: 16 / 10;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: #0c111a;
     transition: filter 0.24s ease, transform 0.24s ease;
 }
 
+.cert-preview-image-wrap img.cert-preview-portrait {
+    object-fit: contain;
+}
+
 .cert-preview-image-wrap {
     position: relative;
     display: flex;
-    flex: 1 1 auto;
-    min-height: 0;
+    min-height: 200px;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .cert-preview-image-wrap:hover img {
     filter: blur(2.5px) brightness(0.62);
     transform: scale(1.01);
+}
+
+.cert-preview-overlay-title {
+    position: absolute;
+    top: 2.7rem;
+    left: 0.9rem;
+    right: 0.9rem;
+    margin: 0;
+    padding: 0.55rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid rgba(87, 201, 255, 0.28);
+    background: rgba(10, 18, 31, 0.84);
+    color: #f3f8ff;
+    font-size: 0.88rem;
+    line-height: 1.25;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(2, 8, 18, 0.3);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.24s ease, transform 0.24s ease;
+    z-index: 2;
 }
 
 .cert-preview-image-overlay-btn {
@@ -2963,9 +2914,17 @@ body.is-ready .hero .profile-wrap {
 }
 
 .cert-preview-image-wrap:hover .cert-preview-image-overlay-btn,
-.cert-preview-image-wrap:focus-within .cert-preview-image-overlay-btn {
+.cert-preview-image-wrap:focus-within .cert-preview-image-overlay-btn,
+.cert-preview-image-wrap:hover .cert-preview-overlay-title,
+.cert-preview-image-wrap:focus-within .cert-preview-overlay-title {
     opacity: 1;
     pointer-events: auto;
+}
+
+.cert-preview-image-wrap:hover .cert-preview-overlay-title,
+.cert-preview-image-wrap:focus-within .cert-preview-overlay-title {
+    transform: translateY(0);
+    pointer-events: none;
 }
 
 .cert-preview-image-overlay-btn:hover {
@@ -2973,15 +2932,15 @@ body.is-ready .hero .profile-wrap {
 }
 
 @media (hover: none) {
+    .cert-preview-overlay-title,
     .cert-preview-image-overlay-btn {
         opacity: 1;
+        transform: translateY(0);
         pointer-events: auto;
     }
-}
 
-@media (prefers-reduced-motion: reduce) {
-    .cert-preview-card-inner {
-        transition: none;
+    .cert-preview-overlay-title {
+        pointer-events: none;
     }
 }
 
