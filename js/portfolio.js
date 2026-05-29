@@ -148,13 +148,13 @@
 
             // Stage 1: icons appear immediately, progress moves sooner
             window.setTimeout(function () {
-                animateProgressTo(40, 220);
-            }, 70);
+                animateProgressTo(40, 160);
+            }, 40);
 
             // Stage 2: title words complete = 75%
             window.setTimeout(function () {
-                animateProgressTo(75, 260);
-            }, 360);
+                animateProgressTo(75, 180);
+            }, 180);
 
             // Stage 3: typewriter drives 75% -> 100%
             window.setTimeout(function () {
@@ -169,7 +169,7 @@
                     setProgress(75 + ratio * 25);
 
                     if (index < source.length) {
-                        window.setTimeout(typeDomain, 55);
+                        window.setTimeout(typeDomain, 35);
                         return;
                     }
 
@@ -177,11 +177,11 @@
                         loadingScreen.classList.add("is-hidden");
                         document.body.classList.remove("loader-active");
                         resolve();
-                    }, 120);
+                    }, 60);
                 }
 
                 typeDomain();
-            }, 680);
+            }, 280);
         });
     }
 
